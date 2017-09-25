@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-9-21 18:30:14 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.jesus.entity.Food" table="FOOD">
+        <id name="fid" type="java.lang.String">
+            <column name="FID" />
+            <generator class="assigned" />
+        </id>
+        <property name="fname" type="java.lang.String">
+            <column name="FNAME" />
+        </property>
+        <property name="fdescri" type="java.lang.String">
+            <column name="FDESCRI" />
+        </property>
+        <property name="fimage" type="java.lang.String">
+            <column name="FIMAGE" />
+        </property>
+        <property name="fvolume" type="java.lang.String">
+            <column name="FVOLUME" />
+        </property>
+        <property name="comments" type="java.lang.String">
+            <column name="COMMENTS" />
+        </property>
+        <property name="fprice" type="java.math.BigDecimal">
+            <column name="FPRICE" />
+        </property>
+    </class>
+</hibernate-mapping>

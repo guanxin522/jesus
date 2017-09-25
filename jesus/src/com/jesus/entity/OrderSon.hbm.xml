@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-9-21 18:30:14 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.jesus.entity.OrderSon" table="ORDERSON">
+        <id name="osid" type="java.lang.String">
+            <column name="OSID" />
+            <generator class="assigned" />
+        </id>
+        <property name="quantity" type="java.lang.String">
+            <column name="QUANTITY" />
+        </property>
+        <property name="price" type="java.math.BigDecimal">
+            <column name="PRICE" />
+        </property>
+        <many-to-one name="food" class="com.jesus.entity.Food" fetch="select">
+            <column name="FID" />
+        </many-to-one>
+        <many-to-one cascade="all" name="orders" class="com.jesus.entity.Orders" fetch="select">
+            <column name="OID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

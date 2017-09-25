@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+   <!--  打开开发模式 -->
+    <constant name="struts.devMode" value="false" />
+  <!--   关闭浏览器缓存 -->
+    <constant name="browserCache" value="false" />
+    <!-- 设置修改配置文件后不用重启服务器就生效 -->
+    <constant name="struts.configuration.xml.reload" value="true" /> 
+    
+	<package name="jesus" extends="struts-default">
+		    <!-- 设置全局的返回值,返回首页 -->         
+	    <global-results>             
+	    	<result name="login">/index.jsp</result>         
+	    </global-results>  
+	
+		<action name="loginUser" class="usersAction" method="loginUser">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="logOutUser" class="usersAction" method="logOutUser">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="registerAction" class="usersAction" method="registerAction">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+</struts>
