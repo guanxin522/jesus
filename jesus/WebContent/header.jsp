@@ -4,10 +4,9 @@
 	<title>首页</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- 引入 Bootstrap -->
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/global.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/dialog.css" rel="stylesheet">
+    <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
+	<link href="/jesus/resources/css/bootstrapValidator.css" rel="stylesheet"/>
 
 </head>
 	<div class="modal" id="login-modal">
@@ -24,13 +23,13 @@
 						<s:fielderror />
 							 <label for="inputUserName" class="col-sm-2 control-label">用户名</label>
 							<div class="col-sm-10">
-								<input  type="text" class="form-control" id="inputUserName" name="users.uname"  placeholder="请输入您的用户名"  minlength="3" required />
+								<input  type="text" class="form-control" id="inputUserName" name="uname"  placeholder="请输入您的用户名"  minlength="3" required />
 							</div>
 						</div>
 						<div class="form-group">
 							 <label for="inputUserPwd" class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-10">															<!-- pattern="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,15}$" -->
-								<input type="password" class="form-control" id="inputUserPwd" name="users.upwd" placeholder="请输入您的密码" required minlength="6" />
+								<input type="password" class="form-control" id="inputUserPwd" name="upwd" placeholder="请输入您的密码" required minlength="6" />
 							</div>
 						</div>
 					</div>

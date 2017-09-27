@@ -5,8 +5,8 @@ import java.util.List;
 import com.jesus.dao.IUserDao;
 import com.jesus.dao.impl.UserDaoImpl;
 import com.jesus.entity.Users;
+import com.jesus.exception.UsersExistException;
 import com.jesus.service.IUserService;
-import exception.UsersExistException;
 
 
 

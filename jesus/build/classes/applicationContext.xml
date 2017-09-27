@@ -50,10 +50,9 @@ xsi:schemaLocation="
 	  	<tx:method name="*" propagation="REQUIRED" /> 
 	  </tx:attributes>
 	</tx:advice>
-	
 	    <!--定义切面，并将事务通知和切面组合（定义哪些方法应用事务规则） -->
     <aop:config>
-        <!-- 对com.restrant.biz包下的所有类的所有方法都应用事务规则 -->
+        <!-- 对com.jesus.Service包下的所有类的所有方法都应用事务规则 -->
     	<aop:pointcut id="ServiceMethods" expression="execution(* com.jesus.service.*.*(..))" /> 
     	<!--  将事务通知和切面组合   --> 
     	<aop:advisor advice-ref="txAdvice" pointcut-ref="ServiceMethods" /> 
@@ -64,7 +63,8 @@ xsi:schemaLocation="
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+    <!--定义Users类-->
+	<bean id="users" class="com.jesus.entity.Users"></bean>
     <!-- 定义UserDAOImpl类-->
 	<bean id="userDao" class="com.jesus.dao.impl.UserDaoImpl">	  
     	<property name="sessionFactory" ref="sessionFactory" />
@@ -73,8 +73,9 @@ xsi:schemaLocation="
 	<bean id="userService" class="com.jesus.service.impl.UserServiceImpl">	  
     	<property name="userDao" ref="userDao" />
     </bean>
-    <!-- 定义UsersAction，并为其中属性userService注入值 -->
+    <!-- 定义UsersAction，并为其中属性userService和users属性注入值 -->
 	<bean name="usersAction" class="com.jesus.web.action.UsersAction" scope="prototype">
+		<property name="users" ref="users" />
     	<property name="userService" ref="userService" />
     </bean>
 	

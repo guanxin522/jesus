@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/self.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/num-alignment.js"></script>
-
+<head>
+    <script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
+</head>
 <script>
 	$(function(){
 	    $("#show-login-modal").click(function(){
@@ -35,23 +35,5 @@
 		    });
 	});
 </script>
-	<script type="text/javascript">
- 	var flag233=true;
-	var form111;
-	function getform()
-	{
-		var form1 = document.forms['form1'];
-		return form1;
-		}
-	function form123(fm)
-	{
-		var form1=getform();
-		if(fm==1)
-		form1.action = '${pageContext.request.contextPath}/CalOrderPrice';
-		else
-	form1.action = '${pageContext.request.contextPath}/AddOrderServlet';
-		//执行SUBMIT
-		form1.submit();
-	} 
 
-	</script>
+

@@ -1,4 +1,4 @@
-package util;
+package com.jesus.util;
 /**
  * 把一些公共方法放在这里
  */
