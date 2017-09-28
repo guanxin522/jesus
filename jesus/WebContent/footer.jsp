@@ -3,8 +3,10 @@
     <script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
+    <script type="text/javascript" src="resources/js/self.js"></script>
 </head>
 <script>
+validateUname();
 	$(function(){
 	    $("#show-login-modal").click(function(){
 	      $("#login-modal").modal("toggle");

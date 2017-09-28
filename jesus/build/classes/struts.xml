@@ -25,7 +25,7 @@
 		<action name="registerAction" class="usersAction" method="registerAction">
 			<result name="success">/index.jsp</result>
 		</action>
-		<action name="findUnameAction" class="usersAction" method="findUnameAction">		
+		<action name="checkUnameAction" class="usersAction" method="checkUnameAction">		
 			<result type="json">  
                 <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
                 <param name="root">dataMap</param>  

@@ -26,8 +26,10 @@ import com.jesus.util.WebUtils;
  * @author: 作者 E-mail: 
  * @date:   2017年9月26日 下午11:49:51
  */
+
 public class UsersAction  extends ActionSupport implements RequestAware,SessionAware,ModelDriven<Users>{
 	private Users users;
+	private String validateUname=null;
 	private Map<String,Object> dataMap;  
 	IUserService userService;
 	public void setUserService(IUserService userService) {
@@ -82,15 +84,22 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		} 
 	}
 	//检查用户名
-	public String findUnameAction() throws Exception {
+	public String checkUnameAction() throws Exception {
 		dataMap = new HashMap<String, Object>();  
 		String uname = users.getUname();
 		Users user = userService.findUsers(uname);
-		if(user!=null){
+		if(user != null && validateUname.equals("2")){
+			
 	        dataMap.put("valid", false);  
 		}
-		else{
+		else if(user!=null && validateUname.equals("1")){
 			dataMap.put("valid", true); 
+		}
+		else if(user == null && validateUname.equals("1")){
+			dataMap.put("valid", false);
+		}
+		else if(user == null && validateUname.equals("2")){
+			dataMap.put("valid", true);
 		}
 	        // 返回结果  
 		return SUCCESS;
@@ -124,6 +133,12 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	public Users getModel() {
 		// TODO Auto-generated method stub
 		return users;
+	}
+	public String getValidateUname() {
+		return validateUname;
+	}
+	public void setValidateUname(String validateUname) {
+		this.validateUname = validateUname;
 	}
 	
 }

@@ -17,7 +17,7 @@
 					<h4 class="modal-title">登录</h4>
 				</div>
 				
-				<s:form class="form-horizontal"  action="/loginUser" method="post">
+				<s:form class="form-horizontal"   method="post">
 					<div class="modal-body">
 						<div class="form-group">
 						<s:fielderror />
@@ -55,7 +55,8 @@
 		<li>
 
 			 <s:if test="(#session.admin==null) && (#session.user==null)">	
-			<a href="javascript:void(0);" id="show-login-modal">登陆</a>
+			 <a href="${pageContext.request.contextPath}/login.jsp">登陆</a>
+			<!-- <a href="javascript:void(0);" id="show-login-modal">登陆</a> -->
 			<li><a href="register.jsp">注册</a></li>
 			</li>
 			</s:if>
