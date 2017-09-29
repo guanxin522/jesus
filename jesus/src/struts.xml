@@ -10,7 +10,7 @@
     <!-- 设置修改配置文件后不用重启服务器就生效 -->
     <constant name="struts.configuration.xml.reload" value="true" /> 
     
-	<package name="jesus"  extends="struts-default,json-default">
+	<package name="jesus" extends="struts-default">
 		    <!-- 设置全局的返回值,返回首页 -->         
 	    <global-results>             
 	    	<result name="login">/index.jsp</result>         
@@ -25,12 +25,11 @@
 		<action name="registerAction" class="usersAction" method="registerAction">
 			<result name="success">/index.jsp</result>
 		</action>
-		<action name="findUnameAction" class="usersAction" method="findUnameAction">		
-			<result type="json">  
-                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
-                <param name="root">dataMap</param>  
-            </result>  
-			
-		</action>		
+		<action name="foodShowAction" class="foodAction" method="foodShowAction">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="foodDetailAction" class="foodAction" method="foodDetailAction">
+			<result name="success">/foodDetail.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -19,8 +19,8 @@ xsi:schemaLocation="
   destroy-method="close">  
 	    <property name="driverClass" value="com.mysql.jdbc.Driver"/>  
 	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/jesus"/>  
-	    <property name="user" value="root"/>  
-	    <property name="password" value="root"/>  
+	    <property name="user" value="mydb"/>  
+	    <property name="password" value="root123456"/>  
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -50,9 +50,10 @@ xsi:schemaLocation="
 	  	<tx:method name="*" propagation="REQUIRED" /> 
 	  </tx:attributes>
 	</tx:advice>
+	
 	    <!--定义切面，并将事务通知和切面组合（定义哪些方法应用事务规则） -->
     <aop:config>
-        <!-- 对com.jesus.Service包下的所有类的所有方法都应用事务规则 -->
+        <!-- 对com.restrant.biz包下的所有类的所有方法都应用事务规则 -->
     	<aop:pointcut id="ServiceMethods" expression="execution(* com.jesus.service.*.*(..))" /> 
     	<!--  将事务通知和切面组合   --> 
     	<aop:advisor advice-ref="txAdvice" pointcut-ref="ServiceMethods" /> 
@@ -63,8 +64,7 @@ xsi:schemaLocation="
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-    <!--定义Users类-->
-	<bean id="users" class="com.jesus.entity.Users"></bean>
+
     <!-- 定义UserDAOImpl类-->
 	<bean id="userDao" class="com.jesus.dao.impl.UserDaoImpl">	  
     	<property name="sessionFactory" ref="sessionFactory" />
@@ -73,10 +73,22 @@ xsi:schemaLocation="
 	<bean id="userService" class="com.jesus.service.impl.UserServiceImpl">	  
     	<property name="userDao" ref="userDao" />
     </bean>
-    <!-- 定义UsersAction，并为其中属性userService和users属性注入值 -->
+    <!-- 定义UsersAction，并为其中属性userService注入值 -->
 	<bean name="usersAction" class="com.jesus.web.action.UsersAction" scope="prototype">
-		<property name="users" ref="users" />
     	<property name="userService" ref="userService" />
+    </bean>
+    
+    <!-- 定义FoodDAOImpl类-->
+	<bean id="foodDao" class="com.jesus.dao.impl.FoodDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义FoodServiceImpl类,并为其foodDAO属性注入值-->
+	<bean id="foodService" class="com.jesus.service.impl.FoodServiceImpl">	  
+    	<property name="foodDao" ref="foodDao" />
+    </bean>
+    <!-- 定义UsersAction，并为其中属性userService注入值 -->
+	<bean name="foodAction" class="com.jesus.web.action.FoodAction" scope="prototype">
+    	<property name="foodService" ref="foodService" />
     </bean>
 	
 

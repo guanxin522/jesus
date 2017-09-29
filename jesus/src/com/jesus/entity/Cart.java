@@ -5,8 +5,16 @@ package com.jesus.entity;
  * @Date:2017年9月21日下午5:08:10
  */
 public class Cart {
-	private String cid, uid, fid, quantity;
+	private String cid, uid, fid, quantity,ctime;
 	
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
 	public Cart() {
 	}
 

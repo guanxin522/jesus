@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.jesus.entity.Admin;
 import com.jesus.entity.Users;
-import com.jesus.exception.UsersExistException;
+
+import exception.UsersExistException;
 
 /**
 * @author Chen Guanxin

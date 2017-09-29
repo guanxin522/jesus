@@ -1,34 +1,35 @@
 package com.jesus.web.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-
 import com.jesus.entity.Users;
-import com.jesus.exception.UsersExistException;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+
+import exception.UsersExistException;
+import util.WebUtils;
 
 import com.jesus.service.IUserService;
 import com.jesus.service.impl.UserServiceImpl;
-import com.jesus.util.WebUtils;
 
 /**
- * 
- * @ClassName:  UsersAction   
- * @Description:TODO(这里用一句话描述这个类的作用)   
- * @author: 作者 E-mail: 
- * @date:   2017年9月26日 下午11:49:51
- */
-public class UsersAction  extends ActionSupport implements RequestAware,SessionAware,ModelDriven<Users>{
+* @author Chen Guanxin
+* @date 2017年9月21日 下午8:26:48
+* 
+*/
+public class UsersAction  extends ActionSupport implements RequestAware,SessionAware{
 	private Users users;
-	private Map<String,Object> dataMap;  
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	
 	IUserService userService;
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
@@ -36,8 +37,8 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	public String loginUser() throws Exception {
 		String uname = users.getUname();
 		String upwd = users.getUpwd();
-		Users user = userService.loginUser(uname, upwd);
-		if(user!=null)
+		Users users = userService.loginUser(uname, upwd);
+		if(users!=null)
 		{
 			session.put("user", users);
 			return "success";
@@ -70,60 +71,24 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 				users.setTel(tel);
 				users.setRealname(realname);
 				userService.addUsers(users);
-				userService.loginUser(uname, upwd);
-				session.put("user", users);
 				return "success";
 		}catch (UsersExistException e) {
-			//addFieldError( "uname", "用户名已存在" );
+			addFieldError( "users.uname", "用户名已存在" );
 			return "login";
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return "login";
 		} 
 	}
-	//检查用户名
-	public String findUnameAction() throws Exception {
-		dataMap = new HashMap<String, Object>();  
-		String uname = users.getUname();
-		Users user = userService.findUsers(uname);
-		if(user!=null){
-	        dataMap.put("valid", false);  
-		}
-		else{
-			dataMap.put("valid", true); 
-		}
-	        // 返回结果  
-		return SUCCESS;
-	
-	}
 	Map<String, Object> session;
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session=session;
 	}
+	
 	Map<String, Object> request;
 	@Override
 	public void setRequest(Map<String, Object> request) {
 		this.request=request;
 	}
-
-	public Map<String, Object> getDataMap() {
-		return dataMap;
-	}
-	public void setDataMap(Map<String, Object> dataMap) {
-		this.dataMap = dataMap;
-	}
-	
-	public Users getUsers() {
-		return users;
-	}
-	public void setUsers(Users users) {
-		this.users = users;
-	}
-	@Override
-	public Users getModel() {
-		// TODO Auto-generated method stub
-		return users;
-	}
-	
 }
