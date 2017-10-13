@@ -20,7 +20,8 @@ xsi:schemaLocation="
 	    <property name="driverClass" value="com.mysql.jdbc.Driver"/>  
 	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/jesus"/>  
 	    <property name="user" value="root"/>  
-	    <property name="password" value="root"/>  
+	    <property name="password" value="root"/>
+	       
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -32,7 +33,9 @@ xsi:schemaLocation="
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
-				<prop key="hibernate.autoReconnect">true</prop>   
+				<prop key="hibernate.autoReconnect">true</prop>  
+<!-- 				 <prop key="hibernate.show_sql">true</prop> 
+				 <prop key="hibernate.format_sql">true</prop>   -->
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -42,7 +45,9 @@ xsi:schemaLocation="
 				<value>com/jesus/entity/Food.hbm.xml</value>
 				<value>com/jesus/entity/Orders.hbm.xml</value>
 				<value>com/jesus/entity/OrderSon.hbm.xml</value>
-				<value>com/jesus/entity/Cart.hbm.xml</value></list>
+				<value>com/jesus/entity/Cart.hbm.xml</value>
+				<value>com/jesus/entity/Feedback.hbm.xml</value>
+			</list>				
 		</property>
 	</bean>
 	<!--  定义事务通知    --> 
@@ -79,6 +84,85 @@ xsi:schemaLocation="
 		<property name="users" ref="users" />
     	<property name="userService" ref="userService" />
     </bean>
-	
-
+    
+	    <!--定义Users类-->
+	<bean id="food" class="com.jesus.entity.Food"></bean>
+    <!-- 定义FoodDAOImpl类-->
+	<bean id="foodDao" class="com.jesus.dao.impl.FoodDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义FoodServiceImpl类,并为其foodDAO属性注入值-->
+	<bean id="foodService" class="com.jesus.service.impl.FoodServiceImpl">	  
+    	<property name="foodDao" ref="foodDao" />
+    </bean>
+    <!-- 定义FoodAction，并为其中属性foodService注入值 -->
+	<bean name="foodAction" class="com.jesus.web.action.FoodAction" scope="prototype">
+		<property name="food" ref="food" />
+    	<property name="foodService" ref="foodService" />
+    </bean>
+    
+ 	    <!--定义Admin类-->
+	<bean id="admin" class="com.jesus.entity.Admin"></bean>
+    <!-- 定义AdminDAOImpl类-->
+	<bean id="adminDao" class="com.jesus.dao.impl.AdminDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义AdminServiceImpl类,并为其AdminDAO属性注入值-->
+	<bean id="adminService" class="com.jesus.service.impl.AdminServiceImpl">	  
+    	<property name="adminDao" ref="adminDao" />
+    </bean>
+    <!-- 定义AdminAction，并为其中属性AdminService注入值 -->
+	<bean name="adminAction" class="com.jesus.web.action.AdminAction" scope="prototype">
+		<property name="admin" ref="admin" />
+    	<property name="adminService" ref="adminService" />
+    </bean>   
+    
+    <!--定义Feedback类-->
+	<bean id="feedback" class="com.jesus.entity.Feedback"></bean>
+    <!-- 定义FeedbackDAOImpl类-->
+	<bean id="feedbackDao" class="com.jesus.dao.impl.FeedbackDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义FeedbackServiceImpl类,并为其FeedbackDAO属性注入值-->
+	<bean id="feedbackService" class="com.jesus.service.impl.FeedbackServiceImpl">	  
+    	<property name="feedbackDao" ref="feedbackDao" />
+    </bean>
+    <!-- 定义FeedbackAction，并为其中属性FeedbackService注入值 -->
+	<bean name="feedbackAction" class="com.jesus.web.action.FeedbackAction" scope="prototype">
+		<property name="feedback" ref="feedback" />
+    	<property name="feedbackService" ref="feedbackService" />
+    </bean>  
+    
+    
+    <!-- 定义CartDAOImpl类-->
+	<bean id="cartDao" class="com.jesus.dao.impl.CartDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义CartServiceImpl类,并为其cartDAO属性注入值-->
+	<bean id="cartService" class="com.jesus.service.impl.CartServiceImpl">	  
+    	<property name="cartDao" ref="cartDao" />
+    </bean>
+    <!-- 定义CartAction，并为其中属性cartService注入值 -->
+	<bean name="cartAction" class="com.jesus.web.action.CartAction" scope="prototype">
+    	<property name="cartService" ref="cartService" />
+    </bean>
+    
+    <!-- 定义OrdersDAOImpl类-->
+	<bean id="ordersDao" class="com.jesus.dao.impl.OrdersDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="orderSonDao" class="com.jesus.dao.impl.OrderSonDaoImpl">	  
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 定义OrdersServiceImpl类,并为其ordersDAO属性注入值-->
+	<bean id="ordersService" class="com.jesus.service.impl.OrdersServiceImpl">	  
+    	<property name="ordersDao" ref="ordersDao" />
+    	<property name="orderSonDao" ref="orderSonDao" />
+    </bean>
+    <!-- 定义OrdersAction，并为其中属性ordersService注入值 -->
+	<bean name="ordersAction" class="com.jesus.web.action.OrdersAction" scope="prototype">
+    	<property name="ordersService" ref="ordersService" />
+    	<property name="cartService" ref="cartService" />
+    	<property name="userService" ref="userService" />
+    </bean>
 </beans>

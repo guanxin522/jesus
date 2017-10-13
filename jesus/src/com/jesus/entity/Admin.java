@@ -5,40 +5,36 @@ package com.jesus.entity;
 * 
 */
 public class Admin {
-	private String aid, aname, apwd;
-
-	public Admin() {
+	private String aId;
+	private String aName;
+	private String aPwd;
+	private String status;
+	
+	public String getaId() {
+		return aId;
+	}
+	public void setaId(String aId) {
+		this.aId = aId;
+	}
+	public String getaName() {
+		return aName;
+	}
+	public void setaName(String aName) {
+		this.aName = aName;
+	}
+	public String getaPwd() {
+		return aPwd;
+	}
+	public void setaPwd(String aPwd) {
+		this.aPwd = aPwd;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public Admin(String aid, String aname, String apwd) {
-		super();
-		this.aid = aid;
-		this.aname = aname;
-		this.apwd = apwd;
-	}
-
-	public String getAid() {
-		return aid;
-	}
-
-	public void setAid(String aid) {
-		this.aid = aid;
-	}
-
-	public String getAname() {
-		return aname;
-	}
-
-	public void setAname(String aname) {
-		this.aname = aname;
-	}
-
-	public String getApwd() {
-		return apwd;
-	}
-
-	public void setApwd(String apwd) {
-		this.apwd = apwd;
-	}
+	
 	
 }

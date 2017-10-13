@@ -22,20 +22,20 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">用户名</label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" name="uname" />
+                                <input type="text" class="form-control" name="uName" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">密码</label>
                             <div class="col-lg-5">
-                                <input type="password" class="form-control" name="upwd" />
+                                <input type="password" class="form-control" name="uPwd" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">确认密码</label>
                             <div class="col-lg-5">
-                                <input type="password" class="form-control" name="cupwd" />
+                                <input type="password" class="form-control" name="cuPwd" />
                             </div>
                         </div>
 

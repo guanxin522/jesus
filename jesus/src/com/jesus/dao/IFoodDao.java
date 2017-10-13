@@ -19,10 +19,10 @@ public interface IFoodDao {
 	public void delFood(Food food);
 	
 	//修改食品信息
-	public void modifyFood(Food food);
+	public void saveFood(Food food);
 
 	//查找食品信息
-	public Food findFood(String foodMessage);
+	public Food findFood(String fId);
 	
 	//查找食品信息
 	public Food findFoodById(Food food);

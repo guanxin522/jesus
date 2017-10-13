@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-9-21 18:30:14 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-12 19:24:55 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.jesus.entity.OrderSon" table="ORDERSON">
-        <id name="osid" type="java.lang.String">
-            <column name="OSID" />
+        <id name="fId" type="java.lang.String" access="field">
+            <column name="FID" />
             <generator class="assigned" />
         </id>
+        <property name="osId" type="java.lang.String">
+            <column name="OSID" />
+        </property>
         <property name="quantity" type="java.lang.String">
             <column name="QUANTITY" />
         </property>
-        <property name="price" type="java.math.BigDecimal">
-            <column name="PRICE" />
-        </property>
-        <many-to-one name="food" class="com.jesus.entity.Food" fetch="select">
-            <column name="FID" />
-        </many-to-one>
-        <many-to-one cascade="all" name="orders" class="com.jesus.entity.Orders" fetch="select">
+        <property name="oId" type="java.lang.String" access="field">
             <column name="OID" />
-        </many-to-one>
+        </property>
+        <property name="fPrice" type="java.math.BigDecimal" access="field">
+            <column name="FPRICE" />
+        </property>
     </class>
 </hibernate-mapping>

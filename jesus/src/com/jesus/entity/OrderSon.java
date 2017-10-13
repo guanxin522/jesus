@@ -8,15 +8,17 @@ import java.math.BigDecimal;
 * 
 */
 public class OrderSon {
-	private String osid, quantity;
-	private BigDecimal price;
-	private Food food;
-	private Orders orders;
-	public String getOsid() {
-		return osid;
+	private String osId;
+	private String quantity;
+	private String fId;
+	private String oId;
+	private BigDecimal fPrice;
+	
+	public String getOsId() {
+		return osId;
 	}
-	public void setOsid(String osid) {
-		this.osid = osid;
+	public void setOsId(String osId) {
+		this.osId = osId;
 	}
 	public String getQuantity() {
 		return quantity;
@@ -24,24 +26,22 @@ public class OrderSon {
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
-	public BigDecimal getPrice() {
-		return price;
+	public String getfId() {
+		return fId;
 	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setfId(String fId) {
+		this.fId = fId;
 	}
-	public Food getFood() {
-		return food;
+	public String getoId() {
+		return oId;
 	}
-	public void setFood(Food food) {
-		this.food = food;
+	public void setoId(String oId) {
+		this.oId = oId;
 	}
-	public Orders getOrders() {
-		return orders;
+	public BigDecimal getfPrice() {
+		return fPrice;
 	}
-	public void setOrders(Orders orders) {
-		this.orders = orders;
+	public void setfPrice(BigDecimal fPrice) {
+		this.fPrice = fPrice;
 	}
-	
-
 }

@@ -9,28 +9,132 @@
     <constant name="browserCache" value="false" />
     <!-- 设置修改配置文件后不用重启服务器就生效 -->
     <constant name="struts.configuration.xml.reload" value="true" /> 
-    
+    	<constant name="struts.multipart.maxSize" value="10240000000"/>
+        
+    	
+    	
 	<package name="jesus"  extends="struts-default,json-default">
+	
+		<default-action-ref name="foodShowAction"></default-action-ref>
 		    <!-- 设置全局的返回值,返回首页 -->         
 	    <global-results>             
-	    	<result name="login">/index.jsp</result>         
+	    	<result name="login"  type="redirectAction">/foodShowAction</result>         
 	    </global-results>  
 	
 		<action name="loginUser" class="usersAction" method="loginUser">
-			<result name="success">/index.jsp</result>
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                 <param name="root">resultTemp</param>    
+            </result>  	
 		</action>
+		<action name="findAllUsersAction" class="usersAction" method="findAllUsersAction">
+			<result name="success">/admin/member-list.jsp</result>
+		</action>		
+		<action name="findUsersAction" class="usersAction" method="findUsersAction">
+			<result name="success">/admin/member-show.jsp</result>
+		</action>			
 		<action name="logOutUser" class="usersAction" method="logOutUser">
-			<result name="success">/index.jsp</result>
+			<result name="success" type="redirectAction">/foodShowAction</result>
 		</action>
 		<action name="registerAction" class="usersAction" method="registerAction">
 			<result name="success">/index.jsp</result>
 		</action>
-		<action name="checkUnameAction" class="usersAction" method="checkUnameAction">		
+		<action name="checkUnameAction" class="usersAction" method="checkUnameAction">	
 			<result type="json">  
                 <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
                 <param name="root">dataMap</param>  
-            </result>  
+            </result>  	
+		</action>	
+		
+
+		<action name="foodShowAction" class="foodAction" method="foodShowAction">
+			<result name="success">/index.jsp</result>
+			<result name="manage">/admin/product-brand.jsp</result>
+		</action>
+		<action name="foodDetailAction" class="foodAction" method="foodDetailAction">
+			<result name="internal">/admin/picture-edit.jsp</result>
+			<result name="success">/foodDetail.jsp</result>
+		</action>
+		<action name="addFoodAction" class="foodAction" method="addFoodAction"> 
+            <interceptor-ref name="fileUpload">
+            	<!-- 配置允许上传的文件类型，多个用“,”分隔 -->
+            	<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg</param>
+            	<!-- 配置允许上传的文件大小，单位字节 -->
+            	<param name="maximumSize">52428800</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <!-- 动态设置Action中的savePath属性的值 --> 
+            <param name="savePath">/upload</param> 
+            <result name="input">/404.html</result>
+            <result name="success" type="redirect">/admin/foodShowAction?managFood=1</result>
+        </action>
+		<action name="delFoodAction" class="foodAction" method="delFoodAction">
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="resultTemp"></param>  
+            </result>  				
+		</action>      
+		<action name="saveFoodAction" class="foodAction" method="saveFoodAction">
+			            <interceptor-ref name="fileUpload">
+            	<!-- 配置允许上传的文件类型，多个用“,”分隔 -->
+            	<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg</param>
+            	<!-- 配置允许上传的文件大小，单位字节 -->
+            	<param name="maximumSize">52428800</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <!-- 动态设置Action中的savePath属性的值 --> 
+            <param name="savePath">/upload</param> 
+            <result name="input">/404.html</result>
+            <result name="success" type="redirect">/admin/foodShowAction?managFood=1</result>			
+		</action>  		
+		<action name="changeStatusAction" class="foodAction" method="changeStatusAction">
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="resultTemp"></param>  
+            </result>  				
+		</action> 		  
+		  
+		  
+		<action name="cartShowAction" class="cartAction" method="cartShowAction">
+		    <result name="success">/cartShow.jsp</result>
+		</action>
+		<action name="addCartAction" class="cartAction" method="addCartAction">
+		    <result name="success" type="redirectAction">cartShowAction</result>
+		</action>
+		<action name="delCartAction" class="cartAction" method="delCartAction">
+		    <result name="success" type="redirectAction">cartShowAction</result>
+		</action>
+		<action name="addOrdersAction" class="ordersAction" method="addOrdersAction">
+		    <result name="success">payPage.jsp</result>
+		</action>
+		<action name="showOrdersAction" class="ordersAction" method="showOrdersAction">
+		    <result name="success">/showOrders.jsp</result>
+		</action>
+		<action name="payOrdersAction" class="ordersAction" method="payOrdersAction">
+		    <result name="success" type="redirectAction">showOrdersAction</result>
+		    <result name="failure">/payPage.jsp</result>
+		</action>
 			
-		</action>		
+		
+		
+		<action name="loginAdmin" class="adminAction" method="loginAdmin">
+		    <result name="success">/admin/index.jsp</result>
+		    <result name="input">/admin/login.jsp</result>
+		</action>
+		<action name="logOutAdmin" class="adminAction" method="logOutAdmin">
+			<result name="success">/admin/login.jsp</result>
+		</action>	
+		
+		<action name="addFeedbackAction" class="feedbackAction" method="addFeedbackAction">
+			<result name="success"  type="redirectAction">/foodShowAction</result>
+		</action>	
+		<action name="delFeedbackAction" class="feedbackAction" method="delFeedbackAction">
+			<result type="json">  
+                <param name="resultTemp"></param>  
+            </result>  			
+		</action>	
+		<action name="findAllFeedbackAction" class="feedbackAction" method="findAllFeedbackAction">
+			<result name="success">/admin/feedback-list.jsp</result>
+		</action>					
 	</package>
 </struts>

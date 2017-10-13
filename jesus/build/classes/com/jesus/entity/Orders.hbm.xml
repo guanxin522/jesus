@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-9-21 18:30:14 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-12 19:24:55 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.jesus.entity.Orders" table="ORDERS">
-        <id name="oid" type="java.lang.String">
+        <id name="oId" type="java.lang.String" access="field">
             <column name="OID" />
             <generator class="assigned" />
         </id>
-        <property name="uid" type="java.lang.String">
+        <property name="uId" type="java.lang.String" access="field">
             <column name="UID" />
         </property>
-        <property name="otime" type="java.lang.String">
-            <column name="OTIME" />
-        </property>
-        <property name="ostatus" type="java.lang.String">
+        <property name="oStatus" type="java.lang.String" access="field">
             <column name="OSTATUS" />
         </property>
-        <property name="oprice" type="java.math.BigDecimal">
+        <property name="oTime" type="java.util.Date" access="field">
+            <column name="OTIME" />
+        </property>
+        <property name="oPrice" type="java.math.BigDecimal" access="field">
             <column name="OPRICE" />
         </property>
     </class>

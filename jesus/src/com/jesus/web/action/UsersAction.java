@@ -1,51 +1,55 @@
 package com.jesus.web.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-
 import com.jesus.entity.Users;
 import com.jesus.exception.UsersExistException;
+import com.jesus.service.IUserService;
+import com.jesus.util.WebUtils;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-
-import com.jesus.service.IUserService;
-import com.jesus.service.impl.UserServiceImpl;
-import com.jesus.util.WebUtils;
 
 /**
  * 
  * @ClassName:  UsersAction   
- * @Description:TODO(这里用一句话描述这个类的作用)   
- * @author: 作者 E-mail: 
- * @date:   2017年9月26日 下午11:49:51
+ * @Description:TODO 
+ * @author: 作者 E-mail:陈观鑫 490861319@qq.com
+ * @date:   2017年9月21日 下午13:14:51
  */
 
 public class UsersAction  extends ActionSupport implements RequestAware,SessionAware,ModelDriven<Users>{
 	private Users users;
 	private String validateUname=null;
 	private Map<String,Object> dataMap;  
+	private String resultTemp;
 	IUserService userService;
+	
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
 	public String loginUser() throws Exception {
-		String uname = users.getUname();
-		String upwd = users.getUpwd();
+		String uname = users.getuName();
+		String upwd = users.getuPwd();
 		Users user = userService.loginUser(uname, upwd);
+		dataMap = new HashMap<String, Object>(); 
 		if(user!=null)
 		{
-			session.put("user", users);
+			session.put("user", user);
+			dataMap.put("result", 1);
+			this.resultTemp = "success";
+			System.out.println("success");
 			return "success";
 		}
-		else
+		else{
+			dataMap.put("result", 2);
+			this.resultTemp = "fail";
 		return "login";
+		}
 	}
 	
 	//用户注销
@@ -56,24 +60,10 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	
 	//用户注册
 	public String registerAction() throws Exception {
-		String uname = users.getUname();
-		String upwd = users.getUpwd();
-		String realname = users.getRealname();
-		String email = users.getEmail();
-		String address = users.getAddress();
-		String tel = users.getTel();
-		String uid = WebUtils.makeId("u");
-		try {
-				users.setAddress(address);
-				users.setUid(uid);
-				users.setUname(uname);
-				users.setEmail(email);
-				users.setUpwd(upwd);
-				users.setTel(tel);
-				users.setRealname(realname);
+		try {	
+				users.setuId(WebUtils.makeId("u"));
 				userService.addUsers(users);
-				userService.loginUser(uname, upwd);
-				session.put("user", users);
+				userService.loginUser(users.getuName(), users.getuPwd());
 				return "success";
 		}catch (UsersExistException e) {
 			//addFieldError( "uname", "用户名已存在" );
@@ -86,8 +76,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	//检查用户名
 	public String checkUnameAction() throws Exception {
 		dataMap = new HashMap<String, Object>();  
-		String uname = users.getUname();
-		Users user = userService.findUsers(uname);
+		Users user = userService.findUsers(users.getuName());
 		if(user != null && validateUname.equals("2")){
 			
 	        dataMap.put("valid", false);  
@@ -104,6 +93,20 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	        // 返回结果  
 		return SUCCESS;
 	
+	}
+	
+	public String findAllUsersAction() throws Exception {
+		List userList = userService.findAllUsers();
+		request.put("userList", userList);
+		return SUCCESS;
+		
+	}
+	
+	public String findUsersAction() throws Exception {
+		Users user = userService.findUsers(users.getuName());
+		request.put("user", user);
+		return SUCCESS;
+		
 	}
 	Map<String, Object> session;
 	@Override
@@ -139,6 +142,12 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	}
 	public void setValidateUname(String validateUname) {
 		this.validateUname = validateUname;
+	}
+	public String getResultTemp() {
+		return resultTemp;
+	}
+	public void setResultTemp(String resultTemp) {
+		this.resultTemp = resultTemp;
 	}
 	
 }

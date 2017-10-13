@@ -10,15 +10,18 @@ import com.jesus.entity.Users;
 * 
 */
 public interface IUserDao {
-	//用户登录验证
-	public Users loginUser(String uname, String upwd);
+	//用户登录
+	public Users loginUser(String uName, String uPwd);
 	
 	//添加用户
 	public void addUsers(Users users);
 	
 	//修改个人信息
-	public void modifyUsers(Users users);
+	public void saveUsers(Users users);
 	
 	//查找单个用户
-	public Users findUsers(String uname);
+	public Users findUsers(String uName);
+	
+	//查找所有用户
+	public List findAllUsers();
 }

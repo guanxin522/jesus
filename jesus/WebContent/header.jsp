@@ -7,7 +7,6 @@
     <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
 	<link href="/jesus/resources/css/bootstrapValidator.css" rel="stylesheet"/>
-
 </head>
 	<div class="modal" id="login-modal">
 	    <div class="modal-dialog">
@@ -46,28 +45,27 @@
       <div class="container">
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="${pageContext.request.contextPath}/index.jsp">主页</a></li>
-            <li><a href="page/about.html" target="blank">实体店</a></li>
+            <li class="active"><a href="${pageContext.request.contextPath}/foodShowAction">主页</a></li>
 			 <li><a href="AnnouncementAction!init">购物车</a></li>
           </ul>
 		   <ul class="nav navbar-nav navbar-right">
           
 		<li>
 
-			 <s:if test="(#session.admin==null) && (#session.user==null)">	
+			 <s:if test="#session.user==null">	
 			 <a href="${pageContext.request.contextPath}/login.jsp">登陆</a>
 			<!-- <a href="javascript:void(0);" id="show-login-modal">登陆</a> -->
 			<li><a href="register.jsp">注册</a></li>
 			</li>
 			</s:if>
 			<s:else>
-  				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">欢迎您：<span style="color:red"><s:property value="#session.user.uname"/></span><span class="caret"></span></a>
+  				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">欢迎您：<span style="color:red"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
                <ul class="dropdown-menu">
                 <li><a href="ClientAction!myData?id=<%=session.getAttribute("loginid")%>">个人中心</a></li>
               <li class="divider"></li>
                  <li><a href="OrdersAction!myOrders?id=<%=session.getAttribute("loginid")%>">我的订单</a></li>
                 <li class="divider"></li>
-                 <li><a href="#">意见反馈</a></li>
+                 <li><a href="feedback.jsp">意见反馈</a></li>
                  <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/logOutUser">退出</a></li>
                 

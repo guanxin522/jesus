@@ -23,16 +23,17 @@ public class UserDaoImpl implements IUserDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
 	@Override
-	public Users loginUser(String uname, String upwd) {
+	public Users loginUser(String uName, String uPwd) {
 		// TODO Auto-generated method stub
 		Users users = null;
 		//通过sessionFactory获得Session
-		Session session=sessionFactory.getCurrentSession();
-		String hql = "from Users where uname=:uname and upwd=:upwd";
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from Users where uName=:uName and uPwd=:uPwd";
 		Query<Users> query = (Query) session.createQuery(hql,Users.class);
-		query.setParameter("uname", uname);
-		query.setParameter("upwd", upwd);
+		query.setParameter("uName", uName);
+		query.setParameter("uPwd", uPwd);
 		List<Users> list = query.getResultList();
 		if(list != null && list.size() > 0){
 		 users =  list.get(0);
@@ -43,29 +44,40 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public void addUsers(Users users) {
 		// TODO Auto-generated method stub
-		Session session=sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(users);
 	}
 
 	@Override
-	public void modifyUsers(Users users) {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public Users findUsers(String uname) {
+	public Users findUsers(String uName) {
 	// TODO Auto-generated method stub
 		Users users = null;
-		Session session=sessionFactory.getCurrentSession();
-		String hql = "from Users where uname=:uname";
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from Users where uName=:uName";
 		Query<Users> query = session.createQuery(hql, Users.class);
-		query.setParameter("uname", uname);
+		query.setParameter("uName", uName);
 		List<Users> list = query.getResultList();
 		if(list != null && list.size() > 0){
 			users = list.get(0);
 		}
 		return users;
-		
+	}
+	
+	@Override
+	public List findAllUsers() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from Users";
+		Query query = session.createQuery(hql);
+		List list = query.getResultList();
+		return list;
+	}
+
+	@Override
+	public void saveUsers(Users users) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(users);
 	}
 
 }

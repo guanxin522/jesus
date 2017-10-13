@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +21,7 @@
 <!--[if lt IE 9]>
 	<script src="resources/js/html5.js"></script>
 <![endif]-->
+<script src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/tooltips.js"></script>
 <script type="text/javascript" src="resources/js/login.js"></script>
 </head>
@@ -31,17 +36,17 @@
 			</div>
 		
 			<div class="login_form">
-				<form action="${pageContext.request.contextPath}/loginUser" id="login_form" method="post" class="form-horizontal" >
+				<form action="" id="login_form" method="post" class="form-horizontal" >
                       <div class="form-group">
                             <label class="col-lg-3 control-label">用户名</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" name="uname" />
+                                <input type="text" class="form-control" name="uName" />
                             </div>
                         </div> 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">密   码</label>
                             <div class="col-lg-6">
-                                <input type="password" class="form-control" name="upwd" />
+                                <input type="password" class="form-control" name="uPwd" />
                             </div>
                         </div>
 					<div class="form-group">
@@ -50,11 +55,10 @@
 						 <input  name="captcha" type="text" class="form-control x80 in">
 						</div>
 					</div>
-
 					<div class="form-group 	">
 						<label class="t"></label>　　　
-						<button type="submit"  id="submit_btn" 
-						class="btn btn-primary btn-lg">&nbsp;登&nbsp;录&nbsp </button>
+						<button type="submit"  id="submit_btn"
+						class="btn btn-primary btn-lg">&nbsp;登&nbsp;录&nbsp; </button>
 						<input type="reset" value="&nbsp;重&nbsp;置&nbsp;" class="btn btn-default btn-lg">
 					</div>			
 				</form>
@@ -63,13 +67,17 @@
 	</div>
 </div>
 <!-- Javascript -->
-<script src="resources/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="resources/admin/lib/layer/2.4/layer.js"></script>
 <script src="resources/js/supersized.3.2.7.min.js"></script>
 <script src="resources/js/supersized-init.js"></script>
 <script src="resources/js/scripts.js"></script>
+<script src="resources/js/jquery.form.js"></script>
 <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
 <script>
+
+
 checkUnameLogin();
+
 </script>
 </body>
 </html>

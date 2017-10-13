@@ -1,5 +1,7 @@
 package com.jesus.entity;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 /**
  * 
@@ -7,42 +9,34 @@ import java.util.Set;
  * @Date:2017年9月21日下午6:10:29
  */
 public class Users {
-	private String uid, uname, upwd, realname ,email, tel, address;
-	
-	public Users() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Users(String uid, String uname, String upwd, String realname, String email, String tel, String address,
-			Set<OrderSon> orderson) {
-		super();
-		this.uid = uid;
-		this.uname = uname;
-		this.upwd = upwd;
-		this.realname = realname;
-		this.email = email;
-		this.tel = tel;
-		this.address = address;
-		this.orderson = orderson;
-	}
-	public String getUname() {
-		return uname;
-	}
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
+	private String uId;
+	private String uName;
+	private String uPwd;
+	private String realname;
+	private String email;
+	private String tel;
+	private String address;
+	private BigDecimal balance;
+	private Date time;
 	private Set <OrderSon >orderson;
-	public String getUid() {
-		return uid;
+	
+	public String getuId() {
+		return uId;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setuId(String uId) {
+		this.uId = uId;
 	}
-	public String getUpwd() {
-		return upwd;
+	public String getuName() {
+		return uName;
 	}
-	public void setUpwd(String upwd) {
-		this.upwd = upwd;
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getuPwd() {
+		return uPwd;
+	}
+	public void setuPwd(String uPwd) {
+		this.uPwd = uPwd;
 	}
 	public String getRealname() {
 		return realname;
@@ -68,10 +62,24 @@ public class Users {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Set getOrderson() {
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	public Set<OrderSon> getOrderson() {
 		return orderson;
 	}
-	public void setOrderson(Set orderson) {
+	public void setOrderson(Set<OrderSon> orderson) {
 		this.orderson = orderson;
 	}
+	
+	
 }

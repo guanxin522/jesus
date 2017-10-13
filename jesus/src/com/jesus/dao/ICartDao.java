@@ -20,6 +20,11 @@ public interface ICartDao {
 	//删除食品
 	public void delCart(Cart cart);
 	
+	//修改食品
+	public void saveCart(Cart cart);
+	
 	//查找食品
+	public List<Food> findAllFood(Users user);
 	public List<Cart> findAll(Users user);
+	public Cart findCart(String uId,String fId);
 }

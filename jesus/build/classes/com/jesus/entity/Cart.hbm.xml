@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-9-21 17:08:37 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-12 19:24:55 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.jesus.entity.Cart" table="CART">
-        <id name="cid" type="java.lang.String">
+        <id name="cId" type="java.lang.String" access="field">
             <column name="CID" />
             <generator class="assigned" />
         </id>
-        <property name="uid" type="java.lang.String">
+        <property name="uId" type="java.lang.String" access="field">
             <column name="UID" />
         </property>
-        <property name="fid" type="java.lang.String">
+        <property name="fId" type="java.lang.String" access="field">
             <column name="FID" />
         </property>
         <property name="quantity" type="java.lang.String">
             <column name="QUANTITY" />
+        </property>
+        <property name="cTime" type="java.util.Date" access="field">
+            <column name="CTIME" />
         </property>
     </class>
 </hibernate-mapping>

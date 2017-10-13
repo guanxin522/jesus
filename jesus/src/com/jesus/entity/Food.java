@@ -1,95 +1,78 @@
 package com.jesus.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 /**
 * @author Chen Guanxin
 * @date 2017年9月21日 下午4:15:05
 * 
 */
+@DynamicUpdate(true)
 public class Food {
-	private String fid, fname, fdescri, fimage, fvolume, comments;
-	private Set <OrderSon > orderson;
-	private BigDecimal fprice;
+	private String fId;
+	private String fName;
+	private String fDescri;
+	private String fImage;
+	private int fVolume;
+	private int status;
+	private Set <OrderSon > orderSon;
+	private BigDecimal fPrice;
+	private Date time;
+	public String getfId() {
+		return fId;
+	}
+	public void setfId(String fId) {
+		this.fId = fId;
+	}
+	public String getfName() {
+		return fName;
+	}
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+	public String getfDescri() {
+		return fDescri;
+	}
+	public void setfDescri(String fDescri) {
+		this.fDescri = fDescri;
+	}
+	public String getfImage() {
+		return fImage;
+	}
+	public void setfImage(String fImage) {
+		this.fImage = fImage;
+	}
+	public int getfVolume() {
+		return fVolume;
+	}
+	public void setfVolume(int fVolume) {
+		this.fVolume = fVolume;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public BigDecimal getfPrice() {
+		return fPrice;
+	}
+	public void setfPrice(BigDecimal fPrice) {
+		this.fPrice = fPrice;
+	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
 	
-	public Food() {
-	}
 
-	public Food(String fid, String fname, String fdescri, String fimage, String fvolume, String comments,
-			Set<OrderSon> orderson, BigDecimal fprice) {
-		super();
-		this.fid = fid;
-		this.fname = fname;
-		this.fdescri = fdescri;
-		this.fimage = fimage;
-		this.fvolume = fvolume;
-		this.comments = comments;
-		this.orderson = orderson;
-		this.fprice = fprice;
-	}
 
-	public Set getOrderson() {
-		return orderson;
-	}
 
-	public void setOrderson(Set orderson) {
-		this.orderson = orderson;
-	}
-
-	public String getFid() {
-		return fid;
-	}
-
-	public void setFid(String fid) {
-		this.fid = fid;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getFdescri() {
-		return fdescri;
-	}
-
-	public void setFdescri(String fdescri) {
-		this.fdescri = fdescri;
-	}
-	public BigDecimal getFprice() {
-		return fprice;
-	}
-
-	public void setFprice(BigDecimal fprice) {
-		this.fprice = fprice;
-	}
-
-	public String getFimage() {
-		return fimage;
-	}
-
-	public void setFimage(String fimage) {
-		this.fimage = fimage;
-	}
-
-	public String getFvolume() {
-		return fvolume;
-	}
-
-	public void setFvolume(String fvolume) {
-		this.fvolume = fvolume;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
 	
 }

@@ -1,53 +1,49 @@
 package com.jesus.entity;
+
+import java.util.Date;
+
 /**
  * 
  * @author Guanxin Chen
  * @Date:2017年9月21日下午5:08:10
  */
 public class Cart {
-	private String cid, uid, fid, quantity;
+	private String cId;
+	private String uId;
+	private String fId;
+	private String quantity;
+	private Date cTime;
 	
-	public Cart() {
+	public String getcId() {
+		return cId;
 	}
-
-	public Cart(String cid, String uid, String fid, String quantity) {
-		super();
-		this.cid = cid;
-		this.uid = uid;
-		this.fid = fid;
-		this.quantity = quantity;
+	public void setcId(String cId) {
+		this.cId = cId;
 	}
-
-	public String getCid() {
-		return cid;
+	public String getuId() {
+		return uId;
 	}
-
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setuId(String uId) {
+		this.uId = uId;
 	}
-
-	public String getUid() {
-		return uid;
+	public String getfId() {
+		return fId;
 	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setfId(String fId) {
+		this.fId = fId;
 	}
-
-	public String getFid() {
-		return fid;
-	}
-
-	public void setFid(String fid) {
-		this.fid = fid;
-	}
-
 	public String getQuantity() {
 		return quantity;
 	}
-
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
+	public Date getcTime() {
+		return cTime;
+	}
+	public void setcTime(Date cTime) {
+		this.cTime = cTime;
+	}
+
 	
 }

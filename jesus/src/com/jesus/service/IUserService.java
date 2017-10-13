@@ -7,20 +7,26 @@ import com.jesus.entity.Users;
 import com.jesus.exception.UsersExistException;
 
 /**
-* @author Chen Guanxin
-* @date 2017年9月21日 下午9:03:46
-* 
-*/
+ * 
+ * @ClassName:  IUserService   
+ * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @author: 作者 E-mail: 陈观鑫 490861319@qq.com
+ * @date:   2017年9月21日 上午12:07:32
+ */
 public interface IUserService {
-	//用户登录验证
-	public Users loginUser(String uname, String upwd);
+	//用户登录
+	public Users loginUser(String uName, String uPwd);
 	
 	//添加用户
 	public void addUsers(Users users) throws UsersExistException;
 	
 	//修改个人信息
-	public void modifyUsers(Users users);
+	public void saveUsers(Users users);
 	
 	//查找单个用户
-	public Users findUsers(String uname);
+	public Users findUsers(String uName);
+	
+	//查找所有用户
+	public List findAllUsers();
+	
 }

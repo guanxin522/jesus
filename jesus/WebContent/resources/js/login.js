@@ -11,7 +11,7 @@
 			}
 		}
 function checkUnameLogin()
-{
+{	var form = $('#login_form');
 	$(document).ready(function() {
 	    // Generate a simple captcha
 	    function randomNumber(min, max) {
@@ -19,7 +19,7 @@ function checkUnameLogin()
 	    };
 	    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
 
-	    $('#login_form').bootstrapValidator({
+	    form.bootstrapValidator({
 //	        live: 'disabled',
 	        message: 'This value is not valid',
 	        feedbackIcons: {
@@ -28,7 +28,7 @@ function checkUnameLogin()
 	            validating: 'glyphicon glyphicon-refresh'
 	        },
 	        fields: {
-	            uname: {
+	            uName: {
 	                message: '用户名非法',
 	                validators: {
 	                    notEmpty: {
@@ -52,7 +52,7 @@ function checkUnameLogin()
 	                    },
 	                }
 	            },
-	            upwd: {
+	            uPwd: {
 	                validators: {
 	                    notEmpty: {
 	                        message: '密码不能为空'
@@ -69,18 +69,36 @@ function checkUnameLogin()
 	                        }
 	                    }
 	                }
-	            }
+	            },
 	        }
 	    });
-
-	    // Validate the form manually
-	    $('#validateBtn').click(function() {
-	        $('#defaultForm').bootstrapValidator('validate');
-	    });
-
-	    $('#resetBtn').click(function() {
-	        $('#defaultForm').data('bootstrapValidator').resetForm(true);
-	    });
+    
+	});
+	$("#submit_btn").click(function () {
+	    //进行表单验证
+	    var bv = form.data('bootstrapValidator');
+	    bv.validate();
+	    if (bv.isValid()) {
+	        console.log(form.serialize());
+	        //发送ajax请求
+	        $.ajax({
+	            url: 'loginUser',
+	            async: true,//同步，会阻塞操作
+	            type: 'POST',//PUT DELETE POST
+	            data: form.serialize(),
+	            success: function (result) {
+	                console.log(result);
+	                if (result=="success") {
+	                	setTimeout("layer.msg('登陆成功!',{icon:1,time:2000})",2000);
+	                    location.href="/jesus/index"
+	                } else {
+	                	layer.msg('密码错误，请重新输入!',{icon:5,time:2000})
+	                }
+	            }, error: function () {
+	                alert("服务器繁忙请稍后再试！")
+	            }
+	        })
+	    }
 	});
 
 }

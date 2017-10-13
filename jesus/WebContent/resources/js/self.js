@@ -15,7 +15,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            uname: {
+            uName: {
                 message: '用户名非法',
                 validators: {
                     notEmpty: {
@@ -43,7 +43,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            upwd: {
+            uPwd: {
                 validators: {
                     notEmpty: {
                         message: '密码不能为空'
@@ -58,7 +58,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            cupwd: {
+            cuPwd: {
                 validators: {
                     notEmpty: {
                         message: '确认密码不能为空'
