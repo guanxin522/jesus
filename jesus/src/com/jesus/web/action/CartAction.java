@@ -12,11 +12,13 @@ import com.jesus.entity.Food;
 import com.jesus.entity.Users;
 import com.jesus.service.ICartService;
 import com.jesus.util.WebUtils;
+import com.opensymphony.xwork2.ActionSupport;
 
 
 
-public class CartAction implements RequestAware,SessionAware{
+public class CartAction extends ActionSupport implements RequestAware,SessionAware{
 
+	private static final long serialVersionUID = 1L;
 	private Cart cart;
 	private Users user;
 	private Food food;

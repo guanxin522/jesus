@@ -11,7 +11,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 引入头部 -->
 	<jsp:include page="header.jsp"/>
 	<!-- 页面主体内容 -->
-<jsp:include page="footer.jsp"/>
 <body>
     <div class="container">
         <div class="row">
@@ -48,5 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- :form -->
         </div>
     </div>
+        <jsp:include page="footer.jsp"/>
 </body>
 </html>

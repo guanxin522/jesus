@@ -7,7 +7,7 @@
 	<!-- 引入头部 -->
 	<jsp:include page="header.jsp"/>
 	<!-- 页面主体内容 -->
-<jsp:include page="footer.jsp"/>
+
 <body>
     <div class="container">
         <div class="row">
@@ -87,4 +87,12 @@
         </div>
     </div>
 </body>
+    <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
+    <script type="text/javascript" src="resources/js/self.js"></script>
+    <jsp:include page="footer.jsp"/>
+ <script>
+validateUname();
+</script>
+
+    
 </html>

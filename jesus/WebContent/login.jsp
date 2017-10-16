@@ -74,10 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="resources/js/jquery.form.js"></script>
 <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
 <script>
-
-
 checkUnameLogin();
-
 </script>
 </body>
 </html>

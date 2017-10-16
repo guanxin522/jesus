@@ -32,11 +32,5 @@
         <property name="time" type="java.util.Date">
             <column name="TIME" />
         </property>
-        <set name="orderson" table="ORDERSON" inverse="false" lazy="true">
-            <key>
-                <column name="UID" />
-            </key>
-            <one-to-many class="com.jesus.entity.OrderSon" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -11,13 +11,12 @@
     <link href="./resources/css/orange.css"rel="stylesheet">
     <link href="./resources/css/share.css"rel="stylesheet">
 
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+ 
     
 </head>
 <body>
-<!--顶部导航-->
-<div class="headr">
+<!--顶部导航--><jsp:include page="header.jsp"/>
+<%-- <div class="headr">
     <div class="heard-con">
         <img src="images/logo.jpg" style="margin-top: 7px;float: left;position: absolute">
         <div class="headr-nav">
@@ -43,13 +42,13 @@
         </div>
     </div>
 </div>
-<!--顶部导航结束-->
+<!--顶部导航结束--> --%>
 
 <!--banner图片-->
 
 <!--banner图片结束-->
 <!--主页内容-->
-<div class="content">
+<div class="content" style="padding-top: 60px;">
     <div class="cont-top">
         <div class="cont-left">
 <%--             <div class="ctl-img">
@@ -184,7 +183,7 @@
 
 </div>
 <!--底部结束-->
-
+<jsp:include page="footer.jsp"/>
 
 
 

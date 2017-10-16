@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class OrdersAction extends ActionSupport implements RequestAware,SessionAware{
 
-	
+	private static final long serialVersionUID = 1L;
 	private Orders order;
 	private Users user;
 	private Food food;
@@ -31,41 +31,24 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	private IOrdersService ordersService;
 	private ICartService cartService;
 	private IUserService userService;
+	private String resultTemp;
 	
-	public IUserService getUserService() {
-		return userService;
-	}
 
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
 
-	public IOrdersService getOrdersService() {
-		return ordersService;
-	}
 
 	public void setOrdersService(IOrdersService ordersService) {
 		this.ordersService = ordersService;
-	}
-
-	public Orders getOrder() {
-		return order;
 	}
 
 	public void setOrder(Orders order) {
 		this.order = order;
 	}
 
-	public Users getUser() {
-		return user;
-	}
-
 	public void setUser(Users user) {
 		this.user = user;
-	}
-
-	public Food getFood() {
-		return food;
 	}
 
 	public void setFood(Food food) {
@@ -117,7 +100,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		
 	}
 	public String addOrdersAction() throws Exception{
-//		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub	
 		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
@@ -157,31 +140,33 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		//判断余额并返回提示信息
 		double price=Double.valueOf(session.get("cartPrice").toString());
 		Users user=(Users)session.get("user");
-		double balance=Double.valueOf(user.getBalance().toString());
+		double balance=Double.valueOf(user.getBalance().toString());		
 		if(balance>=price){
-			request.put("payMessage", "支付成功");
+			//request.put("payMessage", "支付成功");
+			this.resultTemp = "yes";
 		}else{
-			request.put("payMessage", "余额不足");
+			//request.put("payMessage", "余额不足");
+			this.resultTemp = "no";
 		}
-		
-		request.put("oId", order.getoId());
-		request.put("balance", user.getBalance().toString());
-		return "success";
-	}
-
-	public Cart getCart() {
-		return cart;
+		//request.put("oId", order.getoId());
+		//request.put("balance", user.getBalance().toString());
+		return SUCCESS;
 	}
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-
-	public ICartService getCartService() {
-		return cartService;
-	}
-
 	public void setCartService(ICartService cartService) {
 		this.cartService = cartService;
 	}
+
+	public String getResultTemp() {
+		return resultTemp;
+	}
+
+
+	public void setResultTemp(String resultTemp) {
+		this.resultTemp = resultTemp;
+	}
+	
 }

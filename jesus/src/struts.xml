@@ -104,8 +104,13 @@
 		<action name="delCartAction" class="cartAction" method="delCartAction">
 		    <result name="success" type="redirectAction">cartShowAction</result>
 		</action>
+		
+		
 		<action name="addOrdersAction" class="ordersAction" method="addOrdersAction">
-		    <result name="success">payPage.jsp</result>
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="resultTemp"></param>  
+            </result> 		    
 		</action>
 		<action name="showOrdersAction" class="ordersAction" method="showOrdersAction">
 		    <result name="success">/showOrders.jsp</result>

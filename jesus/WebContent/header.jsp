@@ -32,10 +32,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
+<!-- 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<button type="submit" class="btn btn-primary">登录</button>
-					</div>
+					</div> -->
 				</s:form>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -59,7 +59,7 @@
 			</li>
 			</s:if>
 			<s:else>
-  				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">欢迎您：<span style="color:red"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
+  				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">欢迎您：<span style="color:#FF5722"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
                <ul class="dropdown-menu">
                 <li><a href="ClientAction!myData?id=<%=session.getAttribute("loginid")%>">个人中心</a></li>
               <li class="divider"></li>
