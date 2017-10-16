@@ -87,9 +87,9 @@
         </div>
     </div>
 </body>
+    <jsp:include page="footer.jsp"/>
     <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
     <script type="text/javascript" src="resources/js/self.js"></script>
-    <jsp:include page="footer.jsp"/>
  <script>
 validateUname();
 </script>
