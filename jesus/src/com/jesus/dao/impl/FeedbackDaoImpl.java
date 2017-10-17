@@ -40,7 +40,7 @@ public class FeedbackDaoImpl implements IFeedbackDao {
 	public List findAllFeedback() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "SELECT uname,title,content,STATUS,FEEDBACK.`id`,FEEDBACK.`time` FROM USERS,FEEDBACK WHERE USERS.`uid`=FEEDBACK.`user_id`";
+		String sql = "SELECT uName,title,content,status,FEEDBACK.`id`,FEEDBACK.`time` FROM USERS,FEEDBACK WHERE USERS.`uId`=FEEDBACK.`uId`";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		List list = query.list();
 		return list;
