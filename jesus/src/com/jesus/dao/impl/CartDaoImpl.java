@@ -37,10 +37,6 @@ public class CartDaoImpl implements ICartDao{
 
 	public void saveCart(Cart cart){
 		Session session=sessionFactory.getCurrentSession();
-//		System.out.print("cid:"+cart.getcId());
-//		System.out.print("fid:"+cart.getfId());
-//		System.out.print("uid:"+cart.getuId());
-//		System.out.print("quantity:"+cart.getQuantity());
 		session.update(cart);
 	}
 	@Override

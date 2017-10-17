@@ -13,6 +13,7 @@ public interface ICartService {
 	
 	//删除食品
 	public void delCart(Cart cart);
+	public void delCart(Cart cart,List<Cart> cartList);
 	
 	//修改食品
 	public void saveCart(Cart cart);
@@ -21,5 +22,13 @@ public interface ICartService {
 	public List findAllFood(Users user);
 	public List<Cart> findAll(Users user);
 	public Cart findCart(String uId,String fId);
+	
+	//将食物的价格相加事务
+	public double sumOfAllFood(List list);
+	
+	//获取购物车食物种类
+	public int getCartNum();
+	//获取购物车价格
+	public double getCartPrice();
 	
 }

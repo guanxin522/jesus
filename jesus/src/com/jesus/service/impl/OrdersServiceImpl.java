@@ -63,7 +63,8 @@ public class OrdersServiceImpl implements IOrdersService{
 		for(int i=0;i<orderSonList.size();i++){
 			OrderSon orderSon = orderSonList.get(i);
 			orderSonDao.addOrderSon(orderSon);
-//			System.out.println(orderSon);
+			System.out.println("orderson:"+orderSon);
+			System.out.println("ordersonID:"+orderSon.getOsId());
 		}
 	}
 

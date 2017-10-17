@@ -71,36 +71,24 @@ public class CartAction extends ActionSupport implements RequestAware,SessionAwa
 
 	//展示购物车
 	public String cartShowAction() throws Exception{
+	
+		double cartPrice=0.00;                     //购物车的总价格
+		double temp=0.00;
+		int cartNum=0;                             //购物车的食物种类
+		
+		//获取当前用户
 		user=(Users)session.get("user");
-		System.out.println("来到cartShowAction");
+		
+		//获取当前用户的购物车食物
 		List<Cart> cartList=cartService.findAll(user);
 		List foodList=cartService.findAllFood(user);
-		System.out.println(foodList);
-//		System.out.println("获取到列表："+cartList);
-		session.put("cartList", cartList);
 		
+		cartPrice=cartService.sumOfAllFood(foodList);
+		cartNum=cartService.getCartNum();
+		
+		//将 == 购物车 == 和购物车对应的 == 食物 == 放入session
+		session.put("cartList", cartList);	
 		session.put("foodList", foodList);
-//		BigDecimal price1=new BigDecimal("0.0");
-//		double price2=price1.doubleValue();
-//		Object price = foodList.get(0);
-//		double price2=foodList.get(0).getFprice();
-//		System.out.println("BigDecimal:"+price);
-		double cartPrice=0.00;
-		double temp=0.00;
-		int cartNum=0;
-//		BigDecimal price2=null;
-		for(int i=0;i<foodList.size();i++){
-			Map map = (Map)foodList.get(i);
-			System.out.println(map);
-			BigDecimal tmp=new BigDecimal(map.get("fPrice").toString());
-			cartPrice += Double.parseDouble(map.get("fPrice").toString())*Double.parseDouble(map.get("quantity").toString());
-			
-			cartNum++;
-			System.out.println(map.get("fPrice"));
-		}
-//		System.out.println(price);
-//			price.add(food.getFprice());
-
 		session.put("cartPrice", cartPrice);
 		session.put("cartNum", cartNum);
 		return "success";
@@ -108,47 +96,32 @@ public class CartAction extends ActionSupport implements RequestAware,SessionAwa
 	
 	//添加食品到购物车
 	public String addCartAction() throws Exception{
+		
 		user=(Users)session.get("user");
+		
+		//获取由前台传来的用户购买食品的数量
 		int n=Integer.parseInt(cart.getQuantity());
-		
+		//获取用户购买的食品ID
 		String fid=(String)request.get("cart.fId");
-//		Cart cart=null;
-		System.out.println("来到addAction");
-		System.out.println("q:"+cart.getQuantity());
-//		cart.setUid(user.getUid());
-		System.out.println("cartfid1:"+fid);
-		System.out.println("cartfid1:"+cart.getfId());
-		System.out.println("userid"+user.getuId());
-		
+		//根据食品的ID和用户的ID去查找原来的购物车是否有该类型的食品
+		//有======添加数量，无=======添加新的食品类新到购物车
 		Cart t=cartService.findCart(user.getuId(), fid);
 		if(t!=null){
 			t.setQuantity(String.valueOf(Integer.parseInt(t.getQuantity())+n));
 			cartService.saveCart(t);
-		}else{
-//			Cart t=new Cart();
-			System.out.println("cart:"+cart);
-			
+		}else{	
 			cart.setQuantity(String.valueOf(n));
-//			cart.setCtime(time);
-
 			cart.setuId(user.getuId());
 			cart.setcId(WebUtils.makeId("c"));
 			cartService.addCart(cart);
 		}
-		
 		return "success";
 	}
 	public String delCartAction() throws Exception{
-		System.out.println("来到delCartAction,cart:"+cart.getfId()+cart.getuId());
+		//从session中获取购物车列表
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		for(Cart attribute : cartList) {
-			if(attribute.getfId().equals(cart.getfId())){
-				cart.setcId(attribute.getcId());
-				break;
-			}
-		}
-		System.out.println("cartid："+cart.getcId());
-		cartService.delCart(cart);
+		//在购物车列表中找出用户删除对应的食物id
+		cartService.delCart(cart, cartList);
 		return "success";
 	}
 
