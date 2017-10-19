@@ -26,25 +26,6 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	private Food food;
 	private String manageFood=null;
 	private String resultTemp;
-	public Food getFood() {
-		return food;
-	}
-
-	public void setFood(Food food) {
-		this.food = food;
-	}
-	Map<String, Object> session;
-	@Override
-	public void setSession(Map<String, Object> session) {
-		// TODO Auto-generated method stub
-		this.session=session;
-	}
-	Map<String, Object> request;
-	@Override
-	public void setRequest(Map<String, Object> request) {
-		// TODO Auto-generated method stub
-		this.request=request;
-	}
 	
 	IFoodService foodService;
 	public IFoodService getFoodService() {
@@ -84,6 +65,7 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 		}
 	}
 	public String addFoodAction() throws Exception{
+		System.out.println(1111);
 		String dstPath = ServletActionContext.getServletContext().getRealPath(
 				this.getSavePath())+ "/" + this.getUploadFileName();
 		File dstFile = new File(dstPath);
@@ -111,6 +93,7 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	}
 	
 	public String saveFoodAction() throws Exception{
+		System.out.println(1322);
 		Food foodTemp = foodService.findFood(food.getfId());
 		String dstPath = ServletActionContext.getServletContext().getRealPath(
 				this.getSavePath())+ "/" + this.getUploadFileName();
@@ -131,10 +114,6 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 		
 	}
 	
-	public File getUpload() {
-		return upload;
-	}
-
 	public void setUpload(File upload) {
 		this.upload = upload;
 	}
@@ -162,9 +141,6 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
-
-
-
 	public String getManageFood() {
 		return manageFood;
 	}
@@ -183,6 +159,24 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	public void setResultTemp(String resultTemp) {
 		this.resultTemp = resultTemp;
 	}
-
 	
+	public Food getFood() {
+		return food;
+	}
+
+	public void setFood(Food food) {
+		this.food = food;
+	}
+	Map<String, Object> session;
+	@Override
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session=session;
+	}
+	Map<String, Object> request;
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		// TODO Auto-generated method stub
+		this.request=request;
+	}
 }

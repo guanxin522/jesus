@@ -32,21 +32,17 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-	public String loginUser() throws Exception {
-		String uname = users.getuName();
-		String upwd = users.getuPwd();
-		Users user = userService.loginUser(uname, upwd);
-		dataMap = new HashMap<String, Object>(); 
-		if(user!=null)
+	public String loginUserAction() throws Exception {
+		String uName = users.getuName();
+		String uPwd = users.getuPwd();
+		Users user = userService.loginUser(uName, uPwd);
+		if(user != null)
 		{
 			session.put("user", user);
-			dataMap.put("result", 1);
 			this.resultTemp = "success";
-			System.out.println("success");
 			return "success";
 		}
 		else{
-			dataMap.put("result", 2);
 			this.resultTemp = "fail";
 		return "login";
 		}
