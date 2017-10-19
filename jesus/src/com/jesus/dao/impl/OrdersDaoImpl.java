@@ -1,16 +1,14 @@
 package com.jesus.dao.impl;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 
 import com.jesus.dao.IOrdersDao;
-import com.jesus.entity.OrderSon;
 import com.jesus.entity.Orders;
-import com.jesus.entity.Users;
 
 public class OrdersDaoImpl implements IOrdersDao{
 
@@ -66,6 +64,35 @@ public class OrdersDaoImpl implements IOrdersDao{
 			order = list.get(0);
 		}
 		return order;
+	}
+	public List findUnpaidtFood(String uId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		String sql= "SELECT food.fid,food.fname,food.fdescri,food.fprice,food.fimage,food.time,food.status,"
+				+ "orders.oid,orders.otime,orders.ostatus,"
+				+ "orderson.osid,orderson.quantity FROM food,orders,orderson"
+				  + " WHERE food.fid =orderson.fid AND orderson.oid=orders.oid AND orders.uid=? AND orders.ostatus=0";
+		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		query.setParameter(0,uId);
+		List list = query.getResultList();
+		return list;
+	}
+	@Override
+	public List findPaidFood(String uId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		String sql= "SELECT food.fid,food.fname,food.fdescri,food.fprice,food.fimage,food.time,food.status,"
+				+ " orders.oid,orders.otime,orders.ostatus,"
+				+ " orderson.osid,orderson.quantity FROM food,orders,orderson"
+				  + " WHERE food.fid =orderson.fid AND orderson.oid=orders.oid AND orders.uid=? AND orders.ostatus=1";
+//				      + "SELECT orderson.fid FROM orderson"
+//				      + "WHERE orderson.oid IN ("
+//				          + "SELECT orders.oid FROM orders"
+//				          + "WHERE orders.uid=:uId AND orders.ostatus=1))";
+		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		query.setParameter(0,uId);
+		List list = query.getResultList();
+		return list;
 	}
 
 }

@@ -17,6 +17,8 @@ public interface IOrdersDao {
 	public void saveOrders(Orders order);
 	
 	//查询订单
+	public List findUnpaidtFood(String uId);
+	public List findPaidFood(String uId);
 	public Orders findOrderByOid(String oId);
 	public List findOrdersByUser(String uId);
 	public List findAllOrders();

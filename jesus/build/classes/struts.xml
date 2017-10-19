@@ -129,8 +129,13 @@
             <interceptor-ref name="User"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>  
 		</action>
-		<action name="showOrdersAction" class="ordersAction" method="showOrdersAction">
-		    <result name="success">/showOrders.jsp</result>
+		<action name="showUnpaidtOrdersAction" class="ordersAction" method="showUnpaidtOrdersAction">
+		    <result name="success">/showUnpaidtOrders.jsp</result>
+		    <interceptor-ref name="User"></interceptor-ref> 
+		    <interceptor-ref name="defaultStack"></interceptor-ref> 
+		</action>
+		<action name="showPaidtOrdersAction" class="ordersAction" method="showPaidtOrdersAction">
+		    <result name="success">/showPaidtOrders.jsp</result>
 		    <interceptor-ref name="User"></interceptor-ref> 
 		    <interceptor-ref name="defaultStack"></interceptor-ref> 
 		</action>
