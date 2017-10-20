@@ -82,17 +82,23 @@ function checkUnameLogin()
 	        console.log(form.serialize());
 	        //发送ajax请求
 	        $.ajax({
-	            url: 'loginUser',
+	            url: 'loginUserAction',
 	            async: true,//同步，会阻塞操作
 	            type: 'POST',//PUT DELETE POST
 	            data: form.serialize(),
 	            success: function (result) {
-	                console.log(result);
-	                if (result=="success") {
-	                	setTimeout("layer.msg('登陆成功!',{icon:1,time:2000})",2000);
-	                    location.href="/jesus/index"
+	                if (result=="loginSuccess") {
+	                	setTimeout(function(){location.href="/jesus";},2000);
+	                    layer.msg('登陆成功！正在为你跳转！',{icon:6,time:2000})
 	                } else {
-	                	layer.msg('密码错误，请重新输入!',{icon:5,time:2000})
+		                	layer.msg('密码错误，请重新输入!',{icon:5,time:2000});
+		            	    function randomNumber(min, max) {
+		            	        return Math.floor(Math.random() * (max - min + 1) + min);
+		            	    };
+/*		                	$('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+		                	$("#pwd").val("");
+		                	$("#validate").val("");
+		                	checkUnameLogin();*/
 	                }
 	            }, error: function () {
 	                alert("服务器繁忙请稍后再试！")

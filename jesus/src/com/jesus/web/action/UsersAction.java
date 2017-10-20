@@ -39,13 +39,12 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		if(user != null)
 		{
 			session.put("user", user);
-			this.resultTemp = "success";
-			return "success";
+			this.resultTemp = "loginSuccess";
 		}
 		else{
-			this.resultTemp = "fail";
-		return "login";
+			this.resultTemp = "loginFail";
 		}
+		return	SUCCESS;
 	}
 	
 	//用户注销
