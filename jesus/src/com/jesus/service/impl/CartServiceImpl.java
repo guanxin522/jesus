@@ -1,6 +1,7 @@
 package com.jesus.service.impl;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -68,10 +69,11 @@ public class CartServiceImpl implements ICartService{
 		return cartDao.findCart(uId, fId);
 	}
 	
-	public double sumOfAllFood(List foodList){
+	public String sumOfAllFood(List foodList){
 //		将食物列表的价格进行相加
 		cartNum=0;
 		cartPrice=0.00;
+		DecimalFormat df = new DecimalFormat("######0.0");   
 		for(int i=0;i<foodList.size();i++){
 			Map map = (Map)foodList.get(i);
 			System.out.println(map);
@@ -79,7 +81,8 @@ public class CartServiceImpl implements ICartService{
 			cartPrice += Double.parseDouble(map.get("fPrice").toString())*Double.parseDouble(map.get("quantity").toString());
 			cartNum++;
 		}
-		return cartPrice;
+		String cartPriceStr = df.format(cartPrice);
+		return cartPriceStr;
 	}
 
 	public double getCartPrice() {

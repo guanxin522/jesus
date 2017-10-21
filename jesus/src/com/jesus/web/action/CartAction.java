@@ -72,7 +72,7 @@ public class CartAction extends ActionSupport implements RequestAware,SessionAwa
 	//展示购物车
 	public String cartShowAction() throws Exception{
 	
-		double cartPrice=0.00;                     //购物车的总价格
+		String cartPrice;                     //购物车的总价格
 		double temp=0.00;
 		int cartNum=0;                             //购物车的食物种类
 		

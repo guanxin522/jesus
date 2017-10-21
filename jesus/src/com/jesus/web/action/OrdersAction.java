@@ -112,7 +112,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		double oprice =(double)session.get("cartPrice");
+		String oprice =(String) session.get("cartPrice");
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();
 		
