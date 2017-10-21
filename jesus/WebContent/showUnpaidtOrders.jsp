@@ -83,7 +83,7 @@
 				if(data.resultTemp == 'yes'){
 					layer.msg('支付成功',{icon:6,time:1500});
 					 setTimeout(function () {
-							location.href="showOrdersAction";
+							location.href="#";
 				        },1500);
 				}
 				else{
