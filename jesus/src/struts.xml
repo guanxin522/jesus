@@ -125,9 +125,11 @@
 			<result type="json">  
                 <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
                 <param name="resultTemp"></param>  
-            </result> 		    
+            </result> 	
+            <result name="success" type="redirectAction">/showUnpaidtOrdersAction</result>	    
             <interceptor-ref name="User"></interceptor-ref>
-            <interceptor-ref name="defaultStack"></interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref> 
+             
 		</action>
 		<action name="showUnpaidtOrdersAction" class="ordersAction" method="showUnpaidtOrdersAction">
 		    <result name="success">/showUnpaidtOrders.jsp</result>

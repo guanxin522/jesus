@@ -145,4 +145,10 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		this.resultTemp = resultTemp;
 	}
 	
+	//用户修改个人信息
+	public String modUserInfo(){
+		
+		return SUCCESS;
+	}
+	
 }

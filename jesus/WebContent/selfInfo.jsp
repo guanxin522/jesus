@@ -15,10 +15,9 @@
 	<jsp:include page="header.jsp"/>
 	<!--end header -->
 	<!-- start banner_x -->
-
-<!-- end banner_x -->
-<!-- self_info -->
-	<div class="grzxbj" style="padding-top: 60px;">
+	<!-- end banner_x -->
+    <!-- self_info -->
+	<div class="grzxbj">
 		<div class="selfinfo center">
 		<div class="lfnav fl">
 			<div class="ddzx">订单中心</div>
@@ -33,46 +32,37 @@
 			<div class="ddzx">个人中心</div>
 			<div class="subddzx">
 				<ul>
-					<li><a href="#">我的个人中心</a></li>
+					<li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li>
 
 					<li><a href="">收货地址</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="rtcont fr">
-			<div class="ddzxbt">交易订单</div>
-			<s:iterator var="mealItem" value="#session.unpaidOrderList" >
-			<div class="ddxq">
-				<div class="ddspt fl"><img src="./resources/images/liebiao_hongmin4_dd.jpg" alt=""></div>
-				<div class="ddbh fl">${mealItem.fname}</div>
-				<div class="ztxx fr">
-					<ul>
-					<s:if test="#mealItem.ostatus==1">
-						 <li>已付款</li>
-					</s:if>
-					<s:elseif test="#mealItem.ostatus==0"> 
-						<li><a href="#" onClick="pay(this,'101')">待付款</a></li>
-					</s:elseif> 
-
-						<li>￥${mealItem.fprice}</li>
-						<li>数量:${mealItem.quantity}</li>
-						<li><a href="#" onClick="">×</a></li>
-						<div class="clear"></div>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
-			</s:iterator>
+			<div class="grzlbt ml40">我的资料</div>
+			<div class="subgrzl ml40"><span>昵称</span><span>啦啦维吉尔</span><span><a href="" onChick="pay(this.'1')">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>姓名</span><span>啊啊啊啊啊</span><span><a href="">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>手机号</span><span>15669097417</span><span><a href="">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>密码</span><span>************</span><span><a href="">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>邮箱</span><span>#################</span><span><a href="">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>余额</span><span>99999999999999999</span><span><a href="">编辑</a></span></div>
+			<div class="subgrzl ml40"><span>地址</span><span>浙江省杭州市江干区19号大街571号</span><span><a href="">编辑</a></span></div>
+			
 		</div>
 		<div class="clear"></div>
 		</div>
 	</div>
 <!-- self_info -->
-		    <jsp:include page="footer.jsp"/>
-
+		
+		<footer class="mt20 center">			
+			<div class="mt20">小米商城|MIUI|米聊|多看书城|小米路由器|视频电话|小米天猫店|小米淘宝直营店|小米网盟|小米移动|隐私政策|Select Region</div>
+			<div>©mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2014]0059-0009号</div> 
+			<div>违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
+		</footer>
 	</body>
 	<script>
-	function pay(obj,id){
+function pay(obj,id){
+	
 	layer.confirm('确认要支付吗？',{title:'支付',time:0},
 			function(index){	
 		$.ajax({
