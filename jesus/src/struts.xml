@@ -49,6 +49,27 @@
                 <param name="root">dataMap</param>  
             </result>  	
 		</action>	
+		<action name="rechargeAction" class="usersAction" method="rechargeAction">
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="root">resultTemp</param>  
+            </result> 
+			<interceptor-ref name="User"></interceptor-ref> 
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="saveUserInfoAction" class="usersAction" method="saveUserInfoAction">
+			<result type="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="root">resultTemp</param>  
+            </result> 
+			<interceptor-ref name="User"></interceptor-ref> 
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		
+		
+		
+		
 		
 		<action name="foodShowAction" class="foodAction" method="foodShowAction">
 			<result name="success">/index.jsp</result>	
@@ -172,6 +193,8 @@
 			<result name="success">/admin/feedback-list.jsp</result>
 			<interceptor-ref name="Admin"></interceptor-ref> 
 			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</action>					
+		</action>	
+		
+						
 	</package>
 </struts>

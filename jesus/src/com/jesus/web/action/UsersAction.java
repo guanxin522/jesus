@@ -1,5 +1,6 @@
 package com.jesus.web.action;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	private Map<String,Object> dataMap;  
 	private String resultTemp;
 	IUserService userService;
+	private String other;
+	private String value;
 	
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
@@ -145,9 +148,56 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		this.resultTemp = resultTemp;
 	}
 	
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
 	//用户修改个人信息
-	public String modUserInfo(){
+	public String saveUserInfoAction() throws Exception{
+		System.out.println(users.getuName()==null);
+		System.out.println(users.getuName());
+		Users user_session =(Users)session.get("user");
+		if(other.equals("1")){
+			user_session.setuName(value);
+		}else if(other.equals("2")){
+			user_session.setRealname(value);
+		}else if(other.equals("3")){
+			user_session.setTel(value);
+		}else if(other.equals("4")){
+			user_session.setuPwd(value);
+		}else if(other.equals("5")){
+			user_session.setEmail(value);
+		}else if(other.equals("6")){
+			user_session.setAddress(value);
+		}
+		userService.saveUsers(user_session);
+		session.put("user", user_session);
+		this.setResultTemp("yes");
+		return SUCCESS;
+	}
+	//用户充值
+	public String rechargeAction() throws Exception{
+		double out=0.00;
+		double in=0.00;
+		Users user_session =(Users)session.get("user");
+//		Users user_db = userService.findUsers(user_session.getuName());
 		
+		
+		in= Double.parseDouble(user_session.getBalance().toString());
+		out = Double.parseDouble(users.getBalance().toString());
+		in=in+out;
+		BigDecimal db_balance=new BigDecimal(in);
+		user_session.setBalance(db_balance);
+		userService.saveUsers(user_session);
+		this.setResultTemp("yes");
 		return SUCCESS;
 	}
 	
