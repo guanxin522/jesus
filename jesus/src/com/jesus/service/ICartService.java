@@ -24,7 +24,7 @@ public interface ICartService {
 	public Cart findCart(String uId,String fId);
 	
 	//将食物的价格相加事务
-	public double sumOfAllFood(List list);
+	public String sumOfAllFood(List list);
 	
 	//获取购物车食物种类
 	public int getCartNum();
