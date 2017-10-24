@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img class="avatar size-XL l" src="../resources/admin/static/h-ui/images/ucnter/avatar-default.jpg">
 	<dl style="margin-left:80px; color:#fff">
 		<dt>
-			<span class="f-18">${request.user.uname }</span>
+			<span class="f-18">${request.user.uName }</span>
 		</dt>
 		<!-- <dd class="pt-10 f-12" style="margin-left:0">这家伙很懒，什么也没有留下</dd> -->
 	</dl>

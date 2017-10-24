@@ -6,75 +6,46 @@
     <!-- 引入 Bootstrap -->
     <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
-	<link href="/jesus/resources/css/bootstrapValidator.css" rel="stylesheet"/>
 </head>
-	<div class="modal" id="login-modal">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					<h4 class="modal-title">登录</h4>
-				</div>
-				
-				<s:form class="form-horizontal"   method="post">
-					<div class="modal-body">
-						<div class="form-group">
-						<s:fielderror />
-							 <label for="inputUserName" class="col-sm-2 control-label">用户名</label>
-							<div class="col-sm-10">
-								<input  type="text" class="form-control" id="inputUserName" name="uname"  placeholder="请输入您的用户名"  minlength="3" required />
-							</div>
-						</div>
-						<div class="form-group">
-							 <label for="inputUserPwd" class="col-sm-2 control-label">密码</label>
-							<div class="col-sm-10">															<!-- pattern="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,15}$" -->
-								<input type="password" class="form-control" id="inputUserPwd" name="upwd" placeholder="请输入您的密码" required minlength="6" />
-							</div>
-						</div>
-					</div>
-<!-- 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary">登录</button>
-					</div> -->
-				</s:form>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->	
- <div class="navbar navbar-fixed-top navbar-inverse " role="navigation">
-
+   <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <div class="collapse navbar-collapse">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}">Jesus网上订餐</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="${pageContext.request.contextPath}/foodShowAction">主页</a></li>
-			 <li><a href="AnnouncementAction!init">购物车</a></li>
+            <li><a href="${pageContext.request.contextPath}">主页</a></li>
+            <li><a href="${pageContext.request.contextPath}/cartShowAction">购物车</a></li>
           </ul>
-		   <ul class="nav navbar-nav navbar-right">
-          
-		<li>
-
-			 <s:if test="#session.user==null">	
-			 <a href="${pageContext.request.contextPath}/login.jsp">登陆</a>
-			<!-- <a href="javascript:void(0);" id="show-login-modal">登陆</a> -->
-			<li><a href="register.jsp">注册</a></li>
-			</li>
-			</s:if>
-			<s:else>
-  				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">欢迎您：<span style="color:#FF5722"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
-               <ul class="dropdown-menu">
-                <li><a href="ClientAction!myData?id=<%=session.getAttribute("loginid")%>">个人中心</a></li>
-              <li class="divider"></li>
-                 <li><a href="OrdersAction!myOrders?id=<%=session.getAttribute("loginid")%>">我的订单</a></li>
-                <li class="divider"></li>
-                 <li><a href="feedback.jsp">意见反馈</a></li>
-                 <li class="divider"></li>
-                <li><a href="${pageContext.request.contextPath}/logOutUser">退出</a></li>
-                
-              </ul> 
-              </s:else>
-
+          <ul class="nav navbar-nav navbar-right">
+          <s:if test="#session.user==null">	
+            <li><a href="${pageContext.request.contextPath}/login.jsp">登录</a></li>
+            <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
+            </s:if>
+            <s:else>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎您：<span style="color:#FF5722"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
+               		<ul class="dropdown-menu">
+                 		<li><a href="ClientAction!myData?id=<%=session.getAttribute("loginid")%>">个人中心</a></li>           
+              			 <li class="divider"></li>
+               			   <li><a href="OrdersAction!myOrders?id=<%=session.getAttribute("loginid")%>">我的订单</a></li>
+               				  <li class="divider"></li>
+                				  <li><a href="${pageContext.request.contextPath}/feedback.jsp">意见反馈</a></li>
+                 					 <li class="divider"></li>
+                						 <li><a href="${pageContext.request.contextPath}/logOutUser">退出</a></li>
+				</ul>
+                </li>  
+           </s:else>          
           </ul>
-        </div><!-- /.nav-collapse -->
-      </div><!-- /.container -->
-    </div><!-- /.navbar -->
+                    
+        </div>
+      </div>
+    </nav>
     
     

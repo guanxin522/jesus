@@ -88,15 +88,14 @@ function checkUnameLogin()
 	            data: form.serialize(),
 	            success: function (result) {
 	                if (result=="loginSuccess") {
-	                	setTimeout(function(){location.href="/jesus";},2000);
+	                	setTimeout(function(){location.href="/jesus";},1200);
 	                    layer.msg('登陆成功！正在为你跳转！',{icon:6,time:2000})
 	                } else {
 		                	layer.msg('密码错误，请重新输入!',{icon:5,time:2000});
-		            	    function randomNumber(min, max) {
+/*		            	    function randomNumber(min, max) {
 		            	        return Math.floor(Math.random() * (max - min + 1) + min);
 		            	    };
-/*		                	$('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
-		                	$("#pwd").val("");
+		                	$('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));         	/*	                	$("#pwd").val("");
 		                	$("#validate").val("");
 		                	checkUnameLogin();*/
 	                }

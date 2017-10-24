@@ -1,4 +1,5 @@
 ﻿function validateUname(){
+	var form = $('#registerForm');
 $(document).ready(function() {
     // Generate a simple captcha
     function randomNumber(min, max) {
@@ -6,7 +7,7 @@ $(document).ready(function() {
     };
     $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
 
-    $('#defaultForm').bootstrapValidator({
+    form.bootstrapValidator({
 //        live: 'disabled',
         message: 'This value is not valid',
         feedbackIcons: {
@@ -64,7 +65,7 @@ $(document).ready(function() {
                         message: '确认密码不能为空'
                     },
                     identical: {
-                        field: 'upwd',
+                        field: 'uPwd',
                         message: '密码和确认密码不一致'
                     },
                     different: {
@@ -148,5 +149,38 @@ $(document).ready(function() {
     $('#resetBtn').click(function() {
         $('#defaultForm').data('bootstrapValidator').resetForm(true);
     });
+});
+
+
+$("#registerBtn").click(function () {
+    //进行表单验证	
+    var bv = form.data('bootstrapValidator');
+    bv.validate();
+    if (bv.isValid()) {
+        console.log(form.serialize());
+        //发送ajax请求
+        $.ajax({
+            url: 'registerAction',
+            async: true,//同步，会阻塞操作
+            type: 'POST',//PUT DELETE POST
+            data: form.serialize(),
+            success: function (result) {
+                if (result=="registerSuccess") {
+                	setTimeout(function(){location.href="/jesus";},2000);
+                    layer.msg('注册成功！正在为你登录！',{icon:6,time:2000})
+                } else {
+	                	layer.msg('注册失败!',{icon:5,time:1000});
+/*		            	    function randomNumber(min, max) {
+	            	        return Math.floor(Math.random() * (max - min + 1) + min);
+	            	    };
+	                	$('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));         	/*	                	$("#pwd").val("");
+	                	$("#validate").val("");
+	                	checkUnameLogin();*/
+                }
+            }, error: function () {
+                alert("服务器繁忙请稍后再试！")
+            }
+        })
+    }
 });
 }

@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>小米商城-个人中心</title>
+		<title>个人中心</title>
 		<link rel="stylesheet" type="text/css" href="./resources/css/style2.css">
 	</head>
 	<body>
@@ -17,7 +17,7 @@
 	<!-- start banner_x -->
 	<!-- end banner_x -->
     <!-- self_info -->
-	<div class="grzxbj">
+	<div class="grzxbj" style="padding-top: 60px;">
 		<div class="selfinfo center">
 		<div class="lfnav fl">
 			<div class="ddzx">订单中心</div>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="rtcont fr">
-			<div class="grzlbt ml40">我的资料</div>
+			<div class="ddzxbt">交易订单</div>
 			<div class="subgrzl ml40"><span>昵称</span><span><s:property  value="#session.user.uName"/></span><span><a onClick="modify(this,'昵称','1')"/>编辑</a></span></div>
 			<div class="subgrzl ml40"><span>姓名</span><span><s:property  value="#session.user.realName"/></span><span><a onClick="modify(this,'姓名','2')"/>编辑</a></span></div>
 			<div class="subgrzl ml40"><span>手机号</span><span><s:property  value="#session.user.Tel"/></span><span><a onClick="modify(this,'手机号','3')"/>编辑</a></span></div>

@@ -35,8 +35,11 @@ public class OrdersDaoImpl implements IOrdersDao{
 	public List findAllOrders() {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-
-		return null;
+		String sql = "SELECT orders.`oid`,orders.`otime`,orders.`oprice`,"
+				+ "orders.`ostatus`,uname,address,tel FROM users,orders GROUP BY oid";
+		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		List list = query.getResultList();
+		return list;
 	}
 	
 	public List<Orders> findOrdersByUser(String uId){

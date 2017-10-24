@@ -97,7 +97,7 @@
             </div>
              <div class="pict">
                 <div class="f-proSatifySumWrap">
-                                         商品体积：
+                                        销量：
                     <s:property  value="#request.detail.fVolume"/>
                    
                 </div>
@@ -108,21 +108,16 @@
              <!--       <input type="text"  value="1" class="g_itext cartBuyCount f-cartBuyCount" name="q">-->
 
                     <input type="hidden" name="cart.fId" value="${detail.fId}"/>
-                    <input  class="g_itext cartBuyCount f-cartBuyCount" type="text" name="cart.quantity" value="1"/>
+                    <input  class="g_itext cartBuyCount f-cartBuyCount" type="number" required name="cart.quantity" value="1"/>
                     
                 </div>
-                <div class="f-buyCountBtn">
+<!--                 <div class="f-buyCountBtn">
                     <div  class="f-countBtn mallJian"></div>
                     <div  class="f-countBtn disableMallJian"></div>
-                </div>
+                </div> -->
             </div>
             <div class="fk-pd5MallActBtns">
-                <a href="${pageContext.request.contextPath}/addCartAction?cart.fId=${detail.fId}">
-                    <div class="buttn"><input class="buttn" type="submit" value="加入购物车" /></div>
-                </a>
-                    <div class="buttn butto"><input  class="buttn butto" type="submit" value="加入购物车" /></div>
-
-                
+                    <div class="buttn butto"><input  class="buttn butto" type="submit" value="加入购物车" /></div>        
             </div>
 
         </div>

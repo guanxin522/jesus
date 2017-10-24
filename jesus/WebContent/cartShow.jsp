@@ -55,7 +55,7 @@
 					</ul>
 				</div>
 				<div class="jiesuan fr">
-					<div class="jiesuanjiage fl">合计（不含运费）：<span><s:property  value="#session.cartPrice"/>元</span></div>
+					<div class="jiesuanjiage fl">合计：<span><s:property  value="#session.cartPrice"/>元</span></div>
 					<div class="jsanniu fr"><a href="${pageContext.request.contextPath}/addOrdersAction"><input class="jsan" type="button" name="jiesuan"  value="去结算"/></a></div>
 					<div class="clear"></div>
 				</div>

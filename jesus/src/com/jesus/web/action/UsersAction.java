@@ -1,6 +1,7 @@
 package com.jesus.web.action;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.jesus.entity.Users;
-import com.jesus.exception.UsersExistException;
 import com.jesus.service.IUserService;
 import com.jesus.util.WebUtils;
 import com.opensymphony.xwork2.ActionSupport;
@@ -58,18 +58,20 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	
 	//用户注册
 	public String registerAction() throws Exception {
-		try {	
-				users.setuId(WebUtils.makeId("u"));
-				userService.addUsers(users);
-				userService.loginUser(users.getuName(), users.getuPwd());
-				return "success";
-		}catch (UsersExistException e) {
-			//addFieldError( "uname", "用户名已存在" );
-			return "login";
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return "login";
-		} 
+		users.setuId(WebUtils.makeId("u"));
+		Date date = new Date();
+		users.setTime(date);
+		users.setBalance(new BigDecimal(0.0));
+		userService.addUsers(users);
+		users = userService.loginUser(users.getuName(), users.getuPwd());
+		session.put("user", users);
+		this.resultTemp = "registerSuccess";
+		return SUCCESS;
+		
+	}
+	private Date Date() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	//检查用户名
 	public String checkUnameAction() throws Exception {
@@ -95,6 +97,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	
 	public String findAllUsersAction() throws Exception {
 		List userList = userService.findAllUsers();
+		System.out.println(userList);
 		request.put("userList", userList);
 		return SUCCESS;
 		

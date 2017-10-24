@@ -165,4 +165,15 @@ xsi:schemaLocation="
     	<property name="cartService" ref="cartService" />
     	<property name="userService" ref="userService" />
     </bean>
+    
+	<bean id="orderSon" class="com.jesus.entity.OrderSon"></bean>    
+    <!-- 定义FeedbackServiceImpl类,并为其FeedbackDAO属性注入值-->
+	<bean id="orderSonService" class="com.jesus.service.impl.OrderSonServiceImpl">	  
+    	<property name="orderSonDao" ref="orderSonDao" />
+    </bean>
+    <!-- 定义FeedbackAction，并为其中属性FeedbackService注入值 -->
+	<bean name="orderSonAction" class="com.jesus.web.action.OrderSonAction" scope="prototype">
+    	<property name="orderSon" ref="orderSon" />
+		<property name="orderSonService" ref="orderSonService" />
+    </bean> 
 </beans>

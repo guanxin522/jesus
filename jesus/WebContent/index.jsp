@@ -4,6 +4,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<body>
 <!-- 引入头部 -->
 <jsp:include page="header.jsp"/>
      <!-- Carousel
@@ -54,11 +55,11 @@
         <s:iterator var="foodItem" value="#request.foodList">
         <s:if test="%{#foodItem.status>=1}">
         <div class="col-lg-4">
-        <a style="text-decoration:none" href="${pageContext.request.contextPath}/foodDetailAction?fId=${foodItem.fId}">
+        <a style="text-decoration:none;color:#5a5a5a;" href="${pageContext.request.contextPath}/foodDetailAction?fId=${foodItem.fId}">
           <img class="img-circle" src="${pageContext.request.contextPath}/${foodItem.fImage}" alt="Generic placeholder image" width="180" height="180">        
           <h2>${foodItem.fName}</h2>
           <p>${foodItem.fDescri}</p>
-         <p class="btn btn-warning">￥${foodItem.fPrice}</p>
+       	  <p class="btn btn-warning">￥${foodItem.fPrice}</p>
       </a>
         </div><!-- /.col-lg-4 -->    
         </s:if>  
@@ -68,3 +69,5 @@
 </div>
 
 <jsp:include page="footer.jsp"/>
+</body>
+</html>

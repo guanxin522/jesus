@@ -7,7 +7,7 @@
 <html>
  <head> 
   <meta charset="UTF-8" /> 
-  <title>小米商城-个人中心</title> 
+  <title>订单中心</title> 
   <link rel="stylesheet" type="text/css" href="./resources/css/style2.css" /> 
   <link rel="stylesheet" type="text/css" href="./resources/css/base.min.css" /> 
   <link rel="stylesheet" type="text/css" href="./resources/css/main.min.css" /> 
@@ -36,7 +36,7 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="#">我的个人中心</a></li> 
+       <li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li> 
        <li><a href="">收货地址</a></li> 
       </ul> 
      </div> 

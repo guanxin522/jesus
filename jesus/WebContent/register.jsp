@@ -18,7 +18,7 @@
                         <h2 style="padding-top: 45px;">注册</h2>
                     </div>
 
-                    <form id="defaultForm" method="post" class="form-horizontal" action="${pageContext.request.contextPath}/checkUnameAction">
+                    <form id="registerForm" method="post" class="form-horizontal" action="">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">用户名</label>
                             <div class="col-lg-5">
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
    								<button type="button" class="btn btn-info" id="validateBtn">核 验</button>
-                                <button type="submit" class="btn btn-primary" name="signup" value="Sign up">注 册</button>
+                                <button type="submit" class="btn btn-primary" id="registerBtn" name="signup" value="Sign up">注 册</button>
                                 <button type="button" class="btn btn-info" id="resetBtn">重 置</button>
                             </div>
                         </div>

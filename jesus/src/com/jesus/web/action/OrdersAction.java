@@ -68,6 +68,11 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		request=arg0;
 	}
 
+	public String findAllOrders() throws Exception{
+		List ordersList = ordersService.findAllOrders();
+		request.put("ordersList", ordersList);
+		return SUCCESS;
+	}
 	public String showPaidtOrdersAction() throws Exception{
 //		System.out.println("来到showOrdersAction");
 		user=(Users)session.get("user");
@@ -112,7 +117,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		String oprice =(String) session.get("cartPrice");
+		Double oprice =(Double) session.get("cartPrice");
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();
 		

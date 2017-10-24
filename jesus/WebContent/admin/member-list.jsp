@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tbody>
 				<s:iterator var="userItem" value="#request.userList">
 			<tr class="text-c">
-				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uname=${userItem.uname }','10001','360','400')">${userItem.uname }</u></td>
+				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${userItem.uName }','10001','360','400')">${userItem.uName }</u></td>
 				<td>${userItem.realname }</td>
 				<td>${userItem.tel }</td>
 				<td>${userItem.email }</td>
