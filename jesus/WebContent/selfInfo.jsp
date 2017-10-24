@@ -8,8 +8,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>个人中心</title>
-		<link rel="stylesheet" type="text/css" href="./resources/css/style2.css">
-	</head>
+		  <link rel="stylesheet" type="text/css" href="./resources/css/style2.css" /> 
+          <link rel="stylesheet" type="text/css" href="./resources/css/base.min.css" /> 
+          <link rel="stylesheet" type="text/css" href="./resources/css/main.min.css" /> 
+    </head>
 	<body>
 	<!-- start header -->
 	<jsp:include page="header.jsp"/>
@@ -19,25 +21,26 @@
     <!-- self_info -->
 	<div class="grzxbj" style="padding-top: 60px;">
 		<div class="selfinfo center">
-		<div class="lfnav fl">
-			<div class="ddzx">订单中心</div>
-			<div class="subddzx">
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/showUnpaidtOrdersAction">待付款订单</a></li>
-
-
-					<li><a href="${pageContext.request.contextPath}/showPaidtOrdersAction">历史订单</a></li>
-				</ul>
-			</div>
-			<div class="ddzx">个人中心</div>
-			<div class="subddzx">
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li>
-
-					<li><a href="">收货地址</a></li>
-				</ul>
-			</div>
-		</div>
+		<div class="lfnav fl"> 
+     <div class="ddzx">
+      订单中心
+     </div> 
+     <div class="subddzx"> 
+      <ul> 
+       <li><a href="${pageContext.request.contextPath}/showUnpaidtOrdersAction">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showPaidtOrdersAction">历史订单</a></li> 
+      </ul> 
+     </div> 
+     <div class="ddzx">
+      个人中心
+     </div> 
+     <div class="subddzx"> 
+      <ul> 
+       <li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li> 
+       <li><a href="">收货地址</a></li> 
+      </ul> 
+     </div> 
+    </div> 
 		<div class="rtcont fr">
 			<div class="ddzxbt">交易订单</div>
 			<div class="subgrzl ml40"><span>昵称</span><span><s:property  value="#session.user.uName"/></span><span><a onClick="modify(this,'昵称','1')"/>编辑</a></span></div>

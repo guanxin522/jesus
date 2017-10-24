@@ -196,16 +196,17 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	public String rechargeAction() throws Exception{
 		double out=0.00;
 		double in=0.00;
-		Users user_session =(Users)session.get("user");
+		Users userSession =(Users)session.get("user");
 //		Users user_db = userService.findUsers(user_session.getuName());
 		
-		
-		in= Double.parseDouble(user_session.getBalance().toString());
+		Users user = userService.findUsersById(userSession.getuId());
+		in= Double.parseDouble(user.getBalance().toString());
 		out = Double.parseDouble(users.getBalance().toString());
 		in=in+out;
 		BigDecimal db_balance=new BigDecimal(in);
-		user_session.setBalance(db_balance);
-		userService.saveUsers(user_session);
+		userSession.setBalance(db_balance);
+		user.setBalance(db_balance);
+		userService.saveUsers(user);
 		this.setResultTemp("yes");
 		return SUCCESS;
 	}

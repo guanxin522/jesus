@@ -25,6 +25,7 @@ public interface IUserService {
 	
 	//查找单个用户
 	public Users findUsers(String uName);
+	public Users findUsersById(String uId);
 	
 	//查找所有用户
 	public List findAllUsers();

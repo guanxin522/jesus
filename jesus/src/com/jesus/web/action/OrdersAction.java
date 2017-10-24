@@ -33,6 +33,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	private ICartService cartService;
 	private IUserService userService;
 	private String resultTemp;
+	private String payTarget;
 	private String oidAjax;
 	private String ostatusAjax;
 	public void setUserService(IUserService userService) {
@@ -137,25 +138,26 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	}
 	public String payOrdersAction() throws Exception{
 		//获取订单价格
-//		BigDecimal price=new BigDecimal(session.get("price").toString());
-		double price=Double.valueOf(session.get("cartPrice").toString());
-		//获取用户所点的物品对应osid
-		Users user=(Users)session.get("user");
-		double balance=Double.valueOf(user.getBalance().toString());
-		System.out.println("oid:"+order.getoId());
-		Orders tmp=ordersService.findOrderByOid(order.getoId());
+		double price=Double.valueOf(ordersService.findOrderByOid(payTarget).getoPrice().toString());
+		//获取用户所点的物品对应oid
+		Users userSession=(Users)session.get("user");
+		
+		Users user= userService.findUsersById(userSession.getuId());
+		double balance = Double.valueOf(user.getBalance().toString());
+		Orders tmp = ordersService.findOrderByOid(payTarget);
+		System.out.println("payTarget:"+payTarget);
 		if(balance>=price){
 			user.setBalance(new BigDecimal(String.valueOf(balance-price)));
 			tmp.setoStatus("1");
 			ordersService.payOrders(tmp);
 			userService.saveUsers(user);
-			request.put("payMessage", "充值成功");
+			
+			this.resultTemp = "yes";
 		}else{
-			request.put("payMessage", "余额不足");
-			return "failure";
+			this.resultTemp = "no";
 		}
 		
-		return "success";
+		return SUCCESS;
 		
 	}
 	public String addOrdersAction() throws Exception{
@@ -200,16 +202,16 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		ordersService.addOrders(order,list);
 		
 		//判断余额并返回提示信息
-	double price=Double.valueOf(session.get("cartPrice").toString());
-	Users user=(Users)session.get("user");
-		double balance=Double.valueOf(user.getBalance().toString());
-	if(balance>=price){
-			this.resultTemp = "yes";
+//	double price=Double.valueOf(session.get("cartPrice").toString());
+//	Users user=(Users)session.get("user");
+//		double balance=Double.valueOf(user.getBalance().toString());
+//	if(balance>=price){
+//			this.resultTemp = "yes";
 //			request.put("payMessage", "支付成功");
-		}else{
-			this.resultTemp = "no";
+//		}else{
+//			this.resultTemp = "no";
 //			request.put("payMessage", "余额不足");
-	}
+//	}
 //		
 //		request.put("oId", order.getoId());
 //		request.put("balance", user.getBalance().toString());
@@ -250,6 +252,16 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 
 	public void setOstatusAjax(String ostatusAjax) {
 		this.ostatusAjax = ostatusAjax;
+	}
+
+
+	public String getPayTarget() {
+		return payTarget;
+	}
+
+
+	public void setPayTarget(String payTarget) {
+		this.payTarget = payTarget;
 	}
 	
 }

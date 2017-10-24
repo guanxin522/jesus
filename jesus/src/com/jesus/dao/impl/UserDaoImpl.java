@@ -80,4 +80,19 @@ public class UserDaoImpl implements IUserDao {
 		session.saveOrUpdate(users);
 	}
 
+	@Override
+	public Users findUsersById(String uId) {
+		// TODO Auto-generated method stub
+		Users users = null;
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Users WHERE uid=:uId";
+		Query<Users> query = session.createQuery(hql, Users.class);
+		query.setParameter("uId", uId);
+		List<Users> list = query.getResultList();
+		if(list != null && list.size() > 0){
+			users = list.get(0);
+		}
+		return users;
+	}
+
 }

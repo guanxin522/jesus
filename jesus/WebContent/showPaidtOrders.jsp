@@ -94,7 +94,7 @@
                 </s:iterator>
                 
                 </ul> </td> 
-               <td class="order-actions"> <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1171021946411519" target="_blank">立即支付</a> <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a> </td> 
+ 
               </tr> 
              </tbody> 
             </table> 
