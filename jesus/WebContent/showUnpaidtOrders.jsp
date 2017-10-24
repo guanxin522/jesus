@@ -62,7 +62,11 @@
        </div> 
        <div class="box-bd"> 
         <div id="J_orderList">
+        
          <ul class="order-list">
+         
+         <s:iterator var="mealItem" value="#request.unpaidShowOrderList" >
+         
           <li class="uc-order-item uc-order-item-pay"> 
            <div class="order-detail"> 
             <div class="order-summary"> 
@@ -73,72 +77,33 @@
             <table class="order-detail-table"> 
              <thead> 
               <tr> 
-               <th class="col-main"> <p class="caption-info">2017年10月21日 12:40<span class="sep">|</span>赖胜娇<span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">1171021946411519</a><span class="sep">|</span>在线支付</p> </th> 
-               <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">8198.00</span>元</p> </th> 
+               <th class="col-main"> <p class="caption-info">${mealItem.oTime}<span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">${mealItem.oId}</a><span class="sep">|</span>在线支付</p> </th> 
+               <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">${mealItem.oPrice}</span>元</p> </th> 
               </tr> 
              </thead> 
              <tbody> 
               <tr> 
                <td class="order-items"> 
                 <ul class="goods-list"> 
+                
+                <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173800030.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1505903266.08411470!80x80.jpg" width="80" height="80" alt="小米Note 3 全网通版 6GB内存 亮蓝色 64GB" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173800030.html">小米Note 3 全网通版 6GB内存 亮蓝色 64GB</a> </p> <p class="price">2599元 &times; 1</p> </li> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1161200011.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1467184989.74561304!80x80.jpg" width="80" height="80" alt="小米圈铁耳机 银色" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1161200011.html">小米圈铁耳机 银色</a> </p> <p class="price">0元 &times; 1</p> </li> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1172700042.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1505961151.72192129!80x80.jpg" width="80" height="80" alt="小米Note 3 标准高透保护膜 高透" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1172700042.html">小米Note 3 标准高透保护膜 高透</a> </p> <p class="price">0元 &times; 1</p> </li> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1172900006.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1505875677.86046003!80x80.jpg" width="80" height="80" alt="小米Note 3  硅胶保护套 黑色" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1172900006.html">小米Note 3 硅胶保护套 黑色</a> </p> <p class="price">0元 &times; 1</p> </li> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173000036.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1501236937.96732594!80x80.jpg" width="80" height="80" alt="米粉卡日租卡" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173000036.html">米粉卡日租卡</a> </p> <p class="price">0元 &times; 1</p> </li> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1505897592.73836006!80x80.jpg" width="80" height="80" alt="小米笔记本电脑Pro 15 i5 8G 灰色" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173600024.html">小米笔记本电脑Pro 15 i5 8G 灰色</a> </p> <p class="price">5599元 &times; 1</p> </li> 
+                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
+                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173600024.html">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
+                </s:iterator>
+                
                 </ul> </td> 
                <td class="order-actions"> <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1171021946411519" target="_blank">立即支付</a> <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a> </td> 
               </tr> 
              </tbody> 
             </table> 
            </div></li>
-          <li class="uc-order-item uc-order-item-finish"> 
-           <div class="order-detail"> 
-            <div class="order-summary"> 
-             <div class="order-status">
-              已收货
-             </div> 
-            </div> 
-            <table class="order-detail-table"> 
-             <thead> 
-              <tr> 
-               <th class="col-main"> <p class="caption-info">2016年08月15日 10:05<span class="sep">|</span>赖胜娇<span class="sep">|</span>订单号：<a href="//order.mi.com/user/orderView/5160815342300234">5160815342300234</a><span class="sep">|</span>在线支付</p> </th> 
-               <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">699.00</span>元</p> </th> 
-              </tr> 
-             </thead> 
-             <tbody> 
-              <tr> 
-               <td class="order-items"> 
-                <ul class="goods-list"> 
-                 <li> 
-                  <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1162300013.html" target="_blank"> <img src="//i1.mifile.cn/a1/pms_1465371544.17485773!80x80.jpg" width="80" height="80" alt="红米手机3S 16GB 经典金色 16GB" /> </a> 
-                  </div> <p class="name"> <a href="//item.mi.com/1162300013.html" target="_blank">红米手机3S 16GB 经典金色 16GB</a> </p> <p class="price">699元 &times; 1</p> </li> 
-                </ul> </td> 
-               <td class="order-actions"> <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/5160815342300234">订单详情</a> <a class="btn btn-small btn-line-gray" href="//service.order.mi.com/apply/order/id/5160815342300234" target="_blank">申请售后</a> </td> 
-              </tr> 
-             </tbody> 
-            </table> 
-           </div> </li>
+           
+           
+           </s:iterator>
+           
+
          </ul>
         </div> 
         <div id="J_orderListPages">

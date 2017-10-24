@@ -2,6 +2,7 @@ package com.jesus.web.action;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,17 +77,61 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	public String showPaidtOrdersAction() throws Exception{
 //		System.out.println("来到showOrdersAction");
 		user=(Users)session.get("user");
-		List paidOrderList= ordersService.findPaidFood(user.getuId());
+		List paidOrdersonList= ordersService.findPaidFood(user.getuId());
+		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
+		List paidShowOrderList = new ArrayList();
 		
-		session.put("paidOrderList", paidOrderList);
+		for(int i=0;i<paidOrderList.size();i++) {
+			Orders orderMapTemp = (Orders) paidOrderList.get(i);
+			if(orderMapTemp.getoStatus().equals("0"))continue;
+			Map orderMap = new HashMap();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<paidOrdersonList.size();j++) {
+				Map ordersonMap = (Map) paidOrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+				}
+			}
+			orderMap.put("ordersonList", ordersonList);
+			paidShowOrderList.add(orderMap);
+		}
+		
+		request.put("paidShowOrderList", paidShowOrderList);
 		return "success";
 	}
 	public String showUnpaidtOrdersAction() throws Exception{
 //		System.out.println("来到showOrdersAction");
 		user=(Users)session.get("user");
-		List unpaidOrderList= ordersService.findUnpaidtFood(user.getuId());
+		List unpaidOrdersonList= ordersService.findUnpaidtFood(user.getuId());
+		List unpaidOrderList = ordersService.findOrdersByUser(user.getuId());
+		List unpaidShowOrderList = new ArrayList();
 		
-		session.put("unpaidOrderList", unpaidOrderList);
+		for(int i=0;i<unpaidOrderList.size();i++) {
+			Orders orderMapTemp = (Orders) unpaidOrderList.get(i);
+			if(orderMapTemp.getoStatus().equals("1"))continue;
+			Map orderMap = new HashMap();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<unpaidOrdersonList.size();j++) {
+				Map ordersonMap = (Map) unpaidOrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+				}
+			}
+			orderMap.put("ordersonList", ordersonList);
+			unpaidShowOrderList.add(orderMap);
+		}
+		
+		request.put("unpaidShowOrderList", unpaidShowOrderList);
 		return "success";
 	}
 	public String payOrdersAction() throws Exception{
@@ -117,7 +162,8 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		Double oprice =(Double) session.get("cartPrice");
+		String oprice =(String) session.get("cartPrice");
+		
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();
 		
