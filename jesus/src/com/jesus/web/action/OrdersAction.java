@@ -33,7 +33,8 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	private ICartService cartService;
 	private IUserService userService;
 	private String resultTemp;
-
+	private String oidAjax;
+	private String ostatusAjax;
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
@@ -162,8 +163,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		String oprice =(String) session.get("cartPrice");
-		
+		Double oprice =Double.valueOf((String) session.get("cartPrice"));
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();
 		
@@ -216,7 +216,14 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		return "success";
 	}
 
-
+	public String changeOrderStatusAction() throws Exception{
+		Orders od = ordersService.findOrderByOid(oidAjax);
+		od.setoStatus(ostatusAjax);
+		ordersService.saveOrders(od);
+		this.setResultTemp("ok");
+		return SUCCESS;
+		
+	}
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
@@ -233,6 +240,16 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 
 	public void setResultTemp(String resultTemp) {
 		this.resultTemp = resultTemp;
+	}
+
+
+	public void setOidAjax(String oidAjax) {
+		this.oidAjax = oidAjax;
+	}
+
+
+	public void setOstatusAjax(String ostatusAjax) {
+		this.ostatusAjax = ostatusAjax;
 	}
 	
 }

@@ -100,4 +100,10 @@ public class CartServiceImpl implements ICartService{
 	public void setCartNum(int cartNum) {
 		this.cartNum = cartNum;
 	}
+
+	@Override
+	public List graspCartNum(String uId) {
+		// TODO Auto-generated method stub
+		return cartDao.graspCartNum(uId);
+	}
 }

@@ -6,6 +6,7 @@
     <!-- 引入 Bootstrap -->
     <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
+    <link href="https://static.bootcss.com/www/assets/css/site.min.css?1508511738690" rel="stylesheet">
 </head>
    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -21,7 +22,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath}">主页</a></li>
-            <li><a href="${pageContext.request.contextPath}/cartShowAction">购物车</a></li>
+          <s:if test="%{#session.user!=null}">
+            <li><a href="${pageContext.request.contextPath}/cartShowAction">
+            	购物车<span class="badge">&nbsp;<s:property value="#session.cartNum"/>
+            	</span></a></li>
+       	</s:if>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <s:if test="#session.user==null">	

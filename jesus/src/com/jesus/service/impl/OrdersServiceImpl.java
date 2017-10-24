@@ -89,6 +89,12 @@ public class OrdersServiceImpl implements IOrdersService{
 		// TODO Auto-generated method stub
 		return ordersDao.findPaidFood(uId);
 	}
+
+	@Override
+	public void saveOrders(Orders order) {
+		// TODO Auto-generated method stub
+		 ordersDao.saveOrders(order);
+	}
 	
 	
 }

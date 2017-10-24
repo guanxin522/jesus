@@ -47,9 +47,25 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
-   
-  <div class="container marketing">
+    <div class="bc-social">
+    <div class="container">
+      <ul class="bc-social-buttons">
+        <li class="social-forum">
+            <i class="fa fa-comments"></i> Jesus网上订餐
+        </li>
+        <li class="social-weibo">
+          <a href="#" title="Jesus网上订餐" target="_blank"><i class="fa fa-weibo"></i>联系我们</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
+
+  <div class="container marketing">
+      <div class="projects-header page-header">
+      <h2>欢迎光临Jesus网上订餐</h2>
+      <p>本餐厅经营各种美味佳肴，欢迎选购</p>
+    </div>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <s:iterator var="foodItem" value="#request.foodList">

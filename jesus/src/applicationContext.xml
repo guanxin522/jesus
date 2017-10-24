@@ -82,6 +82,7 @@ xsi:schemaLocation="
     <!-- 定义UsersAction，并为其中属性userService和users属性注入值 -->
 	<bean name="usersAction" class="com.jesus.web.action.UsersAction" scope="prototype">
 		<property name="users" ref="users" />
+		<property name="cartService" ref="cartService" />
     	<property name="userService" ref="userService" />
     </bean>
     

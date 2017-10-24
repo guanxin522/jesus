@@ -23,6 +23,9 @@ public interface ICartDao {
 	//修改食品
 	public void saveCart(Cart cart);
 	
+	//获取购物车数量
+	public List graspCartNum(String uId);
+	
 	//查找食品
 	public List<Food> findAllFood(Users user);
 	public List<Cart> findAll(Users user);

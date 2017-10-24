@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.jesus.entity.Users;
+import com.jesus.service.ICartService;
 import com.jesus.service.IUserService;
 import com.jesus.util.WebUtils;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,6 +29,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	private String validateUname=null;
 	private Map<String,Object> dataMap;  
 	private String resultTemp;
+	ICartService cartService;
 	IUserService userService;
 	private String other;
 	private String value;
@@ -41,6 +43,9 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		Users user = userService.loginUser(uName, uPwd);
 		if(user != null)
 		{
+			List list = cartService.graspCartNum(user.getuId());
+			Map map = (Map) list.get(0);
+			session.put("cartNum", map.get("num"));
 			session.put("user", user);
 			this.resultTemp = "loginSuccess";
 		}
@@ -52,6 +57,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	
 	//用户注销
 	public String logOutUser() throws Exception {
+		session.remove("cartNum");
 		session.remove("user");
 		return "success";
 	}
@@ -202,6 +208,9 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		userService.saveUsers(user_session);
 		this.setResultTemp("yes");
 		return SUCCESS;
+	}
+	public void setCartService(ICartService cartService) {
+		this.cartService = cartService;
 	}
 	
 }

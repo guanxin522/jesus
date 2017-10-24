@@ -31,4 +31,5 @@ public interface ICartService {
 	//获取购物车价格
 	public double getCartPrice();
 	
+	public List graspCartNum(String uId);
 }

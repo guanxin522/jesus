@@ -4,47 +4,48 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+ "/admin/" ;
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <%@ include file="header.html"%>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span> 资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"></span> <span class="r">共有数据：<strong>${fn:length(userList)}</strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 			<thead>
 				<tr class="text-c">
-					<th width="80">订单ID</th>
+					<th width="100">订单ID</th>
 					<th width="80">用户</th>
 					<th>食品清单</th>
 					<th width="40">总价格</th>	
 					<th width="80">手机</th>					
-					<th width="200">送货地址</th>
+					<th width="190">送货地址</th>
 					<th width="110">备注</th>
-					<th width="140">付款时间</th>
+					<th width="120">付款时间</th>
 					<th width="30">状态</th>
 					<th width="80">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 			<s:iterator var="ordersItem" value="#request.ordersList">
-				<tr class="text-c">
-				
+				<tr class="text-c">			
 					<td>${ordersItem.oid }</td>
 					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
-					<td><s:iterator var="orderSonItem" value="#request.OrderSonList">${orderSonItem.fname }×${orderSonItem.quantity }&nbsp;&nbsp;</s:iterator></td>
+					<td><s:iterator var="orderSonItem" value="#request.OrderSonList">
+					<s:if test="%{#ordersItem.oid }==%{#orderSonItem.oid}">
+					${orderSonItem.fname }×${orderSonItem.quantity }&nbsp;&nbsp;
+					</s:if>
+					</s:iterator></td>
 					<td>￥${ordersItem.oprice }</td>
 					<td>${ordersItem.tel }</td>
 					<td>${ordersItem.address}</td>
 					<td></td>
-					<td>${ordersItem.otime }</td>
+					<td><fmt:formatDate type="time" value="${ordersItem.otime }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					<td class="td-status"><span class="label label-success radius">${ordersItem.ostatus }</span></td>
-					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','2')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe603;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 				</s:iterator>
 			</tbody>
@@ -59,7 +60,7 @@ $('.table-sort').dataTable({
 	"pading":false,
 	"aoColumnDefs": [
 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,7]}// 不参与排序的列
+	  {"orderable":false,"aTargets":[9]}// 不参与排序的列
 	]
 });
 
@@ -129,13 +130,32 @@ function article_stop(obj,id){
 	});
 }
 
-/*资讯-发布*/
-function article_start(obj,id){
+/*改变订单状态*/
+function changeStatus(obj,id,status){
 	layer.confirm('确认要发布吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-		$(obj).remove();
-		layer.msg('已发布!',{icon: 6,time:1000});
+		$.ajax({
+			type: 'POST',
+			url: 'changeOrderStatusAction',
+			dataType: 'json',
+			data:{
+				oidAjax:id,
+				ostatusAjax:2,
+			},
+			success: function(data){
+				if(data.resultTemp == 'ok'){
+				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
+				$(obj).remove();
+				layer.msg('已发货!',{icon: 6,time:1000});
+				}
+				else{
+					layer.msg('发货失败',{icon: 7,time:1000});
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
 	});
 }
 /*资讯-申请上线*/
@@ -145,6 +165,10 @@ function article_shenqing(obj,id){
 	layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
 }
 
+/*用户-查看*/
+function member_show(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
 </script> 
 </body>
 </html>

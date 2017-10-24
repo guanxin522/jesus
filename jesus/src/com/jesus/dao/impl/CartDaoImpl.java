@@ -1,7 +1,9 @@
 package com.jesus.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.catalina.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -74,6 +76,17 @@ public class CartDaoImpl implements ICartDao{
 			 cart =  list.get(0);
 		}
 		return cart;
+	}
+
+	@Override
+	public List graspCartNum(String uId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		String sql = "SELECT COUNT(cid) num FROM cart WHERE uid=?";
+		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		query.setParameter(0,uId);
+		List list = query.getResultList();
+		return list;
 	}
 
 }

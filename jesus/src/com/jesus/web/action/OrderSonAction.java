@@ -22,7 +22,6 @@ public class OrderSonAction extends ActionSupport implements RequestAware,Sessio
 	
 	public String findAllOrderSon() throws Exception{
 		List OrderSonList = orderSonService.findAllOrderSon();
-		List ordersList = (List) request.get("ordersList");
 		request.put("OrderSonList", OrderSonList);
 		return SUCCESS;
 	}

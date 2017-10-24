@@ -11,6 +11,9 @@ public interface IOrdersService {
 	public void addOrders(Orders order);
 	public void addOrders(Orders order,List<OrderSon> orderSon);
 	
+	//修改订单
+	public void saveOrders(Orders order);
+	
 	//删除订单
 	public void delOrders(Orders order);
 	
