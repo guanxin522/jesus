@@ -6,7 +6,7 @@
     <!-- 引入 Bootstrap -->
     <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
-    <link href="https://static.bootcss.com/www/assets/css/site.min.css?1508511738690" rel="stylesheet">
+    <link href="/jesus/resources/css/site.min.css" rel="stylesheet">
 </head>
    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
