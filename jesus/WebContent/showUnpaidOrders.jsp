@@ -141,8 +141,9 @@
 				if(data.resultTemp == 'yes'){
 					layer.msg('支付成功',{icon:6,time:1500});
 					 setTimeout(function () {
-							location.href="${pageContext.request.contextPath}/showUnpaidtOrdersAction";
+							location.href="showUnpaidOrdersAction";
 				        },1500);
+					 $(obj).remove();
 				}
 				else{
 					layer.msg('余额不足', {

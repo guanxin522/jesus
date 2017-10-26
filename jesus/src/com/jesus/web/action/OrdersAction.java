@@ -222,9 +222,11 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	}
 	public String addOrdersAction() throws Exception{
 //		// TODO Auto-generated method stub	
-		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
+		//获取购物车为空，不添加
+		if(cartList==null)    return "failure";
+		
 		Double oprice =Double.valueOf((String) session.get("cartPrice"));
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();

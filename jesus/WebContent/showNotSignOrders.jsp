@@ -140,8 +140,6 @@
 				},
 				success: function(data){
 					if(data.resultTemp == 'ok'){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
 					$(obj).remove();
 					layer.msg('已发货!',{icon: 6,time:1000});
 					}
