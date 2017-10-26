@@ -207,6 +207,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		userSession.setBalance(db_balance);
 		user.setBalance(db_balance);
 		userService.saveUsers(user);
+		session.put("user", user);
 		this.setResultTemp("yes");
 		return SUCCESS;
 	}

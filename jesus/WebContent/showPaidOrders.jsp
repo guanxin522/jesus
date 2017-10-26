@@ -27,9 +27,11 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidtOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidtOrdersAction">历史订单</a></li> 
-      </ul> 
+       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       </ul> 
      </div> 
      <div class="ddzx">
       个人中心
@@ -65,13 +67,13 @@
         
          <ul class="order-list">
          
-         <s:iterator var="mealItem" value="#request.unpaidShowOrderList" >
+         <s:iterator var="mealItem" value="#request.paidShowOrderList" >
          
           <li class="uc-order-item uc-order-item-pay"> 
            <div class="order-detail"> 
             <div class="order-summary"> 
              <div class="order-status">
-              等待付款
+              已付款
              </div> 
             </div> 
             <table class="order-detail-table"> 
@@ -94,7 +96,7 @@
                 </s:iterator>
                 
                 </ul> </td> 
-               <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a> <input type="button" onclick="paytest('<s:property  value="#mealItem.oId"/>');" value="paytest"> </td> 
+ 
               </tr> 
              </tbody> 
             </table> 
@@ -130,16 +132,13 @@
 			function(index){	
 		$.ajax({
 			type: 'POST',
-			url: 'payOrdersAction',
-			data:{
-		        payTarget:id
-			},
+			url: 'addOrdersAction',
 			dataType: 'json',
 			success: function(data){
 				if(data.resultTemp == 'yes'){
 					layer.msg('支付成功',{icon:6,time:1500});
 					 setTimeout(function () {
-							location.href="${pageContext.request.contextPath}/showUnpaidtOrdersAction";
+							location.href="#";
 				        },1500);
 				}
 				else{
@@ -149,24 +148,8 @@
 						  ,btn: ['充值', '不要了']
 						  ,yes: function(index){
 						    layer.close(index);
-						 layer.prompt({title: '输入充值金额', formType: 3}, function(text, index){
+						 layer.prompt({title: '输入充值金额', formType: 1}, function(text, index){
 						  //充值逻辑
-						  		  $.ajax({
-			type: 'POST',
-			url: 'rechargeAction',
-			data:{
-				balance:text,
-			},
-			dataType: 'json',
-			success: function(data){
-				layer.msg('充值成功',{icon:6,time:1500});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});	
-		  
-		  //ajax结束
 						  layer.close(index);
 						});
 						  }

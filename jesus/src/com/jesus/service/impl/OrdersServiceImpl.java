@@ -78,16 +78,8 @@ public class OrdersServiceImpl implements IOrdersService{
 	}
 
 	@Override
-	public List findUnpaidtFood(String uId) {
-		// TODO Auto-generated method stub
-		
-		return ordersDao.findUnpaidtFood(uId);
-	}
-
-	@Override
-	public List findPaidFood(String uId) {
-		// TODO Auto-generated method stub
-		return ordersDao.findPaidFood(uId);
+	public List findOstatusFood(String uId,String oStatus) {
+		return ordersDao.findOstatusFood(uId, oStatus);
 	}
 
 	@Override

@@ -77,17 +77,17 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		request.put("finish", this.getResultTemp());
 		return SUCCESS;
 	}
-	public String showPaidtOrdersAction() throws Exception{
-//		System.out.println("来到showOrdersAction");
+	public String showPaidOrdersAction() throws Exception{
+
 		user=(Users)session.get("user");
-		List paidOrdersonList= ordersService.findPaidFood(user.getuId());
+		List paidOrdersonList= ordersService.findOstatusFood(user.getuId(),"1");
 		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
 		List paidShowOrderList = new ArrayList();
 		
 		for(int i=0;i<paidOrderList.size();i++) {
 			Orders orderMapTemp = (Orders) paidOrderList.get(i);
-			if(orderMapTemp.getoStatus().equals("0"))continue;
-			Map orderMap = new HashMap();
+			if(!orderMapTemp.getoStatus().equals("1")) continue;	
+			Map<String, Object> orderMap = new HashMap<String, Object>();
 			orderMap.put("oId", orderMapTemp.getoId());
 			orderMap.put("oPrice", orderMapTemp.getoPrice());
 			orderMap.put("oTime", orderMapTemp.getoTime());
@@ -107,16 +107,76 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		request.put("paidShowOrderList", paidShowOrderList);
 		return "success";
 	}
-	public String showUnpaidtOrdersAction() throws Exception{
+	public String showNotSignOrdersAction() throws Exception{
+
+		user=(Users)session.get("user");
+		List paidOrdersonList= ordersService.findOstatusFood(user.getuId(),"2");
+		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
+		List notSignShowOrderList = new ArrayList();
+		
+		for(int i=0;i<paidOrderList.size();i++) {
+			Orders orderMapTemp = (Orders) paidOrderList.get(i);
+			if(!orderMapTemp.getoStatus().equals("2")) continue;	
+			Map<String, Object> orderMap = new HashMap<String, Object>();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<paidOrdersonList.size();j++) {
+				Map ordersonMap = (Map) paidOrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+				}
+			}
+			orderMap.put("ordersonList", ordersonList);
+			notSignShowOrderList.add(orderMap);
+		}
+		
+		request.put("notSignShowOrderList", notSignShowOrderList);
+		return "success";
+	}
+	public String showSignOrdersAction() throws Exception{
+
+		user=(Users)session.get("user");
+		List paidOrdersonList= ordersService.findOstatusFood(user.getuId(),"3");
+		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
+		List signShowOrderList = new ArrayList();
+		
+		for(int i=0;i<paidOrderList.size();i++) {
+			Orders orderMapTemp = (Orders) paidOrderList.get(i);
+			if(!orderMapTemp.getoStatus().equals("3")) continue;	
+			Map<String, Object> orderMap = new HashMap<String, Object>();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<paidOrdersonList.size();j++) {
+				Map ordersonMap = (Map) paidOrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+				}
+			}
+			orderMap.put("ordersonList", ordersonList);
+			signShowOrderList.add(orderMap);
+		}
+		
+		request.put("signShowOrderList", signShowOrderList);
+		return "success";
+	}
+	public String showUnpaidOrdersAction() throws Exception{
 //		System.out.println("来到showOrdersAction");
 		user=(Users)session.get("user");
-		List unpaidOrdersonList= ordersService.findUnpaidtFood(user.getuId());
+		List unpaidOrdersonList= ordersService.findOstatusFood(user.getuId(),"0");
 		List unpaidOrderList = ordersService.findOrdersByUser(user.getuId());
 		List unpaidShowOrderList = new ArrayList();
 		
 		for(int i=0;i<unpaidOrderList.size();i++) {
 			Orders orderMapTemp = (Orders) unpaidOrderList.get(i);
-			if(orderMapTemp.getoStatus().equals("1"))continue;
+			if(!orderMapTemp.getoStatus().equals("0"))continue;
 			Map orderMap = new HashMap();
 			orderMap.put("oId", orderMapTemp.getoId());
 			orderMap.put("oPrice", orderMapTemp.getoPrice());
@@ -163,9 +223,9 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	}
 	public String addOrdersAction() throws Exception{
 //		// TODO Auto-generated method stub	
-		System.out.println("来到addOrdersAction");
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
+		
 		Double oprice =Double.valueOf((String) session.get("cartPrice"));
 		List foodList=(List) session.get("foodList");
 		List<OrderSon> list=new ArrayList<OrderSon>();
@@ -199,6 +259,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 			System.out.println("cart:"+cart);
 			cartService.delCart(cart);
 		}
+		session.put("cartNum",0);
 		//存入
 		List cartNumList = cartService.graspCartNum(user.getuId());
 		Map map = (Map) cartNumList.get(0);

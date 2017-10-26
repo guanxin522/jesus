@@ -17,10 +17,12 @@ public interface IOrdersDao {
 	public void saveOrders(Orders order);
 	
 	//查询订单
-	public List findUnpaidtFood(String uId);
-	public List findPaidFood(String uId);
+    public List findOstatusFood(String uId,String oStatus);
+    //通过订单号查订单
 	public Orders findOrderByOid(String oId);
+	//通过用户查订单
 	public List findOrdersByUser(String uId);
+	//查找所有订单
 	public List findAllOrders();
 	
 }

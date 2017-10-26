@@ -56,7 +56,7 @@
 				</div>
 				<div class="jiesuan fr">
 					<div class="jiesuanjiage fl">合计：<span><s:property  value="#session.cartPrice"/>元</span></div>
-					<div class="jsanniu fr"><a href="${pageContext.request.contextPath}/addOrdersAction"><input class="jsan" type="button" name="jiesuan"  value="去结算"/></a></div>
+					<div class="jsanniu fr"><a href="#"><input class="jsan" type="button" name="jiesuan" onClick="buy(this,'<s:property  value="#session.foodList"/>')" value="去结算"/></a></div>
 					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
@@ -78,40 +78,15 @@
 
 	</body>
 <script>
-function pay(obj,id){
-	layer.confirm('确认要支付吗？',{title:'支付',time:0},
-			function(index){	
-		$.ajax({
-			type: 'POST',
-			url: 'addOrdersAction',
-			dataType: 'json',
-			success: function(data){
-				if(data.resultTemp == 'yes'){
-					layer.msg('支付成功',{icon:6,time:1500});
-					 setTimeout(function () {
-							location.href="showOrdersAction";
-				        },1500);
-				}
-				else{
-					layer.msg('余额不足', {
-						  time: 0 //不自动关闭
-						  ,icon: 5
-						  ,btn: ['充值', '不要了']
-						  ,yes: function(index){
-						    layer.close(index);
-						 layer.prompt({title: '输入充值金额', formType: 1}, function(text, index){
-						  //充值逻辑
-						  layer.close(index);
-						});
-						  }
-						});
-				}
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
+function buy(obj,id){
+	
+	if(id!="[]"){ // "",null,undefined
+		location.href="addOrdersAction";
+    }else{
+    	layer.alert("购物车什么都没有！！！");
+    	
+    }
+	
 }
 </script>
 </html>
