@@ -76,6 +76,10 @@ function recharge(obj,id){
 			dataType: 'json',
 			success: function(data){
 				layer.msg('充值成功',{icon:6,time:1500});
+				setTimeout(function () {
+					location.reload();
+		        },1500);
+				
 			},
 			error:function(data) {
 				console.log(data.msg);
