@@ -27,9 +27,11 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidtOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidtOrdersAction">历史订单</a></li> 
-      </ul> 
+       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       </ul> 
      </div> 
      <div class="ddzx">
       个人中心

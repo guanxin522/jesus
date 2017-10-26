@@ -27,9 +27,11 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidtOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidtOrdersAction">历史订单</a></li> 
-      </ul> 
+       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       </ul> 
      </div> 
      <div class="ddzx">
       个人中心
@@ -65,13 +67,13 @@
         
          <ul class="order-list">
          
-         <s:iterator var="mealItem" value="#request.unpaidShowOrderList" >
+         <s:iterator var="mealItem" value="#request.notSignShowOrderList" >
          
           <li class="uc-order-item uc-order-item-pay"> 
            <div class="order-detail"> 
             <div class="order-summary"> 
              <div class="order-status">
-              等待付款
+              等待确认
              </div> 
             </div> 
             <table class="order-detail-table"> 
@@ -94,7 +96,7 @@
                 </s:iterator>
                 
                 </ul> </td> 
-               <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a> <input type="button" onclick="paytest('<s:property  value="#mealItem.oId"/>');" value="paytest"> </td> 
+               <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:changeStatus(this,'<s:property  value="#mealItem.oId"/>','3');" target="_blank">确认收货</a>  <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td> 
               </tr> 
              </tbody> 
             </table> 
@@ -125,60 +127,34 @@
 		    <jsp:include page="footer.jsp"/>
 
 	<script>
-	function pay(obj,id){
-	layer.confirm('确认要支付吗？',{title:'支付',time:0},
-			function(index){	
-		$.ajax({
-			type: 'POST',
-			url: 'payOrdersAction',
-			data:{
-		        payTarget:id
-			},
-			dataType: 'json',
-			success: function(data){
-				if(data.resultTemp == 'yes'){
-					layer.msg('支付成功',{icon:6,time:1500});
-					 setTimeout(function () {
-							location.href="${pageContext.request.contextPath}/showUnpaidtOrdersAction";
-				        },1500);
-				}
-				else{
-					layer.msg('余额不足', {
-						  time: 0 //不自动关闭
-						  ,icon: 5
-						  ,btn: ['充值', '不要了']
-						  ,yes: function(index){
-						    layer.close(index);
-						 layer.prompt({title: '输入充值金额', formType: 3}, function(text, index){
-						  //充值逻辑
-						  		  $.ajax({
-			type: 'POST',
-			url: 'rechargeAction',
-			data:{
-				balance:text,
-			},
-			dataType: 'json',
-			success: function(data){
-				layer.msg('充值成功',{icon:6,time:1500});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});	
-		  
-		  //ajax结束
-						  layer.close(index);
-						});
-						  }
-						});
-				}
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-}
+	/*改变订单状态*/
+	function changeStatus(obj,id,status){
+		layer.confirm('确认签收吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'changeOrderStatusAction',
+				dataType: 'json',
+				data:{
+					oidAjax:id,
+					ostatusAjax:3,
+				},
+				success: function(data){
+					if(data.resultTemp == 'ok'){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
+					$(obj).remove();
+					layer.msg('已发货!',{icon: 6,time:1000});
+					}
+					else{
+						layer.msg('发货失败',{icon: 7,time:1000});
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
 </script>
  </body>
 </html> 

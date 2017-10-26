@@ -21,8 +21,7 @@ public interface IOrdersService {
 	public void payOrders(Orders order);
 	
 	//查询订单
-	public List findUnpaidtFood(String uId);
-	public List findPaidFood(String uId);
+	public List findOstatusFood(String uId,String oStatus);
 	public Orders findOrderByOid(String oId);
 	public List<Orders> findAllOrders();
 	public List<Orders> findOrdersByUser(String uId);
