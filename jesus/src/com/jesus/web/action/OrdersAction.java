@@ -74,6 +74,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	public String findAllOrders() throws Exception{
 		List ordersList = ordersService.findAllOrders();
 		request.put("ordersList", ordersList);
+		request.put("finish", this.getResultTemp());
 		return SUCCESS;
 	}
 	public String showPaidtOrdersAction() throws Exception{
@@ -199,6 +200,9 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 			cartService.delCart(cart);
 		}
 		//存入
+		List cartNumList = cartService.graspCartNum(user.getuId());
+		Map map = (Map) cartNumList.get(0);
+		session.put("cartNum", map.get("num"));
 		ordersService.addOrders(order,list);
 		
 		//判断余额并返回提示信息

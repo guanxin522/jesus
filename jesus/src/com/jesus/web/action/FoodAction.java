@@ -65,12 +65,13 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 		}
 	}
 	public String addFoodAction() throws Exception{
+		String suffix = this.getUploadFileName().substring(this.getUploadFileName().lastIndexOf(".")+1);
+		String str = WebUtils.makeId("i");
+		String newFileName = str+'.'+suffix;
 		String dstPath = ServletActionContext.getServletContext().getRealPath(
-				this.getSavePath())+ "/" + this.getUploadFileName();
+				this.getSavePath())+ "/" + newFileName;
 		File dstFile = new File(dstPath);
 		WebUtils.copy(this.upload, dstFile);	
-		String newFileName = WebUtils.makeId("i");
-		this.setUploadFileName(newFileName);
 		food.setfImage(this.getSavePath()+ "/" + newFileName);
 		Food foodTemp = foodService.findFood(food.getfId());		
 		foodService.addFood(food);
@@ -78,6 +79,11 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	}
 	
 	public String delFoodAction() throws Exception{
+		Food newFood = foodService.findFood(food.getfId());
+	
+		System.out.println(this.getClass().getResource("/").getPath());
+		File file = new File(newFood.getfImage());
+		
 		foodService.delFood(food);
 		this.setResultTemp("删除成功");
 		return SUCCESS;	
@@ -94,14 +100,16 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	}
 	
 	public String saveFoodAction() throws Exception{
-		System.out.println(1322);
+		String suffix = this.getUploadFileName().substring(this.getUploadFileName().lastIndexOf(".")+1);
+		String str = WebUtils.makeId("i");
+		String newFileName = str+'.'+suffix;
 		Food foodTemp = foodService.findFood(food.getfId());
 		String dstPath = ServletActionContext.getServletContext().getRealPath(
-				this.getSavePath())+ "/" + this.getUploadFileName();
+				this.getSavePath())+ "/" + newFileName;
 		if(this.getUploadFileName()!=null){
 		File dstFile = new File(dstPath);
 		WebUtils.copy(this.upload, dstFile);	
-		food.setfImage(this.getSavePath()+ "/" + this.getUploadFileName());
+		food.setfImage(this.getSavePath()+ "/" + newFileName);
 		}
 		else{
 		food.setfImage(foodTemp.getfImage());

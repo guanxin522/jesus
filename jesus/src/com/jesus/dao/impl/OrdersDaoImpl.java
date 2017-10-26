@@ -35,8 +35,7 @@ public class OrdersDaoImpl implements IOrdersDao{
 	public List findAllOrders() {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "SELECT orders.`oid`,orders.`otime`,orders.`oprice`,"
-				+ "orders.`ostatus`,uname,address,tel FROM users,orders GROUP BY oid";
+		String sql = "SELECT oid,any_value(ORDERS.`otime`) otime,any_value(ORDERS.`oprice`) oprice,any_value(ORDERS.`ostatus`) ostatus,any_value(uname) uname,any_value(address) address,any_value(tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` GROUP BY oid ORDER BY otime AND ostatus ASC ";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		List list = query.getResultList();
 		return list;
@@ -71,10 +70,10 @@ public class OrdersDaoImpl implements IOrdersDao{
 	public List findUnpaidtFood(String uId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql= "SELECT food.fid,food.fname,food.fdescri,food.fprice,food.fimage,food.time,food.status,"
-				+ "orders.oid,orders.otime,orders.ostatus,"
-				+ "orderson.osid,orderson.quantity FROM food,orders,orderson"
-				  + " WHERE food.fid =orderson.fid AND orderson.oid=orders.oid AND orders.uid=? AND orders.ostatus=0";
+		String sql= "SELECT FOOD.fid,FOOD.fname,FOOD.fdescri,FOOD.fprice,FOOD.fimage,FOOD.time,FOOD.status,"
+				+ "ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
+				+ "ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
+				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ORDERS.ostatus=0";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		query.setParameter(0,uId);
 		List list = query.getResultList();
@@ -84,10 +83,10 @@ public class OrdersDaoImpl implements IOrdersDao{
 	public List findPaidFood(String uId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql= "SELECT food.fid,food.fname,food.fdescri,food.fprice,food.fimage,food.time,food.status,"
-				+ " orders.oid,orders.otime,orders.ostatus,"
-				+ " orderson.osid,orderson.quantity FROM food,orders,orderson"
-				  + " WHERE food.fid =orderson.fid AND orderson.oid=orders.oid AND orders.uid=? AND orders.ostatus=1";
+		String sql= "SELECT FOOD.fid,FOOD.fname,FOOD.fdescri,FOOD.fprice,FOOD.fimage,FOOD.time,FOOD.status,"
+				+ " ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
+				+ " ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
+				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ORDERS.ostatus=1";
 //				      + "SELECT orderson.fid FROM orderson"
 //				      + "WHERE orderson.oid IN ("
 //				          + "SELECT orders.oid FROM orders"

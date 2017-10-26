@@ -54,7 +54,7 @@
             <i class="fa fa-comments"></i> Jesus网上订餐
         </li>
         <li class="social-weibo">
-          <a href="#" title="Jesus网上订餐" target="_blank"><i class="fa fa-weibo"></i>联系我们</a>
+          <a href="javascript:;" onClick="contact()">联系我们</a>
         </li>
       </ul>
     </div>
@@ -85,5 +85,26 @@
 </div>
 
 <jsp:include page="footer.jsp"/>
+<script>
+function contact() {
+	layer.open({
+		  type: 1
+		  ,title: false //不显示标题栏
+		  ,closeBtn: false
+		  ,area: '570px;'
+		  ,shade: 0.8
+		  ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+		  ,resize: false
+		  ,btn: ['我知道了']
+		  ,btnAlign: 'c'
+		  ,moveType: 1 //拖拽模式，0或者1
+		  ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">餐厅地址：广东省广州市花都区新华街道学府路1号华南理工大学广州学院<br>联系电话：13570325854<br>对本系统你有更好的意见和建议，欢迎提交到意见反馈<br>本系统为学生练习开发，无任何商业用途，图片均来自网络，如有侵权，请联系我们！</div>'
+		  ,yes:function(index){
+		layer.close(index);
+		layer.msg('尽情订餐吧!', {icon:6,time:2000});
+		}
+		});
+}
+</script>
 </body>
 </html>

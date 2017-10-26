@@ -191,6 +191,7 @@
 				
 		<action name="findAllOrderSon" class="orderSonAction" method="findAllOrderSon">
 		    <result name="success">/admin/order-list.jsp</result>
+		    <result name="finishOrder">/admin/order-list-finish.jsp</result>
 		    <interceptor-ref name="Admin"></interceptor-ref> 
 		    <interceptor-ref name="defaultStack"></interceptor-ref>  
 		</action>	

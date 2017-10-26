@@ -46,8 +46,8 @@ public class OrderSonDaoImpl implements IOrderSonDao{
 	public List findAllOrderSon() {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "  SELECT  orders.`oid`,orderson.`fid`,fname,quantity FROM orders,orderson,"
-				+ "food WHERE orders.`oid`=orderson.`oid` AND food.`fid`=orderson.`fid`";
+		String sql = "  SELECT  ORDERS.`oid`,ORDERSON.`fid`,fname,quantity FROM ORDERS,ORDERSON,"
+				+ "FOOD WHERE ORDERS.`oid`=ORDERSON.`oid` AND FOOD.`fid`=ORDERSON.`fid`";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		List list = query.getResultList();
 		return list;

@@ -83,10 +83,12 @@
                 </div>
                 </span>
             </div>
-           <div class="pic">
-               <span class="ppi">价格:</span>
+           <div class="pict">
+            <div class="f-proSatifySumWrap">
+            	  价格:
                <span class="f-mallUnit">￥</span>
                <span class="pcc"><s:property  value="#request.detail.fPrice"/></span>
+               </div>
            </div>
             <div class="pict">
                 <div class="f-proSatifySumWrap">
@@ -108,7 +110,10 @@
              <!--       <input type="text"  value="1" class="g_itext cartBuyCount f-cartBuyCount" name="q">-->
 
                     <input type="hidden" name="cart.fId" value="${detail.fId}"/>
-                    <input  class="g_itext cartBuyCount f-cartBuyCount" type="number" required name="cart.quantity" value="1"/>
+                    <input  class="g_itext cartBuyCount f-cartBuyCount" type="number" required 
+                    min="1" name="cart.quantity" value="1" 
+                    onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');" 
+                    oninput="if(value.length>2)value=value.slice(0,2)"/>
                     
                 </div>
 <!--                 <div class="f-buyCountBtn">

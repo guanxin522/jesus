@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/admin/index.jsp">Jesus网上系统后台</a> 
-		<span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> 
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 			<nav class="nav navbar-nav">
 				<ul class="cl">
@@ -60,7 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dt><i class="Hui-iconfont">&#xe616;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="findAllOrders" data-title="订单管理" href="javascript:void(0)">订单管理</a></li>
+					<li><a data-href="findAllOrders" data-title="待处理订单" href="javascript:void(0)">待处理订单</a></li>
+					<li><a data-href="findAllOrders?resultTemp='finish'" data-title="已完成订单" href="javascript:void(0)">已完成订单</a></li>
 			</ul>
 		</dd>
 	</dl>

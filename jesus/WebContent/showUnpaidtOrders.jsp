@@ -89,7 +89,7 @@
                 <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
+                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
                   </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173600024.html">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
                 </s:iterator>
                 

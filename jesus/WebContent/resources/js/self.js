@@ -143,11 +143,11 @@ $(document).ready(function() {
 
     // Validate the form manually
     $('#validateBtn').click(function() {
-        $('#defaultForm').bootstrapValidator('validate');
+        $(form).bootstrapValidator('validate');
     });
 
     $('#resetBtn').click(function() {
-        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+        $(form).data('bootstrapValidator').resetForm(true);
     });
 });
 

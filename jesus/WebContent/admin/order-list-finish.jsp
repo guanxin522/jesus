@@ -19,7 +19,7 @@
 					<th width="100">订单ID</th>
 					<th width="80">用户</th>
 					<th>食品清单</th>
-					<th width="60">总价格</th>	
+					<th width="40">总价格</th>	
 					<th width="80">手机</th>					
 					<th width="220">送货地址</th>
 					<th width="120">付款时间</th>
@@ -29,7 +29,7 @@
 			</thead>
 			<tbody>
 			<s:iterator var="ordersItem" value="#request.ordersList">
-				<s:if test="%{#ordersItem.ostatus>0 and #ordersItem.ostatus<3}">
+				<s:if test="%{#ordersItem.ostatus>2}">
 				<tr class="text-c">			
 					<td>${ordersItem.oid }</td>
 					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
@@ -43,10 +43,10 @@
 					<td>${ordersItem.address}</td>
 					<td><fmt:formatDate type="time" value="${ordersItem.otime }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					<td class="td-status"><span class="label label-success radius">
-					<s:if test="%{#ordersItem.ostatus==1}">用户已付款</s:if>
+					<s:if test="%{#ordersItem.ostatus==3}">交易完成</s:if>
 					<s:elseif test="%{#ordersItem.ostatus==2}">送货中</s:elseif>
 					</span></td>
-					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','确定要发货吗？','2')" href="javascript:;" title="发货"><i class="Hui-iconfont">&#xe603;</i></a></td>
+					<td></td>
 				</tr>
 				</s:if>
 				</s:iterator>

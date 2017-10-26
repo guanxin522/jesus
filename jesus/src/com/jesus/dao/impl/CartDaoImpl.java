@@ -57,7 +57,7 @@ public class CartDaoImpl implements ICartDao{
 		Session session=sessionFactory.getCurrentSession();
 //		String hql="from Cart where uid=:Message";
 //		String sql = "SELECT * FROM food WHERE food.fid IN ( SELECT cart.fid FROM cart WHERE cart.uid=?)";
-		String sql = "SELECT food.fId,fName,fDescri,fPrice,fImage,fVolume,food.time,food.status,quantity FROM food,cart WHERE food.fId=cart.fId AND cart.uId=?";
+		String sql = "SELECT FOOD.fId,fName,fDescri,fPrice,fImage,fVolume,FOOD.time,FOOD.status,quantity FROM FOOD,CART WHERE FOOD.fId=CART.fId AND CART.uId=?";
 //		Query<Food> query = (Query) session.createQuery(sql,Food.class);
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		query.setParameter(0, user.getuId());
@@ -82,7 +82,7 @@ public class CartDaoImpl implements ICartDao{
 	public List graspCartNum(String uId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "SELECT COUNT(cid) num FROM cart WHERE uid=?";
+		String sql = "SELECT COUNT(cid) num FROM CART WHERE uid=?";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		query.setParameter(0,uId);
 		List list = query.getResultList();

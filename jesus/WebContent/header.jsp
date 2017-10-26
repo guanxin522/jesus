@@ -22,11 +22,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath}">主页</a></li>
-          <s:if test="%{#session.user!=null}">
             <li><a href="${pageContext.request.contextPath}/cartShowAction">
-            	购物车<span class="badge">&nbsp;<s:property value="#session.cartNum"/>
-            	</span></a></li>
-       	</s:if>
+            	购物车<s:if test="%{#session.user!=null}"><span class="badge"><s:property value="#session.cartNum"/></span></s:if></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <s:if test="#session.user==null">	
@@ -37,9 +34,9 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎您：<span style="color:#FF5722"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
                		<ul class="dropdown-menu">
-                 		<li><a href="ClientAction!myData?id=<%=session.getAttribute("loginid")%>">个人中心</a></li>           
+                 		<li><a href="#">个人中心</a></li>           
               			 <li class="divider"></li>
-               			   <li><a href="OrdersAction!myOrders?id=<%=session.getAttribute("loginid")%>">我的订单</a></li>
+               			   <li><a href="#">我的订单</a></li>
                				  <li class="divider"></li>
                 				  <li><a href="${pageContext.request.contextPath}/feedback.jsp">意见反馈</a></li>
                  					 <li class="divider"></li>
