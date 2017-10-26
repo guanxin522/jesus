@@ -224,8 +224,6 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 //		// TODO Auto-generated method stub	
 		user=(Users)session.get("user");
 		List<Cart> cartList=(List<Cart>)session.get("cartList");
-		//获取购物车为空，不添加
-		if(cartList==null)    return "failure";
 		
 		Double oprice =Double.valueOf((String) session.get("cartPrice"));
 		List foodList=(List) session.get("foodList");
@@ -260,6 +258,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 			System.out.println("cart:"+cart);
 			cartService.delCart(cart);
 		}
+		session.put("cartNum",0);
 		//存入
 		ordersService.addOrders(order,list);
 		
