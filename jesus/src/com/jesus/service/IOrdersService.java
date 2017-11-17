@@ -23,6 +23,6 @@ public interface IOrdersService {
 	//查询订单
 	public List findOstatusFood(String uId,String oStatus);
 	public Orders findOrderByOid(String oId);
-	public List<Orders> findAllOrders();
+	public List<Orders> findAllOrders(String oStatus);
 	public List<Orders> findOrdersByUser(String uId);
 }

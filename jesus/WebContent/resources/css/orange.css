@@ -204,12 +204,12 @@
     margin-left: 30px;
 }
 .f-mallUnit{
-    color: #4AB344;
+    color: #FF5722;
     font-size: 24px;
     font-weight: bold;
 }
 .pcc{
-    color: #4AB344;
+    color: #FF5722;
     font-size: 30px;
     font-weight: bold;
 }
@@ -303,7 +303,7 @@
     width: 160px;
     height: 42px;
     line-height: 42px;
-    border: 1px solid  #4AB344;
+    border: 1px solid rgb(255,103,0);
     border-radius: 5px;
     margin-right: 20px;
     text-align: center;
@@ -312,7 +312,7 @@
 
 }
 .butto{
-    background-color:#4AB344 ;
+    background: rgb(255,103,0);
     color: white;
 }
 .cont-bot{

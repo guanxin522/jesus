@@ -100,13 +100,13 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	}
 	
 	public String saveFoodAction() throws Exception{
-		String suffix = this.getUploadFileName().substring(this.getUploadFileName().lastIndexOf(".")+1);
-		String str = WebUtils.makeId("i");
-		String newFileName = str+'.'+suffix;
 		Food foodTemp = foodService.findFood(food.getfId());
-		String dstPath = ServletActionContext.getServletContext().getRealPath(
-				this.getSavePath())+ "/" + newFileName;
 		if(this.getUploadFileName()!=null){
+			String suffix = this.getUploadFileName().substring(this.getUploadFileName().lastIndexOf(".")+1);
+			String str = WebUtils.makeId("i");
+			String newFileName = str+'.'+suffix;
+			String dstPath = ServletActionContext.getServletContext().getRealPath(
+					this.getSavePath())+ "/" + newFileName;
 		File dstFile = new File(dstPath);
 		WebUtils.copy(this.upload, dstFile);	
 		food.setfImage(this.getSavePath()+ "/" + newFileName);

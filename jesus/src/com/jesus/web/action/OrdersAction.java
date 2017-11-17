@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class OrdersAction extends ActionSupport implements RequestAware,SessionAware{
 
 	
-	private Orders order;
+	private Orders orders;
 	private Users user;
 	private Food food;
 	private Cart cart;
@@ -46,8 +46,8 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	}
 
 
-	public void setOrder(Orders order) {
-		this.order = order;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
 
 	public void setUser(Users user) {
@@ -71,10 +71,10 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		request=arg0;
 	}
 
-	public String findAllOrders() throws Exception{
-		List ordersList = ordersService.findAllOrders();
+	public String findAllOrders() throws Exception{		
+		List ordersList = ordersService.findAllOrders(orders.getoStatus());
 		request.put("ordersList", ordersList);
-		request.put("finish", this.getResultTemp());
+		request.put("resultTemp", orders.getoStatus());
 		return SUCCESS;
 	}
 	public String showPaidOrdersAction() throws Exception{

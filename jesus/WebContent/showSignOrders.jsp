@@ -3,6 +3,7 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="s" uri="/struts-tags" 
 %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
  <head> 
@@ -38,8 +39,8 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li> 
-       <li><a href="">收货地址</a></li> 
+       <li><a href="${pageContext.request.contextPath}/findUsersToUserAction">我的个人中心</a></li> 
+
       </ul> 
      </div> 
     </div> 
@@ -47,14 +48,8 @@
      <div class="uc-box uc-main-box"> 
       <div class="uc-content-box order-list-box"> 
        <div class="box-hd"> 
-        <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="//www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="78d07fef654ba47a" onclick="_msq.push(['trackEvent', '5cc76a9bce8347f4-78d07fef654ba47a', '//www.mi.com/service/buy/antifraud/', 'pcpid', '']);">了解更多&gt;</a></small></h1> 
+        <h1 class="title">历史订单</h1> 
         <div class="more clearfix"> 
-         <ul class="filter-list J_orderType"> 
-          <li class="first active"><a href="//static.mi.com/order/#type=0" data-type="0" data-stat-id="89d882413195fd4c" onclick="_msq.push(['trackEvent', '5cc76a9bce8347f4-89d882413195fd4c', '//static.mi.com/order/#type=0', 'pcpid', '']);">全部有效订单</a></li> 
-          <li><a id="J_unpaidTab" href="//static.mi.com/order/#type=7" data-type="7" data-stat-id="8edf501aa1eca097" onclick="_msq.push(['trackEvent', '5cc76a9bce8347f4-8edf501aa1eca097', '//static.mi.com/order/#type=7', 'pcpid', '']);">待支付（1）</a></li> 
-          <li><a id="J_sendTab" href="//static.mi.com/order/#type=8" data-type="8" data-stat-id="8308bdcf62c72b1b" onclick="_msq.push(['trackEvent', '5cc76a9bce8347f4-8308bdcf62c72b1b', '//static.mi.com/order/#type=8', 'pcpid', '']);">待收货</a></li> 
-          <li><a href="//static.mi.com/order/#type=5" data-type="5" data-stat-id="d99182d42018ae52" onclick="_msq.push(['trackEvent', '5cc76a9bce8347f4-d99182d42018ae52', '//static.mi.com/order/#type=5', 'pcpid', '']);">已关闭</a></li> 
-         </ul> 
          <form id="J_orderSearchForm" class="search-form clearfix" action="#" method="get"> 
           <label for="search" class="hide">站内搜索</label> 
           <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入商品名称、商品编号、订单号" /> 
@@ -79,7 +74,7 @@
             <table class="order-detail-table"> 
              <thead> 
               <tr> 
-               <th class="col-main"> <p class="caption-info">${mealItem.oTime}<span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">${mealItem.oId}</a><span class="sep">|</span>在线支付</p> </th> 
+               <th class="col-main"> <p class="caption-info"><fmt:formatDate type="time" value="${mealItem.oTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate><span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">${mealItem.oId}</a><span class="sep">|</span>在线支付</p> </th> 
                <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">${mealItem.oPrice}</span>元</p> </th> 
               </tr> 
              </thead> 
@@ -91,8 +86,8 @@
                 <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
-                  </div> <p class="name"> <a target="_blank" href="//item.mi.com/1173600024.html">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
+                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
+                  </div> <p class="name"> <a href="#">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
                 </s:iterator>
                 
                 </ul> </td> 

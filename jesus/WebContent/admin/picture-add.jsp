@@ -88,6 +88,7 @@ $(function(){
     },
 	submitHandler:function(form){
 		$(form).ajaxSubmit();
+		layer.msg('添加成功!',{icon:6,time:1000});
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         setTimeout(function () {
         	window.parent.location.reload();

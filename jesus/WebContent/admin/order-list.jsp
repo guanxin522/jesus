@@ -29,10 +29,9 @@
 			</thead>
 			<tbody>
 			<s:iterator var="ordersItem" value="#request.ordersList">
-				<s:if test="%{#ordersItem.ostatus>0 and #ordersItem.ostatus<3}">
 				<tr class="text-c">			
 					<td>${ordersItem.oid }</td>
-					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
+					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersToAdminAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
 					<td><s:iterator var="orderSonItem" value="#request.OrderSonList">
 					<s:if test="%{#ordersItem.oid==#orderSonItem.oid}">
 					${orderSonItem.fname }×${orderSonItem.quantity }&nbsp;&nbsp;
@@ -44,11 +43,9 @@
 					<td><fmt:formatDate type="time" value="${ordersItem.otime }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					<td class="td-status"><span class="label label-success radius">
 					<s:if test="%{#ordersItem.ostatus==1}">用户已付款</s:if>
-					<s:elseif test="%{#ordersItem.ostatus==2}">送货中</s:elseif>
 					</span></td>
 					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','确定要发货吗？','2')" href="javascript:;" title="发货"><i class="Hui-iconfont">&#xe603;</i></a></td>
 				</tr>
-				</s:if>
 				</s:iterator>
 			</tbody>
 		</table>
@@ -145,10 +142,13 @@ function changeStatus(obj,id,content,status){
 			},
 			success: function(data){
 				if(data.resultTemp == 'ok'){
-				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+/* 				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
 				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-				$(obj).remove();
+				$(obj).remove(); */
 				layer.msg('已发货!',{icon: 6,time:1000});
+		        setTimeout(function () {
+					location.reload();
+		        },800);
 				}
 				else{
 					layer.msg('发货失败',{icon: 7,time:1000});

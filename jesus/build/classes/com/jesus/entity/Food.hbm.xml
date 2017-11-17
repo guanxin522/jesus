@@ -23,12 +23,7 @@
         <property name="status" type="int">
             <column name="STATUS" />
         </property>
-        <set name="orderSon" table="ORDERSON" inverse="false" lazy="true" access="field">
-            <key>
-                <column name="FID" />
-            </key>
-            <one-to-many class="com.jesus.entity.OrderSon" />
-        </set>
+
         <property name="fPrice" type="java.math.BigDecimal" access="field">
             <column name="FPRICE" />
         </property>

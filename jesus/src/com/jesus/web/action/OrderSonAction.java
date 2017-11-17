@@ -22,10 +22,15 @@ public class OrderSonAction extends ActionSupport implements RequestAware,Sessio
 	
 	public String findAllOrderSon() throws Exception{
 		List OrderSonList = orderSonService.findAllOrderSon();
-		String finish = (String) request.get("finish");
+		String resultTemp = (String) request.get("resultTemp");
 		request.put("OrderSonList", OrderSonList);
-		if (finish==null){
+		int temp = Integer.parseInt(resultTemp);
+		if (temp == 1){
 			return SUCCESS;
+		}
+		else if (temp == 2){
+			return "deliveryOrder";
+			
 		}
 		else{
 			return "finishOrder";

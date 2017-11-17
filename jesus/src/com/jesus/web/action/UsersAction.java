@@ -1,6 +1,7 @@
 package com.jesus.web.action;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +39,11 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		this.userService = userService;
 	}
 	public String loginUserAction() throws Exception {
-		String uName = users.getuName();
-		String uPwd = users.getuPwd();
-		Users user = userService.loginUser(uName, uPwd);
+		Users user = userService.loginUser(users.getuName().trim(), users.getuPwd().trim());
+		if(user == null){
+			System.out.println("user为空");
+			System.out.println(users.getuName()+"  "+users.getuPwd());
+		}
 		if(user != null)
 		{
 			List list = cartService.graspCartNum(user.getuId());
@@ -109,7 +112,16 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 		
 	}
 	
-	public String findUsersAction() throws Exception {
+	public String findUsersToUserAction() throws Exception {
+		Users user = userService.findUsers(users.getuName());
+		DecimalFormat df = new DecimalFormat("######0.0");
+		String userBalance = df.format(user.getBalance());
+		request.put("userBalance", userBalance);
+		return SUCCESS;
+		
+	}
+	
+	public String findUsersToAdminAction() throws Exception {
 		Users user = userService.findUsers(users.getuName());
 		request.put("user", user);
 		return SUCCESS;

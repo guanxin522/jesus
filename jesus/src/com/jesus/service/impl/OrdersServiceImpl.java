@@ -45,9 +45,9 @@ public class OrdersServiceImpl implements IOrdersService{
 	}
 
 	@Override
-	public List<Orders> findAllOrders() {
+	public List<Orders> findAllOrders(String oStatus) {
 		// TODO Auto-generated method stub
-		return ordersDao.findAllOrders();
+		return ordersDao.findAllOrders(oStatus);
 	}
 
 	@Override

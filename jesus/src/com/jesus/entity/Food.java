@@ -19,7 +19,6 @@ public class Food {
 	private String fImage;
 	private int fVolume;
 	private int status;
-	private Set <OrderSon > orderSon;
 	private BigDecimal fPrice;
 	private Date time;
 	public String getfId() {

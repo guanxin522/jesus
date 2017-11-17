@@ -32,11 +32,12 @@ public class OrdersDaoImpl implements IOrdersDao{
 	}
 
 	@Override
-	public List findAllOrders() {
+	public List findAllOrders(String oStatus) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "SELECT oid,any_value(ORDERS.`otime`) otime,any_value(ORDERS.`oprice`) oprice,any_value(ORDERS.`ostatus`) ostatus,any_value(uname) uname,any_value(address) address,any_value(tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` GROUP BY oid ORDER BY otime AND ostatus ASC ";
+		String sql = "SELECT oid,any_value(ORDERS.`otime`) otime,any_value(ORDERS.`oprice`) oprice,any_value(ORDERS.`ostatus`) ostatus,any_value(uname) uname,any_value(address) address,any_value(tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` AND ostatus=? GROUP BY oid ORDER BY otime AND ostatus ASC ";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 		query.setParameter(0,oStatus);
 		List list = query.getResultList();
 		return list;
 	}
@@ -70,10 +71,10 @@ public class OrdersDaoImpl implements IOrdersDao{
  	public List findOstatusFood(String uId,String oStatus) {
  		// TODO Auto-generated method stub
  		Session session=sessionFactory.getCurrentSession();
- 		String sql= "SELECT food.fid,food.fname,food.fdescri,food.fprice,food.fimage,food.time,food.status,"
- 				+ "orders.oid,orders.otime,orders.ostatus,"
- 				+ "orderson.osid,orderson.quantity FROM food,orders,orderson"
- 				  + " WHERE food.fid =orderson.fid AND orderson.oid=orders.oid AND orders.uid=? AND orders.ostatus=?";
+ 		String sql= "SELECT FOOD.fid,FOOD.fname,FOOD.fdescri,FOOD.fprice,FOOD.fimage,FOOD.time,FOOD.status,"
+ 				+ "ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
+ 				+ "ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
+ 				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ORDERS.ostatus=?";
  		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  		query.setParameter(0,uId);
  		query.setParameter(1,oStatus);

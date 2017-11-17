@@ -22,7 +22,7 @@ public interface IOrdersDao {
 	public Orders findOrderByOid(String oId);
 	//通过用户查订单
 	public List findOrdersByUser(String uId);
-	//查找所有订单
-	public List findAllOrders();
+	//查找指定状态订单
+	public List findAllOrders(String oStatus);
 	
 }

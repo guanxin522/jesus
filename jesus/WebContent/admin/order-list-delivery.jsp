@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
@@ -42,7 +42,7 @@
 					<td>${ordersItem.address}</td>
 					<td><fmt:formatDate type="time" value="${ordersItem.otime }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					<td class="td-status"><span class="label label-success radius">
-					<s:if test="%{#ordersItem.ostatus==3}">交易完成</s:if>
+					<s:if test="%{#ordersItem.ostatus==2}">送货中</s:if>
 					</span></td>
 					<td></td>
 				</tr>

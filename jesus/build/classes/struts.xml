@@ -31,13 +31,20 @@
             </result>  	
 		</action>
 		<action name="findAllUsersAction" class="usersAction" method="findAllUsersAction">
-			<result name="success">/admin/member-list.jsp</result>
-			<interceptor-ref name="Admin"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref> 
-		</action>		
-		<action name="findUsersAction" class="usersAction" method="findUsersAction">
+		    <result name="success">/admin/member-list.jsp</result>
+		    <interceptor-ref name="Admin"></interceptor-ref> 
+		    <interceptor-ref name="defaultStack"></interceptor-ref>  
+		</action>	
+		<action name="findUsersToAdminAction" class="usersAction" method="findUsersToAdminAction">
 			<result name="success">/admin/member-show.jsp</result>
-		</action>			
+			<interceptor-ref name="Admin"></interceptor-ref> 
+		    <interceptor-ref name="defaultStack"></interceptor-ref>  
+		</action>
+		<action name="findUsersToUserAction" class="usersAction" method="findUsersToUserAction">
+			<result name="success">/selfInfo.jsp</result>
+			<interceptor-ref name="User"></interceptor-ref> 
+		    <interceptor-ref name="defaultStack"></interceptor-ref>  
+		</action>				
 		<action name="logOutUser" class="usersAction" method="logOutUser">
 			<result name="success" type="redirectAction">/foodShowAction</result>
 		</action>
@@ -201,6 +208,7 @@
 				
 		<action name="findAllOrderSon" class="orderSonAction" method="findAllOrderSon">
 		    <result name="success">/admin/order-list.jsp</result>
+		    <result name="deliveryOrder">/admin/order-list-delivery.jsp</result>
 		    <result name="finishOrder">/admin/order-list-finish.jsp</result>
 		    <interceptor-ref name="Admin"></interceptor-ref> 
 		    <interceptor-ref name="defaultStack"></interceptor-ref>  
@@ -219,7 +227,7 @@
 		
 		<action name="addFeedbackAction" class="feedbackAction" method="addFeedbackAction">
 			<result name="success"  type="redirectAction">/foodShowAction</result>
-			<interceptor-ref name="Admin"></interceptor-ref>  
+			<interceptor-ref name="User"></interceptor-ref>  
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>	
 		<action name="delFeedbackAction" class="feedbackAction" method="delFeedbackAction">

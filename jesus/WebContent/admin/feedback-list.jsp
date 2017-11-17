@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tbody>
 			<s:iterator var="feedbackItem" value="#request.feedbackList">
 				<tr class="text-c">
-					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${feedbackItem.uName }','10001','360','400')">${feedbackItem.uName}</u></td>
+					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersToAdminAction?uName=${feedbackItem.uName }','10001','360','400')">${feedbackItem.uName}</u></td>
 					<td>${feedbackItem.title}</td>
 					<td>${feedbackItem.content}</td>
 					<td><fmt:formatDate type="time" value="${feedbackItem.time }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>

@@ -15,18 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/admin/index.jsp">Jesus网上系统后台</a> 
 		<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-			<nav class="nav navbar-nav">
-				<ul class="cl">
-					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.jsp')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.jsp')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.jsp')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.jsp','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
 		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>
@@ -60,34 +48,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dt><i class="Hui-iconfont">&#xe616;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="findAllOrders" data-title="待处理订单" href="javascript:void(0)">待处理订单</a></li>
-					<li><a data-href="findAllOrders?resultTemp='finish'" data-title="已完成订单" href="javascript:void(0)">已完成订单</a></li>
-			</ul>
-		</dd>
-	</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="picture-list.jsp" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
+					<li><a data-href="findAllOrders?orders.oStatus=1" data-title="待处理订单" href="javascript:void(0)">待处理订单</a></li>
+					<li><a data-href="findAllOrders?orders.oStatus=2" data-title="已发货订单" href="javascript:void(0)">已发货订单</a></li>
+					<li><a data-href="findAllOrders?orders.oStatus=3" data-title="已完成订单" href="javascript:void(0)">已完成订单</a></li>
 			</ul>
 		</dd>
 	</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe620;</i> 食品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="foodShowAction?manageFood=1" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
-					<li><a data-href="product-category.jsp" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.jsp" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+					<li><a data-href="foodShowAction?manageFood=1" data-title="食品管理" href="javascript:void(0)">品牌管理</a></li>
 			</ul>
 		</dd>
 	</dl>
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe622;</i>反馈管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="http://h-ui.duoshuo.com/admin/" data-title="评论列表" href="javascript:;">评论列表</a></li>
 					<li><a data-href="findAllFeedbackAction" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
 			</ul>
 		</dd>
@@ -97,48 +75,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dd>
 				<ul>
 					<li><a data-href="findAllUsersAction" data-title="会员列表" href="javascript:;">会员列表</a></li>
-					<li><a data-href="member-del.jsp" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
-					<li><a data-href="member-level.jsp" data-title="等级管理" href="javascript:;">等级管理</a></li>
-					<li><a data-href="member-scoreoperation.jsp" data-title="积分管理" href="javascript:;">积分管理</a></li>
-					<li><a data-href="member-record-browse.jsp" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
-					<li><a data-href="member-record-download.jsp" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-					<li><a data-href="member-record-share.jsp" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
-			</ul>
-		</dd>
-	</dl>
-		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="admin-role.jsp" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
-					<li><a data-href="admin-permission.jsp" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="admin-list.jsp" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
-			</ul>
-		</dd>
-	</dl>
-		<dl id="menu-tongji">
-			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="charts-1.jsp" data-title="折线图" href="javascript:void(0)">折线图</a></li>
-					<li><a data-href="charts-2.jsp" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>
-					<li><a data-href="charts-3.jsp" data-title="区域图" href="javascript:void(0)">区域图</a></li>
-					<li><a data-href="charts-4.jsp" data-title="柱状图" href="javascript:void(0)">柱状图</a></li>
-					<li><a data-href="charts-5.jsp" data-title="饼状图" href="javascript:void(0)">饼状图</a></li>
-					<li><a data-href="charts-6.jsp" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a></li>
-					<li><a data-href="charts-7.jsp" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a></li>
-			</ul>
-		</dd>
-	</dl>
-		<dl id="menu-system">
-			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="system-base.jsp" data-title="系统设置" href="javascript:void(0)">系统设置</a></li>
-					<li><a data-href="system-category.jsp" data-title="栏目管理" href="javascript:void(0)">栏目管理</a></li>
-					<li><a data-href="system-data.jsp" data-title="数据字典" href="javascript:void(0)">数据字典</a></li>
-					<li><a data-href="system-shielding.jsp" data-title="屏蔽词" href="javascript:void(0)">屏蔽词</a></li>
-					<li><a data-href="system-log.jsp" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -150,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
 				<li class="active">
-					<span title="我的桌面" data-href="welcome.jsp">我的桌面</span>
+					<span title="订单管理" data-href="findAllOrders?orders.oStatus=0">待处理订单</span>
 					<em></em></li>
 		</ul>
 	</div>
@@ -159,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.jsp"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="findAllOrders?orders.oStatus=0"></iframe>
 	</div>
 </div>
 </section>

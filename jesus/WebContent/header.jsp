@@ -7,6 +7,7 @@
     <link href="/jesus/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/jesus/resources/css/carousel.css" rel="stylesheet">
     <link href="/jesus/resources/css/site.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/jesus/resources/css/zzsc.css" />
 </head>
    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -34,12 +35,12 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎您：<span style="color:#FF5722"><s:property value="#session.user.uName"/></span><span class="caret"></span></a>
                		<ul class="dropdown-menu">
-                 		<li><a href="#">个人中心</a></li>           
+                 		<li><a href="${pageContext.request.contextPath}/findUsersToUserAction">个人中心</a></li>           
               			 <li class="divider"></li>
-               			   <li><a href="#">我的订单</a></li>
+               			   <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">我的订单</a></li>
                				  <li class="divider"></li>
                 				  <li><a href="${pageContext.request.contextPath}/feedback.jsp">意见反馈</a></li>
-                 					 <li class="divider"></li>
+                 						  <li class="divider"></li>
                 						 <li><a href="${pageContext.request.contextPath}/logOutUser">退出</a></li>
 				</ul>
                 </li>  

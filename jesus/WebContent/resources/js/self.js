@@ -49,6 +49,11 @@ $(document).ready(function() {
                     notEmpty: {
                         message: '密码不能为空'
                     },
+                    stringLength: {
+                        min: 4,
+                        max: 15,
+                        message: '请输入您的真实姓名'
+                    },
                     identical: {
                         field: 'cupwd',
                         message: '密码和确认密码不一致'
@@ -121,7 +126,7 @@ $(document).ready(function() {
                         message: '请输入11位手机号码'
                     },
                     regexp: {
-                        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                        regexp: /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/,
                         message: '请不要输入火星的手机号码'
                     }
                 }
@@ -167,9 +172,11 @@ $("#registerBtn").click(function () {
             success: function (result) {
                 if (result=="registerSuccess") {
                 	setTimeout(function(){location.href="/jesus";},2000);
-                    layer.msg('注册成功！正在为你登录！',{icon:6,time:2000})
+                    layer.msg('注册成功！正在为你登录！',{icon:6,time:2000});
+                    return false;
                 } else {
 	                	layer.msg('注册失败!',{icon:5,time:1000});
+	                	return false;
 /*		            	    function randomNumber(min, max) {
 	            	        return Math.floor(Math.random() * (max - min + 1) + min);
 	            	    };

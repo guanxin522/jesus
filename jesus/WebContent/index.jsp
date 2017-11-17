@@ -83,8 +83,14 @@
       </div><!-- /.row -->
 
 </div>
-
 <jsp:include page="footer.jsp"/>
+<script type="text/javascript" src="resources/js/zzsc.js"></script>
+<div class="bottom_tools">
+  <div class="qr_tool">二维码</div>
+  <a id="feedback" href="${pageContext.request.contextPath}/feedback.jsp" title="意见反馈">意见反馈</a>
+  <a id="scrollUp" href="javascript:;" title="飞回顶部"></a>
+  <img class="qr_img" src="resources/images/wx.jpg">
+</div>
 <script>
 function contact() {
 	layer.open({
@@ -101,7 +107,6 @@ function contact() {
 		  ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">餐厅地址：广东省广州市花都区新华街道学府路1号华南理工大学广州学院<br>联系电话：13570325854<br>对本系统你有更好的意见和建议，欢迎提交到意见反馈<br>本系统为学生练习开发，无任何商业用途，图片均来自网络，如有侵权，请联系我们！</div>'
 		  ,yes:function(index){
 		layer.close(index);
-		layer.msg('尽情订餐吧!', {icon:6,time:2000});
 		}
 		});
 }
