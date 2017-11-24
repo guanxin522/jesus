@@ -17,8 +17,7 @@
         <li data-target="#myCarousel" data-slide-to="2" class="active"></li>        
       </ol> -->
       <div class="carousel-inner" role="listbox">
-      	<s:iterator var="foodItem" value="#request.foodList" status='st'>
-        <s:if test="%{#foodItem.status>=2}">
+      	<s:iterator var="foodItem" value="#request.foodCarousel" status='st'>
             <s:if test="#st.first ">
             <div class="item active">
     		</s:if>
@@ -34,7 +33,6 @@
             </div>
           </div>
         </div>
-        </s:if>
         </s:iterator>
               
       </div>
@@ -68,8 +66,8 @@
     </div>
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <s:iterator var="foodItem" value="#request.foodList">
-        <s:if test="%{#foodItem.status>=1}">
+        <s:iterator var="foodItem" value="#request.foodSell">
+
         <div class="col-lg-4">
         <a style="text-decoration:none;color:#5a5a5a;" href="${pageContext.request.contextPath}/foodDetailAction?fId=${foodItem.fId}">
           <img class="img-circle" src="${pageContext.request.contextPath}/${foodItem.fImage}" alt="Generic placeholder image" width="180" height="180">        
@@ -78,7 +76,6 @@
        	  <p class="btn btn-warning">￥${foodItem.fPrice}</p>
       </a>
         </div><!-- /.col-lg-4 -->    
-        </s:if>  
         </s:iterator>
       </div><!-- /.row -->
 

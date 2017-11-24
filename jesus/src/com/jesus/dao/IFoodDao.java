@@ -30,4 +30,9 @@ public interface IFoodDao {
 	//查找所有食品
 	public List<Food> findAllFood();
 	
+	//查找食品销量
+	public List findFoodVolume(String oid);
+	
+	//查找上架中的食品
+	public List findFoodByStatus(int status);
 }

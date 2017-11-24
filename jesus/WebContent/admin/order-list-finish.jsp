@@ -31,7 +31,7 @@
 			<s:iterator var="ordersItem" value="#request.ordersList">
 				<tr class="text-c">			
 					<td>${ordersItem.oid }</td>
-					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
+					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('会员','findUsersToAdminAction?uName=${ordersItem.uname }','10001','360','400')">${ordersItem.uname }</u></td>
 					<td><s:iterator var="orderSonItem" value="#request.OrderSonList">
 					<s:if test="%{#ordersItem.oid==#orderSonItem.oid}">
 					${orderSonItem.fname }×${orderSonItem.quantity }&nbsp;&nbsp;

@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</s:elseif>
 					<s:else>
 					<td class="td-manage">
-					<a style="text-decoration:none" onClick="picture_start(this,'${foodItem.fId }')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6dc;</i></a> 
+					<a style="text-decoration:none" onClick="picture_start(this,'${foodItem.fId }')" href="javascript:;" title="上架"><i class="Hui-iconfont">&#xe6dc;</i></a> 
 					<a style="text-decoration:none" onClick="banner_start(this,'${foodItem.fId }')" href="javascript:;" title="上架轮播"><i class="Hui-iconfont">&#xe603;</i></a> 
 					<a style="text-decoration:none" class="ml-5"  onClick="picture_edit('修改食品','foodDetailAction?fId=${foodItem.fId }&&manageFood=1')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
 					<a style="text-decoration:none" class="ml-5" onClick="picture_del(this,'${foodItem.fId }')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -123,7 +123,7 @@ function picture_add(title,url){
 
 /*图片-下架*/
 function picture_stop(obj,id){
-	layer.confirm('确认要下架吗？',function(index){
+	layer.confirm('确认要下架此食品吗？',function(index){
 		$.ajax({
 			type: 'POST',
 			url: 'changeStatusAction',
@@ -134,7 +134,7 @@ function picture_stop(obj,id){
 			dataType: 'json',
 			success: function(data){
 				$(obj).parents("tr").remove();
-				layer.msg('已下架!',{icon:1,time:1000});
+				layer.msg('食品下架成功!',{icon:1,time:1000});
 		        setTimeout(function () {
 					location.reload();// 关闭layer
 		        },500);
@@ -160,7 +160,7 @@ function picture_start(obj,id){
 			dataType: 'json',
 			success: function(data){
 				$(obj).parents("tr").remove();
-				layer.msg('已发布!',{icon:6,time:1000});
+				layer.msg('已发布该食品!',{icon:6,time:1000});
 		        setTimeout(function () {
 					location.reload();// 关闭layer
 		        },800);
@@ -175,7 +175,7 @@ function picture_start(obj,id){
 
 /*轮播-下架*/
 function banner_stop(obj,id){
-	layer.confirm('确认要下架吗？',function(index){
+	layer.confirm('确认要此食品轮播下架吗？',function(index){
 		$.ajax({
 			type: 'POST',
 			url: 'changeStatusAction',
@@ -186,7 +186,7 @@ function banner_stop(obj,id){
 			dataType: 'json',
 			success: function(data){
 				$(obj).parents("tr").remove();
-				layer.msg('已下架!',{icon:1,time:1000});
+				layer.msg('已从轮播下架!',{icon:1,time:1000});
 		        setTimeout(function () {
 					location.reload();// 关闭layer
 		        },800);
@@ -201,7 +201,7 @@ function banner_stop(obj,id){
 
 /*轮播-上架*/
 function banner_start(obj,id){
-	layer.confirm('确认要上架轮播吗？',function(index){
+	layer.confirm('确认要上架轮播到吗？',function(index){
 		$.ajax({
 			type: 'POST',
 			url: 'changeStatusAction',

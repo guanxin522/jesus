@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 
 import com.jesus.dao.IFoodDao;
 import com.jesus.entity.Food;
@@ -77,8 +78,31 @@ public class FoodDaoImpl implements IFoodDao{
 		Session session=sessionFactory.getCurrentSession();
 		String hql = "from Food";
 		Query<Food> query = (Query) session.createQuery(hql,Food.class);
-		List<Food> list = query.getResultList();
+		List<Food> list = query.getResultList();		
+		return list;
+	}
+
+	@Override
+	public List findFoodVolume(String oid) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		String sql = "SELECT ORDERSON.`fid`,ORDERSON.`quantity`,FOOD.`fvolume` FROM ORDERS,ORDERSON,FOOD "
+				+ "WHERE ORDERS.`oid`=ORDERSON.`oid` AND ORDERSON.`fid`=FOOD.`fid` AND ORDERS.`oid` =?";
+		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 		query.setParameter(0,oid);
+		List list = query.getResultList();
+		return list;
+	}
+
+	@Override
+	public List findFoodByStatus(int status) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		String hql="from Food  where status>=:status";
+		Query<Food> query = (Query) session.createQuery(hql,Food.class);
+		query.setParameter("status", status);
 		
+		List<Food> list = query.getResultList();
 		return list;
 	}
 }

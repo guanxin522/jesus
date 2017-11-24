@@ -38,7 +38,7 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/selfInfo.jsp">我的个人中心</a></li> 
+       <li><a href="${pageContext.request.contextPath}/findUsersToUserAction">我的个人中心</a></li> 
       </ul> 
      </div> 
     </div> 
@@ -61,31 +61,39 @@
 	</body>
 	<script>
 function recharge(obj,id){	
-	layer.prompt({title: '输入充值金额', formType: 3,}, function(text, index){
-		  //充值逻辑
-
-		  $.ajax({
-			type: 'POST',
-			url: 'rechargeAction',
-			data:{
-				balance:text,
-			},
-			dataType: 'json',
-			success: function(data){
-				layer.msg('充值成功',{icon:6,time:1500});
-				setTimeout(function () {
-					location.reload();
-		        },1500);
-				
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});	
-		  
-		  //ajax结束
-		  layer.close(index);
-		});
+	var reg;
+	var msg = "输入金额只能在1-100之间的整数"
+	reg = /^([1-9]\d{0,1}|100)$/;
+	 layer.prompt({
+		 title: '请输入充值的金额',
+		 formType: 3,
+		 yes: function(index, layero){
+		 var t = layero.find(".layui-layer-input").val();
+			 if (!reg.test(t)) {  
+				 layer.msg(msg,{icon:5,time:1500});
+				 //layer.close(index);
+			    }
+			 else{
+				  $.ajax({
+						type: 'POST',
+						url: 'rechargeAction',
+						data:{
+							balance:t,
+						},
+						dataType: 'json',
+						success: function(data){
+							layer.msg('充值成功',{icon:6,time:1500});
+							setTimeout(function () {
+								location.reload();
+					        },1500);
+						},
+						error:function(data) {
+							console.log(data.msg);
+						},
+					});	 
+			 }
+		 },
+			});
 }
 function modify(obj,title,id){	
 	var reg;
@@ -110,7 +118,7 @@ function modify(obj,title,id){
 	}
 	else if(id=='2'){
 		n="3";
-		reg = /^.{2,6}$/;
+		reg = /^([\u4e00-\u9fa5]{2,4})$/;
 		msg = "请输入正确的真实姓名";
 	}
 	 layer.prompt({

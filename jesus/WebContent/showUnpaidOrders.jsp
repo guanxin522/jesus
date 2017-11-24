@@ -73,7 +73,7 @@
             <table class="order-detail-table"> 
              <thead> 
               <tr> 
-               <th class="col-main"> <p class="caption-info"><fmt:formatDate type="time" value="${mealItem.oTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate><span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">${mealItem.oId}</a><span class="sep">|</span>在线支付</p> </th> 
+               <th class="col-main"> <p class="caption-info"><fmt:formatDate type="time" value="${mealItem.oTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate><span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： ${mealItem.oId}<span class="sep">|</span>在线支付</p> </th> 
                <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">${mealItem.oPrice}</span>元</p> </th> 
               </tr> 
              </thead> 
@@ -85,12 +85,13 @@
                 <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="#"> <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
-                  </div> <p class="name"> <a href="#">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
+                    <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> 	
+                  </div> <p class="name"> ${mealItem2.fname} </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
                 </s:iterator>
                 
                 </ul> </td> 
-               <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a>  <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td> 
+              <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a>  
+              <!-- <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td>  -->
               </tr> 
              </tbody> 
             </table> 
@@ -98,16 +99,8 @@
            
            
            </s:iterator>
-           
-
+      
          </ul>
-        </div> 
-        <div id="J_orderListPages">
-         <div class="xm-pagenavi"> 
-          <span class="numbers first"><span class="iconfont"></span></span> 
-          <span class="numbers current">1</span> 
-          <span class="numbers last"><span class="iconfont"></span></span> 
-         </div>
         </div> 
        </div> 
       </div> 
@@ -146,26 +139,39 @@
 						  ,btn: ['充值', '不要了']
 						  ,yes: function(index){
 						    layer.close(index);
-						 layer.prompt({title: '输入充值金额', formType: 3}, function(text, index){
-						  //充值逻辑
-						  		  $.ajax({
-			type: 'POST',
-			url: 'rechargeAction',
-			data:{
-				balance:text,
-			},
-			dataType: 'json',
-			success: function(data){
-				layer.msg('充值成功',{icon:6,time:1500});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});	
-		  
-		  //ajax结束
-						  layer.close(index);
-						});
+							var reg;
+							var msg = "输入金额只能在1-100之间的整数"
+							reg = /(^[1-9][0-9]$)|(^100&)|(^[1-9]$)$/;
+							 layer.prompt({
+								 title: '请输入充值的金额',
+								 formType: 3,
+								 yes: function(index, layero){
+								 var t = layero.find(".layui-layer-input").val();
+									 if (!reg.test(t)) {  
+										 layer.msg(msg,{icon:5,time:1500});
+										 //layer.close(index);
+									    }
+									 else{
+										  $.ajax({
+												type: 'POST',
+												url: 'rechargeAction',
+												data:{
+													balance:t,
+												},
+												dataType: 'json',
+												success: function(data){
+													layer.msg('充值成功',{icon:6,time:1500});
+													setTimeout(function () {
+														location.reload();
+											        },1500);
+												},
+												error:function(data) {
+													console.log(data.msg);
+												},
+											});	 
+									 }
+								 },
+									});
 						  }
 						});
 				}

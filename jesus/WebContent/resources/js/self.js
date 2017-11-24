@@ -52,7 +52,7 @@ $(document).ready(function() {
                     stringLength: {
                         min: 4,
                         max: 15,
-                        message: '请输入您的真实姓名'
+                        message: '密码须在4-15个字符之间'
                     },
                     identical: {
                         field: 'cupwd',
@@ -95,11 +95,10 @@ $(document).ready(function() {
                     notEmpty: {
                         message: '真实姓名不能为空'
                     },
-                    stringLength: {
-                        min: 2,
-                        max: 6,
+                    regexp: {
+                    	regexp:/^([\u4e00-\u9fa5]{2,4})$/,
                         message: '请输入您的真实姓名'
-                    },
+                    }
                 }
             },
             address: {

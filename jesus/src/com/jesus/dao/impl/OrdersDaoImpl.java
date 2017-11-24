@@ -71,7 +71,7 @@ public class OrdersDaoImpl implements IOrdersDao{
  	public List findOstatusFood(String uId,String oStatus) {
  		// TODO Auto-generated method stub
  		Session session=sessionFactory.getCurrentSession();
- 		String sql= "SELECT FOOD.fid,FOOD.fname,FOOD.fdescri,FOOD.fprice,FOOD.fimage,FOOD.time,FOOD.status,"
+ 		String sql= "SELECT FOOD.fid,ORDERSON.fname,ORDERSON.fdescri,ORDERSON.fprice,ORDERSON.fimage,FOOD.status,"
  				+ "ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
  				+ "ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
  				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ORDERS.ostatus=?";

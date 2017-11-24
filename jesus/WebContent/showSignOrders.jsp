@@ -74,7 +74,7 @@
             <table class="order-detail-table"> 
              <thead> 
               <tr> 
-               <th class="col-main"> <p class="caption-info"><fmt:formatDate type="time" value="${mealItem.oTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate><span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号： <a href="//order.mi.com/user/orderView/1171021946411519">${mealItem.oId}</a><span class="sep">|</span>在线支付</p> </th> 
+               <th class="col-main"> <p class="caption-info"><fmt:formatDate type="time" value="${mealItem.oTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate><span class="sep">|</span><s:property  value="#session.user.uName"/><span class="sep">|</span>订单号：${mealItem.oId}<span class="sep">|</span>在线支付</p> </th> 
                <th class="col-sub"> <p class="caption-price">订单金额：<span class="num">${mealItem.oPrice}</span>元</p> </th> 
               </tr> 
              </thead> 
@@ -86,12 +86,12 @@
                 <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="//item.mi.com/1173600024.html" target="_blank"> <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
-                  </div> <p class="name"> <a href="#">${mealItem2.fname}</a> </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
+                  <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> 
+                  </div> <p class="name"> ${mealItem2.fname} </p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
                 </s:iterator>
                 
                 </ul> </td> 
-               <td class="order-actions">   <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td> 
+            <!--    <td class="order-actions">   <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td>  -->
               </tr> 
              </tbody> 
             </table> 
@@ -102,13 +102,6 @@
            
 
          </ul>
-        </div> 
-        <div id="J_orderListPages">
-         <div class="xm-pagenavi"> 
-          <span class="numbers first"><span class="iconfont"></span></span> 
-          <span class="numbers current">1</span> 
-          <span class="numbers last"><span class="iconfont"></span></span> 
-         </div>
         </div> 
        </div> 
       </div> 

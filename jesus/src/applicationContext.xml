@@ -178,6 +178,7 @@ xsi:schemaLocation="
     	<property name="ordersService" ref="ordersService" />
     	<property name="cartService" ref="cartService" />
     	<property name="userService" ref="userService" />
+    	<property name="foodService" ref="foodService" />
     </bean>
     
 	<bean id="orderSon" class="com.jesus.entity.OrderSon"></bean>    

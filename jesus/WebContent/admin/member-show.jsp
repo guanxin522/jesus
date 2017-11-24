@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table class="table">
 		<tbody>
 			<tr>
-				<th class="text-r">真实姓名</th>
+				<th class="text-r">真实姓名:</th>
 				<td>${request.user.realname }</td>
 			</tr>		
 			<tr>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-12 19:24:55 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-20 21:18:45 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.jesus.entity.OrderSon" table="ORDERSON">
         <id name="fId" type="java.lang.String" access="field">
@@ -19,6 +19,15 @@
         </property>
         <property name="fPrice" type="java.math.BigDecimal" access="field">
             <column name="FPRICE" />
+        </property>
+        <property name="fImage" type="java.lang.String" access="field">
+            <column name="FIMAGE" />
+        </property>
+        <property name="fName" type="java.lang.String" access="field">
+            <column name="FNAME" />
+        </property>
+        <property name="fDescri" type="java.lang.String" access="field">
+            <column name="FDESCRI" />
         </property>
     </class>
 </hibernate-mapping>

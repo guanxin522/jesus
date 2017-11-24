@@ -47,5 +47,15 @@ public class FoodServiceImpl implements IFoodService{
 	public List<Food> findAllFood(){
 		return foodDao.findAllFood();
 	}
+	@Override
+	public List findFoodVolume(String oid) {
+		// TODO Auto-generated method stub
+		return foodDao.findFoodVolume(oid);
+	}
+	@Override
+	public List findFoodByStatus(int status) {
+		// TODO Auto-generated method stub
+		return foodDao.findFoodByStatus(status);
+	}
 	
 }

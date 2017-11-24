@@ -2,6 +2,7 @@ package com.jesus.web.action;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import com.jesus.entity.OrderSon;
 import com.jesus.entity.Orders;
 import com.jesus.entity.Users;
 import com.jesus.service.ICartService;
+import com.jesus.service.IFoodService;
 import com.jesus.service.IOrdersService;
 import com.jesus.service.IUserService;
 import com.jesus.util.WebUtils;
@@ -32,6 +34,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	private IOrdersService ordersService;
 	private ICartService cartService;
 	private IUserService userService;
+	private IFoodService foodService;
 	private String resultTemp;
 	private String payTarget;
 	private String oidAjax;
@@ -210,6 +213,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		if(balance>=price){
 			user.setBalance(new BigDecimal(String.valueOf(balance-price)));
 			tmp.setoStatus("1");
+			tmp.setoTime(new Date());
 			ordersService.payOrders(tmp);
 			userService.saveUsers(user);
 			
@@ -237,7 +241,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		Orders order =new Orders();
 //		OrderSon orderSon=new OrderSon();
 		order.setoId(WebUtils.makeId("o"));
-		order.setoTime(new java.sql.Timestamp(new java.util.Date().getTime()));
+		order.setoTime(new java.sql.Timestamp(new Date().getTime()));
 		order.setuId(user.getuId());
 		order.setoPrice(new BigDecimal(String.valueOf(oprice)));
 		order.setoStatus("0");
@@ -251,6 +255,9 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 			System.out.print("osID:"+orderSon.getOsId());
 			orderSon.setfPrice(new BigDecimal(map.get("fPrice").toString()));
 			orderSon.setQuantity(map.get("quantity").toString());
+			orderSon.setfName(map.get("fName").toString());
+			orderSon.setfImage(map.get("fImage").toString());
+			orderSon.setfDescri(map.get("fDescri").toString());
 			list.add(orderSon);
 		}
 		//生成订单后，清空购物车
@@ -286,6 +293,16 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	public String changeOrderStatusAction() throws Exception{
 		Orders od = ordersService.findOrderByOid(oidAjax);
 		od.setoStatus(ostatusAjax);
+		if(ostatusAjax.equals("3")){
+			List volumeList = foodService.findFoodVolume(oidAjax);
+			for(int i=0;i<volumeList.size();i++){
+				Map volumeMap = (Map) volumeList.get(i);
+				Food f = foodService.findFood((String)(volumeMap.get("fid")));
+				int volume = Integer.parseInt((String)volumeMap.get("quantity"));
+				f.setfVolume(f.getfVolume()+volume);
+				foodService.saveFood(f);
+			}
+		}
 		ordersService.saveOrders(od);
 		this.setResultTemp("ok");
 		return SUCCESS;
@@ -327,6 +344,11 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 
 	public void setPayTarget(String payTarget) {
 		this.payTarget = payTarget;
+	}
+
+
+	public void setFoodService(IFoodService foodService) {
+		this.foodService = foodService;
 	}
 	
 }

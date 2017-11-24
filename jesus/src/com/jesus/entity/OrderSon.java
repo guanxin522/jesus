@@ -13,6 +13,11 @@ public class OrderSon {
 	private String fId;
 	private String oId;
 	private BigDecimal fPrice;
+	private String fImage;
+	private String fName;
+	private String fDescri;
+	
+	
 	
 	public String getOsId() {
 		return osId;
@@ -44,4 +49,25 @@ public class OrderSon {
 	public void setfPrice(BigDecimal fPrice) {
 		this.fPrice = fPrice;
 	}
+	public String getfImage() {
+		return fImage;
+	}
+	public void setfImage(String fImage) {
+		this.fImage = fImage;
+	}
+	public String getfName() {
+		return fName;
+	}
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+	public String getfDescri() {
+		return fDescri;
+	}
+	public void setfDescri(String fDescri) {
+		this.fDescri = fDescri;
+	}
+
+	
+	
 }

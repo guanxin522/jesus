@@ -37,14 +37,17 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	}
 	
 	public String foodShowAction() throws Exception {
-		int curPage =1;
-		List<Food> foodList=foodService.findAllFood();
+		List<Food> foodSell = foodService.findFoodByStatus(1);
+		List<Food> foodCarousel = foodService.findFoodByStatus(2);
 //		System.out.println(foodList);
-		request.put("foodList", foodList);
+		request.put("foodSell", foodSell);
+		request.put("foodCarousel", foodCarousel);
 		if (manageFood == null || manageFood.equals("")){
 			return SUCCESS;
 		}
 		else {
+			List<Food> foodList=foodService.findAllFood();
+			request.put("foodList", foodList);
 			manageFood = null;
 			return "manage";
 		}

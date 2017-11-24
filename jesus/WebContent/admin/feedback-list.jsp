@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${feedbackItem.title}</td>
 					<td>${feedbackItem.content}</td>
 					<td><fmt:formatDate type="time" value="${feedbackItem.time }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
-					<td class="td-manage"><a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'${feedbackItem.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td class="td-manage"> <a title="删除" href="javascript:;" onclick="member_del(this,'${feedbackItem.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 			</s:iterator>
 
