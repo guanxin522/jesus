@@ -141,7 +141,7 @@
 						    layer.close(index);
 							var reg;
 							var msg = "输入金额只能在1-100之间的整数"
-							reg = /(^[1-9][0-9]$)|(^100&)|(^[1-9]$)$/;
+							reg = /^([1-9]\d{0,1}|100)$/;
 							 layer.prompt({
 								 title: '请输入充值的金额',
 								 formType: 3,

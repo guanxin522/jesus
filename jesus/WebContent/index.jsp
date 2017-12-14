@@ -4,6 +4,12 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<link href="resources/css/jq22.css" rel="stylesheet" type="text/css" />
+<script src="resources/js/snow_index.js"></script>
+<script>createSnow('', 100);</script>
+
+</head>
 <body>
 <!-- 引入头部 -->
 <jsp:include page="header.jsp"/>
@@ -113,6 +119,7 @@ function contact() {
 $('#searchInput').keydown(function(e){
 if(e.keyCode==13){
     var sousuo = $("#searchInput").val();
+   if (sousuo == "") { alert("请输入信息"); return false; }
 $('#search').submit(); //处理事件
 }
 });

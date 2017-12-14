@@ -1,4 +1,4 @@
-﻿function validateUname(){
+﻿	function validateUname(){
 	var form = $('#registerForm');
 $(document).ready(function() {
     // Generate a simple captcha
