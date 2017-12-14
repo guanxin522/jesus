@@ -90,6 +90,9 @@
 			<result name="internal">/admin/picture-edit.jsp</result>
 			<result name="success">/foodDetail.jsp</result>
 		</action>
+		<action name="searchFoodAction" class="foodAction" method="searchFoodAction">
+			<result name="success">/index.jsp</result>	
+		</action>		
 		<action name="addFoodAction" class="foodAction" method="addFoodAction"> 
             <interceptor-ref name="fileUpload">
             	<!-- 配置允许上传的文件类型，多个用“,”分隔 -->

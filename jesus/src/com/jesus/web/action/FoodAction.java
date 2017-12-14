@@ -83,10 +83,8 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 	
 	public String delFoodAction() throws Exception{
 		Food newFood = foodService.findFood(food.getfId());
-	
 		System.out.println(this.getClass().getResource("/").getPath());
-		File file = new File(newFood.getfImage());
-		
+		File file = new File(newFood.getfImage());		
 		foodService.delFood(food);
 		this.setResultTemp("删除成功");
 		return SUCCESS;	
@@ -98,10 +96,16 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 		newFood.setStatus(status);
 		foodService.saveFood(newFood);
 		this.setResultTemp("操作成功");
-		return SUCCESS;
-		
+		return SUCCESS;	
 	}
-	
+	public String searchFoodAction() throws Exception{			
+		request.put("foodCarousel", foodService.findFoodByStatus(2));
+		String fName = food.getfName();
+		//fName =new String(fName.getBytes("ISO-8859-1"),"UTF-8");
+		List foodSell = foodService.searchFood(fName);
+		request.put("foodSell", foodSell);
+		return SUCCESS;	
+	}
 	public String saveFoodAction() throws Exception{
 		Food foodTemp = foodService.findFood(food.getfId());
 		if(this.getUploadFileName()!=null){
