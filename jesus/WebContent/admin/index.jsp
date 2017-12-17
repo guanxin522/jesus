@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dd>
 				<ul>
 					<li><a data-href="findAllOrders?orders.oStatus=1" data-title="待处理订单" href="javascript:void(0)">待处理订单</a></li>
-					<li><a data-href="findAllOrders?orders.oStatus=2" data-title="已发货订单" href="javascript:void(0)">已发货订单</a></li>
+					<li><a data-href="findOrdersByDoubleStatus?orders.oStatus=2&ostatusAjax=4" data-title="已发货订单" href="javascript:void(0)">已发货订单</a></li>
 					<li><a data-href="findAllOrders?orders.oStatus=3" data-title="已完成订单" href="javascript:void(0)">已完成订单</a></li>
 			</ul>
 		</dd>

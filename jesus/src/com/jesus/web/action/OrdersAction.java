@@ -80,6 +80,13 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		request.put("resultTemp", orders.getoStatus());
 		return SUCCESS;
 	}
+	
+	public String findOrdersByDoubleStatus() throws Exception{		
+		List ordersList = ordersService.findOrdersByDoubleStatus(orders.getoStatus(), ostatusAjax);
+		request.put("ordersList", ordersList);
+		request.put("resultTemp", orders.getoStatus());
+		return SUCCESS;
+	}
 	public String showPaidOrdersAction() throws Exception{
 
 		user=(Users)session.get("user");
@@ -293,6 +300,28 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	public String changeOrderStatusAction() throws Exception{
 		Orders od = ordersService.findOrderByOid(oidAjax);
 		od.setoStatus(ostatusAjax);
+		if(ostatusAjax.equals("3")){
+			List volumeList = foodService.findFoodVolume(oidAjax);
+			for(int i=0;i<volumeList.size();i++){
+				Map volumeMap = (Map) volumeList.get(i);
+				Food f = foodService.findFood((String)(volumeMap.get("fid")));
+				int volume = Integer.parseInt((String)volumeMap.get("quantity"));
+				f.setfVolume(f.getfVolume()+volume);
+				foodService.saveFood(f);
+			}
+		}
+		ordersService.saveOrders(od);
+		this.setResultTemp("ok");
+		return SUCCESS;
+		
+	}
+	
+	public String refundOrdersAction() throws Exception{
+		Orders od = ordersService.findOrderByOid(oidAjax);
+		od.setoStatus(ostatusAjax);
+		Users usersNew = userService.findUsersById(od.getuId());
+		usersNew.setBalance(usersNew.getBalance().add(od.getoPrice()));
+		userService.saveUsers(usersNew);
 		if(ostatusAjax.equals("3")){
 			List volumeList = foodService.findFoodVolume(oidAjax);
 			for(int i=0;i<volumeList.size();i++){

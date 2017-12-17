@@ -87,6 +87,12 @@ public class OrdersServiceImpl implements IOrdersService{
 		// TODO Auto-generated method stub
 		 ordersDao.saveOrders(order);
 	}
+
+	@Override
+	public List findOrdersByDoubleStatus(String oStatus1, String oStatus2) {
+		// TODO Auto-generated method stub
+		return ordersDao.findOrdersByDoubleStatus(oStatus1, oStatus2);
+	}
 	
 	
 }

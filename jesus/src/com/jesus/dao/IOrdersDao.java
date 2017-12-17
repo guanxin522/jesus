@@ -24,5 +24,7 @@ public interface IOrdersDao {
 	public List findOrdersByUser(String uId);
 	//查找指定状态订单
 	public List findAllOrders(String oStatus);
+	//查找两个状态的订单
+	public List findOrdersByDoubleStatus(String oStatus1,String oStatus2);
 	
 }

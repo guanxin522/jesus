@@ -41,10 +41,16 @@
 					<td>${ordersItem.tel }</td>
 					<td>${ordersItem.address}</td>
 					<td><fmt:formatDate type="time" value="${ordersItem.otime }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
-					<td class="td-status"><span class="label label-success radius">
-					<s:if test="%{#ordersItem.ostatus==2}">送货中</s:if>
-					</span></td>
-					<td></td>
+					<td class="td-status">
+					<s:if test="%{#ordersItem.ostatus==2}"><span class="label label-success radius">送货中</span></s:if>
+					<s:if test="%{#ordersItem.ostatus==4}"><span class="label label-danger radius">用户申请退款</span></s:if>
+					</td>
+					<td class="f-14 td-manage">
+						<s:if test="%{#ordersItem.ostatus==4}">
+					<a style="text-decoration:none" onClick="refund(this,'${ordersItem.oid }','确定要同意退款吗？','5')" href="javascript:;" title="确定退款"><i class="Hui-iconfont">&#xe66b;</i></a>
+					<a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','确定要驳回退款申请吗？','7')" href="javascript:;" title="驳回退款"><i class="Hui-iconfont">&#xe60b;</i></a>
+					</s:if>
+					</td>				
 				</tr>
 				</s:iterator>
 			</tbody>
@@ -138,17 +144,51 @@ function changeStatus(obj,id,content,status){
 			dataType: 'json',
 			data:{
 				oidAjax:id,
-				ostatusAjax:2,
+				ostatusAjax:status,
 			},
 			success: function(data){
 				if(data.resultTemp == 'ok'){
 				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
 				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
 				$(obj).remove();
-				layer.msg('已发货!',{icon: 6,time:1000});
+				layer.msg('已驳回退款申请!',{icon: 6,time:1000});
+		        setTimeout(function () {
+		        	window.parent.location.reload();
+		            parent.layer.close(index);  // 关闭layer
+		        },1500);
 				}
 				else{
-					layer.msg('发货失败',{icon: 7,time:1000});
+					layer.msg('驳回退款申请失败',{icon: 7,time:1000});
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
+	});
+}
+
+/*退款*/
+function refund(obj,id,content,status){
+	layer.confirm(content,function(index){
+		$.ajax({
+			type: 'POST',
+			url: 'refundOrdersAction',
+			dataType: 'json',
+			data:{
+				oidAjax:id,
+				ostatusAjax:status,
+			},
+			success: function(data){
+				if(data.resultTemp == 'ok'){
+				layer.msg('完成对用户退款',{icon: 6,time:1000});
+		        setTimeout(function () {
+		        	window.parent.location.reload();
+		            parent.layer.close(index);  // 关闭layer
+		        },1500);
+				}
+				else{
+					layer.msg('对用户退款失败',{icon: 7,time:1000});
 				}
 			},
 			error:function(data) {
