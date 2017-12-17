@@ -13,7 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-
 <!-- CSS -->
 <link rel="stylesheet" href="resources/css/supersized.css">
 <link rel="stylesheet" href="resources/css/login.css">
@@ -21,7 +20,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--[if lt IE 9]>
 	<script src="resources/js/html5.js"></script>
 <![endif]-->
-<script src="resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/ThreeCanvas.js"></script>
+ <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+<script src="resources/js/Snow.js"></script>
+<script type="text/javascript" src="resources/js/snowFall.js"></script>
+
+
 <script type="text/javascript" src="resources/js/tooltips.js"></script>
 <script type="text/javascript" src="resources/js/login.js"></script>
 </head>
@@ -75,6 +79,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="resources/dist/js/bootstrapValidator.js"></script>
 <script>
 checkUnameLogin();
+</script>
+<script>
+$.snowFall({
+	//创建粒子数量，密度
+	particleNo: 500,
+	//粒子下拉速度
+	particleSpeed:30,
+	//粒子在垂直（Y轴）方向运动范围
+	particleY_Range:1300,
+	//粒子在垂直（X轴）方向运动范围
+	particleX_Range:1000,
+	//是否绑定鼠标事件
+    bindMouse: false,
+    //相机离Z轴原点距离
+    zIndex:600,
+  //摄像机视野角度
+    angle:55,
+    wind_weight:0
+	});
 </script>
 </body>
 </html>

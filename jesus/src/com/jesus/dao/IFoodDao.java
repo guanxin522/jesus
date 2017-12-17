@@ -21,7 +21,7 @@ public interface IFoodDao {
 	//修改食品信息
 	public void saveFood(Food food);
 
-	//查找食品信息
+	//通过id查找单个食品信息
 	public Food findFood(String fId);
 	
 	//查找食品信息
@@ -35,4 +35,7 @@ public interface IFoodDao {
 	
 	//查找上架中的食品
 	public List findFoodByStatus(int status);
+	
+	//根据食品名字模糊搜索食品
+	public List searchFood(String fname);
 }

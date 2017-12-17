@@ -4,6 +4,12 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<link href="resources/css/jq22.css" rel="stylesheet" type="text/css" />
+<script src="resources/js/snow_index.js"></script>
+<script>createSnow('', 100);</script>
+
+</head>
 <body>
 <!-- 引入头部 -->
 <jsp:include page="header.jsp"/>
@@ -63,6 +69,9 @@
       <div class="projects-header page-header">
       <h2>欢迎光临Jesus网上订餐</h2>
       <p>本餐厅经营各种美味佳肴，欢迎选购</p>
+              <form id="search" method="get" action="${pageContext.request.contextPath}/searchFoodAction">
+            <input type="text" id="searchInput"  placeholder="搜索食品" name="fName">
+          </form>
     </div>
       <!-- Three columns of text below the carousel -->
       <div class="row">
@@ -107,6 +116,13 @@ function contact() {
 		}
 		});
 }
+$('#searchInput').keydown(function(e){
+if(e.keyCode==13){
+    var sousuo = $("#searchInput").val();
+   if (sousuo == "") { alert("请输入信息"); return false; }
+$('#search').submit(); //处理事件
+}
+});
 </script>
 </body>
 </html>

@@ -33,4 +33,7 @@ public interface IFoodService {
 	
 	//查找上架中的食品
 	public List findFoodByStatus(int status);
+	
+	//根据食品名字模糊搜索食品
+	public List searchFood(String fname);
 }

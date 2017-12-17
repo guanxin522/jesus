@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <h2 style="padding-top: 45px;">意见反馈</h2>
                     </div>
 
-                    <form id="feedbackForm" method="post" class="form-horizontal" action="${pageContext.request.contextPath}/addFeedbackAction">
+                    <form id="feedbackForm" method="post" class="form-horizontal" action="">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">标题：</label>
                             <div class="col-lg-5">

@@ -57,5 +57,10 @@ public class FoodServiceImpl implements IFoodService{
 		// TODO Auto-generated method stub
 		return foodDao.findFoodByStatus(status);
 	}
+	@Override
+	public List searchFood(String fname) {
+		// TODO Auto-generated method stub
+		return foodDao.searchFood(fname);
+	}
 	
 }

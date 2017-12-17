@@ -105,4 +105,16 @@ public class FoodDaoImpl implements IFoodDao{
 		List<Food> list = query.getResultList();
 		return list;
 	}
+
+	@Override
+	public List searchFood(String fname) {
+		// TODO Auto-generated method stub
+		Food food = null;
+		fname = "'%"+fname+"%'";
+		Session session=sessionFactory.getCurrentSession();
+		String hql="from Food where fname like "+fname;
+		Query<Food> query = (Query) session.createQuery(hql,Food.class);	 
+		List<Food> list = query.getResultList();
+		return list;
+	}
 }
