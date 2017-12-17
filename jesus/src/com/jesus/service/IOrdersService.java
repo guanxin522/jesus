@@ -25,12 +25,10 @@ public interface IOrdersService {
 	public Orders findOrderByOid(String oId);
 	public List<Orders> findAllOrders(String oStatus);
 	public List<Orders> findOrdersByUser(String uId);
-<<<<<<< HEAD
 	//查找两个状态的订单
 	public List findOrdersByDoubleStatus(String oStatus1,String oStatus2);
-=======
+
 	public List findOrdersByKeyword(String uId,String oStatus,String keyword);
 	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2);
 	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2,String oStatus3);
->>>>>>> b1cb6c80e6fbe449b792c0b32a3dcc6e324a2ce4
 }
