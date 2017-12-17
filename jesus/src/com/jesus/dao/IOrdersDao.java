@@ -24,5 +24,7 @@ public interface IOrdersDao {
 	public List findOrdersByUser(String uId);
 	//查找指定状态订单
 	public List findAllOrders(String oStatus);
+	//通过关键字查找订单
+	public List findOrderByKeyword(String uId,String oStatus,String keyword);
 	
 }

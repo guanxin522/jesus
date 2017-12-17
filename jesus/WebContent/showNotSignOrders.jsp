@@ -27,10 +27,10 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=0">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=1">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=2">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=3">历史订单</a></li> 
        </ul> 
      </div> 
      <div class="ddzx">
@@ -48,7 +48,7 @@
        <div class="box-hd"> 
         <h1 class="title">待确认订单</h1> 
         <div class="more clearfix"> 
-         <form id="J_orderSearchForm" class="search-form clearfix" action="#" method="get"> 
+         <form id="J_orderSearchForm" class="search-form clearfix" action="searchOrdersAction" method="get"> 
           <label for="search" class="hide">站内搜索</label> 
           <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入商品名称、商品编号、订单号" /> 
           <input type="submit" class="search-btn iconfont" value="" /> 
@@ -60,7 +60,7 @@
         
          <ul class="order-list">
          
-         <s:iterator var="mealItem" value="#request.notSignShowOrderList" >
+         <s:iterator var="mealItem" value="#request.showOrderList" >
          
           <li class="uc-order-item uc-order-item-pay"> 
            <div class="order-detail"> 

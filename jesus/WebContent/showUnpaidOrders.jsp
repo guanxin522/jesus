@@ -28,10 +28,10 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=0">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=1">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=2">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=3">历史订单</a></li> 
       </ul> 
      </div> 
      <div class="ddzx">
@@ -49,8 +49,9 @@
        <div class="box-hd"> 
         <h1 class="title">未支付订单</h1> 
         <div class="more clearfix"> 
-         <form id="J_orderSearchForm" class="search-form clearfix" action="#" method="get"> 
+         <form id="J_orderSearchForm" class="search-form clearfix" action="searchOrdersAction?oTemp=0" method="get" enctype="multipart/form-data"> 
           <label for="search" class="hide">站内搜索</label> 
+          <input type="hidden" value="0" name="oTemp" id="oTemp" />
           <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入商品名称、商品编号、订单号" /> 
           <input type="submit" class="search-btn iconfont" value="" /> 
          </form> 
@@ -61,7 +62,7 @@
         
          <ul class="order-list">
          
-         <s:iterator var="mealItem" value="#request.unpaidShowOrderList" >
+         <s:iterator var="mealItem" value="#request.showOrderList" >
          
           <li class="uc-order-item uc-order-item-pay"> 
            <div class="order-detail"> 
@@ -90,8 +91,8 @@
                 </s:iterator>
                 
                 </ul> </td> 
-              <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a>  
-              <!-- <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td>  -->
+              <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:pay(this,'<s:property  value="#mealItem.oId"/>');" target="_blank">立即支付</a> </td>  
+              <!-- <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a> -->
               </tr> 
              </tbody> 
             </table> 

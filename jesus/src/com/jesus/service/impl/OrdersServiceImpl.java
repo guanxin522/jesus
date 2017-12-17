@@ -35,18 +35,21 @@ public class OrdersServiceImpl implements IOrdersService{
 	@Override
 	public void addOrders(Orders order) {
 		// TODO Auto-generated method stub
+		System.out.println("addOrders");
 		ordersDao.addOrders(order);
 	}
 
 	@Override
 	public void delOrders(Orders order) {
 		// TODO Auto-generated method stub
+		System.out.println("delOrders");
 		ordersDao.delOrders(order);
 	}
 
 	@Override
 	public List<Orders> findAllOrders(String oStatus) {
 		// TODO Auto-generated method stub
+		System.out.println("findOrders");
 		return ordersDao.findAllOrders(oStatus);
 	}
 
@@ -59,6 +62,7 @@ public class OrdersServiceImpl implements IOrdersService{
 	@Override
 	public void addOrders(Orders order, List<OrderSon> orderSonList) {
 		// TODO Auto-generated method stub
+		System.out.println("addOrders");
 		ordersDao.addOrders(order);
 		for(int i=0;i<orderSonList.size();i++){
 			OrderSon orderSon = orderSonList.get(i);
@@ -74,6 +78,7 @@ public class OrdersServiceImpl implements IOrdersService{
 		ordersDao.saveOrders(order);
 	}
 	public Orders findOrderByOid(String oId){
+		System.out.println("findOrderByid");
 		return ordersDao.findOrderByOid(oId);
 	}
 
@@ -88,5 +93,11 @@ public class OrdersServiceImpl implements IOrdersService{
 		 ordersDao.saveOrders(order);
 	}
 	
+	public List findOrdersByKeyword(String uId,String oStatus,String keyword) {
+		System.out.println(ordersDao.findOrderByKeyword(uId,oStatus,keyword));
+		return ordersDao.findOrderByKeyword(uId,oStatus,keyword);
+	}
+
+
 	
 }

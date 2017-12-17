@@ -25,4 +25,5 @@ public interface IOrdersService {
 	public Orders findOrderByOid(String oId);
 	public List<Orders> findAllOrders(String oStatus);
 	public List<Orders> findOrdersByUser(String uId);
+	public List findOrdersByKeyword(String uId,String oStatus,String keyword);
 }
