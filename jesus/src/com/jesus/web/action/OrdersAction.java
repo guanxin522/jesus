@@ -33,15 +33,30 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	private Cart cart;
 	private IOrdersService ordersService;
 	private ICartService cartService;
+	private String resultTemp;
 	private IUserService userService;
 	private IFoodService foodService;
-	private String resultTemp;
 	private String payTarget;
 	private String oidAjax;
 	private String ostatusAjax;
+	private String oTemp;
+	private String keywords;
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
+
+
+	
+	public String getoTemp() {
+		return oTemp;
+	}
+
+
+
+	public void setoTemp(String oTemp) {
+		this.oTemp = oTemp;
+	}
+
 
 
 	public void setOrdersService(IOrdersService ordersService) {
@@ -59,6 +74,18 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	public void setFood(Food food) {
 		this.food = food;
 	}
+	
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
 
 	Map<String, Object> session;
 	Map<String, Object> request;
@@ -88,7 +115,6 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		return SUCCESS;
 	}
 	public String showPaidOrdersAction() throws Exception{
-
 		user=(Users)session.get("user");
 		List paidOrdersonList= ordersService.findOstatusFood(user.getuId(),"1");
 		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
@@ -118,7 +144,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		return "success";
 	}
 	public String showNotSignOrdersAction() throws Exception{
-
+		
 		user=(Users)session.get("user");
 		List paidOrdersonList= ordersService.findOstatusFood(user.getuId(),"2");
 		List paidOrderList = ordersService.findOrdersByUser(user.getuId());
@@ -178,7 +204,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		return "success";
 	}
 	public String showUnpaidOrdersAction() throws Exception{
-//		System.out.println("来到showOrdersAction");
+		System.out.println(oTemp);
 		user=(Users)session.get("user");
 		List unpaidOrdersonList= ordersService.findOstatusFood(user.getuId(),"0");
 		List unpaidOrderList = ordersService.findOrdersByUser(user.getuId());
@@ -206,6 +232,131 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		
 		request.put("unpaidShowOrderList", unpaidShowOrderList);
 		return "success";
+	}
+	public String showOrdersAction()throws Exception{
+		
+		if(oTemp==null)oTemp = "0";
+		System.out.println("otemp"+oTemp);
+		user=(Users)session.get("user");
+		List OrdersonList = null;
+		if(oTemp.equals("2")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "4");
+		}else if(oTemp.equals("3")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "5", "6");
+		}else{
+			 OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		}
+		System.out.println(OrdersonList);
+//		List OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		List OrderList = ordersService.findOrdersByUser(user.getuId());
+		List ShowOrderList = new ArrayList();
+		
+		for(int i=0;i<OrderList.size();i++) {
+			Orders orderMapTemp = (Orders) OrderList.get(i);
+			if(oTemp.equals("2")){
+				if((!orderMapTemp.getoStatus().equals("2"))&&(!orderMapTemp.getoStatus().equals("4")))continue;
+			}else if(oTemp.equals("3")){
+				if(!orderMapTemp.getoStatus().equals("3")&&!orderMapTemp.getoStatus().equals("5")&&!orderMapTemp.getoStatus().equals("6"))continue;
+			}else{
+				if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			}
+			Map orderMap = new HashMap();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<OrdersonList.size();j++) {
+				Map ordersonMap = (Map) OrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+				}
+			}
+			orderMap.put("ordersonList", ordersonList);
+			ShowOrderList.add(orderMap);
+		}
+		
+		request.put("showOrderList", ShowOrderList);
+		if(oTemp.equals("1")){
+			System.out.println(oTemp);
+			return "showPaidOrders";
+		}else if(oTemp.equals("2")){
+			System.out.println(oTemp);
+			return "showNotSignOrders";
+		}else if(oTemp.equals("3")){
+			System.out.println(oTemp);
+			return "showSignOrders";
+		}else{
+			System.out.println(oTemp);
+			return "showUnpaidOrders";
+		}
+	}
+	//搜索
+	public String searchOrdersAction() throws Exception{
+		System.out.println("test"+keywords);
+		int flag = 0;
+		if(oTemp==null)oTemp = "0";
+		System.out.println("otemp"+oTemp);
+		user=(Users)session.get("user");
+		List OrdersonList = null;
+		if(oTemp.equals("2")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "4");
+		}else if(oTemp.equals("3")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "5", "6");
+		}else{
+			 OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		}
+//		List OrdersonList= ordersService.findOrdersByKeyword(user.getuId(), oTemp, keywords);
+//		List OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		List OrderList = ordersService.findOrdersByUser(user.getuId());
+		List ShowOrderList = new ArrayList();
+		System.out.println(OrderList);
+		for(int i=0;i<OrderList.size();i++) {
+			Orders orderMapTemp = (Orders) OrderList.get(i);
+			if(oTemp.equals("2")){
+				if((!orderMapTemp.getoStatus().equals("2"))&&(!orderMapTemp.getoStatus().equals("4")))continue;
+			}else if(oTemp.equals("3")){
+				if(!orderMapTemp.getoStatus().equals("3")&&!orderMapTemp.getoStatus().equals("5")&&!orderMapTemp.getoStatus().equals("6"))continue;
+			}else{
+				if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			}
+
+			Map orderMap = new HashMap();
+			orderMap.put("oId", orderMapTemp.getoId());
+			orderMap.put("oPrice", orderMapTemp.getoPrice());
+			orderMap.put("oTime", orderMapTemp.getoTime());
+			orderMap.put("oStatus", orderMapTemp.getoStatus());
+			orderMap.put("uId", orderMapTemp.getuId());
+			List ordersonList = new ArrayList();
+			for(int j=0;j<OrdersonList.size();j++) {
+				Map ordersonMap = (Map) OrdersonList.get(j);
+				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
+					ordersonList.add(ordersonMap);
+					System.out.println(ordersonMap.get("fname"));
+					if(ordersonMap.get("fname").toString().contains(keywords)){
+						System.out.println("flag  1");
+						flag=1;
+					}
+				}
+			}
+			if(flag==1){
+				orderMap.put("ordersonList", ordersonList);
+				ShowOrderList.add(orderMap);
+				flag=0;
+			}
+		}
+		
+		request.put("showOrderList", ShowOrderList);
+		if(oTemp.equals("1")){
+			return "showPaidOrders";
+		}else if(oTemp.equals("2")){
+			return "showNotSignOrders";
+		}else if(oTemp.equals("3")){
+			return "showSignOrders";
+		}else{
+			return "showUnpaidOrders";
+		}
 	}
 	public String payOrdersAction() throws Exception{
 		//获取订单价格
@@ -273,6 +424,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 			System.out.println("cart:"+cart);
 			cartService.delCart(cart);
 		}
+		System.out.println("test1");
 		session.put("cartNum",0);
 		//存入
 		List cartNumList = cartService.graspCartNum(user.getuId());

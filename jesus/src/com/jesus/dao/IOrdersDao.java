@@ -24,7 +24,15 @@ public interface IOrdersDao {
 	public List findOrdersByUser(String uId);
 	//查找指定状态订单
 	public List findAllOrders(String oStatus);
+<<<<<<< HEAD
 	//查找两个状态的订单
 	public List findOrdersByDoubleStatus(String oStatus1,String oStatus2);
+=======
+	//通过关键字查找订单
+	public List findOrderByKeyword(String uId,String oStatus,String keyword);
+	//通过订单状态查找订单
+	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2);
+	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2,String oStatus3);
+>>>>>>> b1cb6c80e6fbe449b792c0b32a3dcc6e324a2ce4
 	
 }

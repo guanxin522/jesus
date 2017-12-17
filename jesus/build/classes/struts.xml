@@ -161,28 +161,27 @@
                 <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
                 <param name="resultTemp"></param>  
             </result> 	
-            <result name="success" type="redirectAction">/showUnpaidOrdersAction</result>	    
+            <result name="success" type="redirectAction">/showOrdersAction</result>	    
             <interceptor-ref name="User"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref> 
              
 		</action>
-		<action name="showUnpaidOrdersAction" class="ordersAction" method="showUnpaidOrdersAction">
-		    <result name="success">/showUnpaidOrders.jsp</result>
+		<action name="searchOrdersAction" class="ordersAction" method="searchOrdersAction">
+		    <result name="showUnpaidOrders">/showUnpaidOrders.jsp</result>
+		    <result name="showPaidOrders">/showPaidOrders.jsp</result>
+		    <result name="showNotSignOrders">/showNotSignOrders.jsp</result>
+		    <result name="showSignOrders">/showSignOrders.jsp</result>
 		    <interceptor-ref name="User"></interceptor-ref> 
 		    <interceptor-ref name="defaultStack"></interceptor-ref> 
 		</action>
-		<action name="showPaidOrdersAction" class="ordersAction" method="showPaidOrdersAction">
-		    <result name="success">/showPaidOrders.jsp</result>
-		    <interceptor-ref name="User"></interceptor-ref> 
-		    <interceptor-ref name="defaultStack"></interceptor-ref> 
-		</action>
-		<action name="showNotSignOrdersAction" class="ordersAction" method="showNotSignOrdersAction">
-		    <result name="success">/showNotSignOrders.jsp</result>
-		    <interceptor-ref name="User"></interceptor-ref> 
-		    <interceptor-ref name="defaultStack"></interceptor-ref> 
-		</action>
-		<action name="showSignOrdersAction" class="ordersAction" method="showSignOrdersAction">
-		    <result name="success">/showSignOrders.jsp</result>
+
+
+
+		<action name="showOrdersAction" class="ordersAction" method="showOrdersAction">
+		    <result name="showUnpaidOrders">/showUnpaidOrders.jsp</result>
+		    <result name="showPaidOrders">/showPaidOrders.jsp</result>
+		    <result name="showNotSignOrders">/showNotSignOrders.jsp</result>
+		    <result name="showSignOrders">/showSignOrders.jsp</result>
 		    <interceptor-ref name="User"></interceptor-ref> 
 		    <interceptor-ref name="defaultStack"></interceptor-ref> 
 		</action>

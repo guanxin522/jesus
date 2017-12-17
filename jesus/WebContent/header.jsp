@@ -37,7 +37,7 @@
                		<ul class="dropdown-menu">
                  		<li><a href="${pageContext.request.contextPath}/findUsersToUserAction">个人中心</a></li>           
               			 <li class="divider"></li>
-               			   <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">我的订单</a></li>
+               			   <li><a href="${pageContext.request.contextPath}/showOrdersAction">我的订单</a></li>
                				  <li class="divider"></li>
                 				  <li><a href="${pageContext.request.contextPath}/feedback.jsp">意见反馈</a></li>
                  						  <li class="divider"></li>
