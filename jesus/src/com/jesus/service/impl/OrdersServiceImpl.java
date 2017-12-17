@@ -98,6 +98,19 @@ public class OrdersServiceImpl implements IOrdersService{
 		return ordersDao.findOrderByKeyword(uId,oStatus,keyword);
 	}
 
+	@Override
+	public List findOrdersByStatus(String uId, String oStatus1, String oStatus2) {
+		// TODO Auto-generated method stub
+		
+		return ordersDao.findOrdersByStatus(uId, oStatus1, oStatus2);
+	}
+
+	@Override
+	public List findOrdersByStatus(String uId, String oStatus1, String oStatus2, String oStatus3) {
+		// TODO Auto-generated method stub
+		return ordersDao.findOrdersByStatus(uId, oStatus1, oStatus2, oStatus3);
+	}
+
 
 	
 }

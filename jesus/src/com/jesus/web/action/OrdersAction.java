@@ -231,13 +231,28 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 		if(oTemp==null)oTemp = "0";
 		System.out.println("otemp"+oTemp);
 		user=(Users)session.get("user");
-		List OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		List OrdersonList = null;
+		if(oTemp.equals("2")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "4");
+		}else if(oTemp.equals("3")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "5", "6");
+		}else{
+			 OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		}
+		System.out.println(OrdersonList);
+//		List OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
 		List OrderList = ordersService.findOrdersByUser(user.getuId());
 		List ShowOrderList = new ArrayList();
 		
 		for(int i=0;i<OrderList.size();i++) {
 			Orders orderMapTemp = (Orders) OrderList.get(i);
-			if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			if(oTemp.equals("2")){
+				if((!orderMapTemp.getoStatus().equals("2"))&&(!orderMapTemp.getoStatus().equals("4")))continue;
+			}else if(oTemp.equals("3")){
+				if(!orderMapTemp.getoStatus().equals("3")&&!orderMapTemp.getoStatus().equals("5")&&!orderMapTemp.getoStatus().equals("6"))continue;
+			}else{
+				if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			}
 			Map orderMap = new HashMap();
 			orderMap.put("oId", orderMapTemp.getoId());
 			orderMap.put("oPrice", orderMapTemp.getoPrice());
@@ -272,17 +287,34 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 	}
 	//搜索
 	public String searchOrdersAction() throws Exception{
-		System.out.println(keywords);
+		System.out.println("test"+keywords);
+		int flag = 0;
 		if(oTemp==null)oTemp = "0";
 		System.out.println("otemp"+oTemp);
 		user=(Users)session.get("user");
-		List OrdersonList= ordersService.findOrdersByKeyword(user.getuId(), oTemp, keywords);
+		List OrdersonList = null;
+		if(oTemp.equals("2")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "4");
+		}else if(oTemp.equals("3")){
+			 OrdersonList = ordersService.findOrdersByStatus(user.getuId(), oTemp, "5", "6");
+		}else{
+			 OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
+		}
+//		List OrdersonList= ordersService.findOrdersByKeyword(user.getuId(), oTemp, keywords);
+//		List OrdersonList= ordersService.findOstatusFood(user.getuId(),oTemp);
 		List OrderList = ordersService.findOrdersByUser(user.getuId());
 		List ShowOrderList = new ArrayList();
-		
+		System.out.println(OrderList);
 		for(int i=0;i<OrderList.size();i++) {
 			Orders orderMapTemp = (Orders) OrderList.get(i);
-			if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			if(oTemp.equals("2")){
+				if((!orderMapTemp.getoStatus().equals("2"))&&(!orderMapTemp.getoStatus().equals("4")))continue;
+			}else if(oTemp.equals("3")){
+				if(!orderMapTemp.getoStatus().equals("3")&&!orderMapTemp.getoStatus().equals("5")&&!orderMapTemp.getoStatus().equals("6"))continue;
+			}else{
+				if(!orderMapTemp.getoStatus().equals(oTemp))continue;
+			}
+
 			Map orderMap = new HashMap();
 			orderMap.put("oId", orderMapTemp.getoId());
 			orderMap.put("oPrice", orderMapTemp.getoPrice());
@@ -294,24 +326,28 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 				Map ordersonMap = (Map) OrdersonList.get(j);
 				if(orderMap.get("oId").equals(ordersonMap.get("oid"))){
 					ordersonList.add(ordersonMap);
+					System.out.println(ordersonMap.get("fname"));
+					if(ordersonMap.get("fname").toString().contains(keywords)){
+						System.out.println("flag  1");
+						flag=1;
+					}
 				}
 			}
-			orderMap.put("ordersonList", ordersonList);
-			ShowOrderList.add(orderMap);
+			if(flag==1){
+				orderMap.put("ordersonList", ordersonList);
+				ShowOrderList.add(orderMap);
+				flag=0;
+			}
 		}
 		
 		request.put("showOrderList", ShowOrderList);
 		if(oTemp.equals("1")){
-			System.out.println(oTemp);
 			return "showPaidOrders";
 		}else if(oTemp.equals("2")){
-			System.out.println(oTemp);
 			return "showNotSignOrders";
 		}else if(oTemp.equals("3")){
-			System.out.println(oTemp);
 			return "showSignOrders";
 		}else{
-			System.out.println(oTemp);
 			return "showUnpaidOrders";
 		}
 	}

@@ -50,6 +50,7 @@
         <div class="more clearfix"> 
          <form id="J_orderSearchForm" class="search-form clearfix" action="searchOrdersAction" method="get"> 
           <label for="search" class="hide">站内搜索</label> 
+          <input type="hidden" value="2" name="oTemp" id="oTemp" />
           <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入商品名称、商品编号、订单号" /> 
           <input type="submit" class="search-btn iconfont" value="" /> 
          </form> 

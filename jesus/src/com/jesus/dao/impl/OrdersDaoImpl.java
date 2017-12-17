@@ -97,5 +97,37 @@ public class OrdersDaoImpl implements IOrdersDao{
  		List list = query.getResultList();
  		return list;
  	}
+	@Override
+	public List findOrdersByStatus(String uId, String oStatus1, String oStatus2) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+ 		String sql= "SELECT FOOD.fid,ORDERSON.fname,ORDERSON.fdescri,ORDERSON.fprice,ORDERSON.fimage,FOOD.status,"
+ 				+ "ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
+ 				+ "ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
+ 				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ( ORDERS.ostatus=? OR ORDERS.ostatus=? )";
+ 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 		query.setParameter(0,uId);
+ 		query.setParameter(1,oStatus1);
+ 		query.setParameter(2,oStatus2);
+ 		List list = query.getResultList();
+ 		return list;
+	}
+	@Override
+	public List findOrdersByStatus(String uId, String oStatus1, String oStatus2, String oStatus3) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+ 		String sql= "SELECT FOOD.fid,ORDERSON.fname,ORDERSON.fdescri,ORDERSON.fprice,ORDERSON.fimage,FOOD.status,"
+ 				+ "ORDERS.oid,ORDERS.otime,ORDERS.ostatus,"
+ 				+ "ORDERSON.osid,ORDERSON.quantity FROM FOOD,ORDERS,ORDERSON"
+ 				  + " WHERE FOOD.fid =ORDERSON.fid AND ORDERSON.oid=ORDERS.oid AND ORDERS.uid=? AND ( ORDERS.ostatus=? OR ORDERS.ostatus=? OR ORDERS.ostatus=? )";
+ 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 		query.setParameter(0,uId);
+ 		query.setParameter(1,oStatus1);
+ 		query.setParameter(2,oStatus2);
+ 		query.setParameter(3,oStatus3);
+ 		List list = query.getResultList();
+ 		return list;
+	}
+	
 
 }

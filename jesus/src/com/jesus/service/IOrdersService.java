@@ -26,4 +26,6 @@ public interface IOrdersService {
 	public List<Orders> findAllOrders(String oStatus);
 	public List<Orders> findOrdersByUser(String uId);
 	public List findOrdersByKeyword(String uId,String oStatus,String keyword);
+	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2);
+	public List findOrdersByStatus(String uId,String oStatus1,String oStatus2,String oStatus3);
 }
