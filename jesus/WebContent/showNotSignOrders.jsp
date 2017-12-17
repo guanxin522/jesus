@@ -67,7 +67,8 @@
            <div class="order-detail"> 
             <div class="order-summary"> 
              <div class="order-status">
-              等待确认
+               <s:if test="%{#mealItem.oStatus==2}"> 等待确认</s:if>
+               <s:if test="%{#mealItem.oStatus==4}"> 退款申请中</s:if>
              </div> 
             </div> 
             <table class="order-detail-table"> 
@@ -90,8 +91,14 @@
                 </s:iterator>
                 
                 </ul> </td> 
-            <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:changeStatus(this,'<s:property  value="#mealItem.oId"/>','3');" target="_blank">确认收货</a>  
-           <!--  <a class="btn btn-small btn-line-gray" href="//order.mi.com/user/orderView/1171021946411519">订单详情</a></td>  -->
+                <s:if test="%{#mealItem.oStatus==2}"> 
+                    <td class="order-actions"> <a class="btn btn-small btn-primary" href="javascript:changeStatus(this,'<s:property  value="#mealItem.oId"/>','3');" target="_blank">确认收货</a>  
+                    <a class="btn btn-small btn-line-gray" onClick="changeStatus2(this,'${mealItem.oId }','确定要申请退款吗？','4')" href="javascript:;" >申请退款</a></td> 
+               </s:if>
+               <s:if test="%{#mealItem.oStatus==4}"> 
+                    <td class="order-actions"> <a class="btn btn-small btn-primary"  onClick="changeStatus2(this,'${mealItem.oId }','确定要撤销退款吗？','2')" href="javascript:;" >撤销退款</a>  
+                    </td> 
+               </s:if>
               </tr> 
              </tbody> 
             </table> 
@@ -137,6 +144,35 @@
 					}
 					else{
 						layer.msg('签收失败',{icon: 7,time:1000});
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
+	/*改变订单状态*/
+	function changeStatus2(obj,id,content,status){
+		layer.confirm(content,function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'changeOrderStatusAction',
+				dataType: 'json',
+				data:{
+					oidAjax:id,
+					ostatusAjax:status,
+				},
+				success: function(data){
+					if(data.resultTemp == 'ok'){
+					layer.msg('操作成功!',{icon: 6,time:1000});
+			        setTimeout(function () {
+			        	window.parent.location.reload();
+			            parent.layer.close(index);  // 关闭layer
+			        },1500);
+					}
+					else{
+						layer.msg('操作失败！',{icon: 7,time:1000});
 					}
 				},
 				error:function(data) {

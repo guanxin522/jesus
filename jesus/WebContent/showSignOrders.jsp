@@ -69,7 +69,9 @@
            <div class="order-detail"> 
             <div class="order-summary"> 
              <div class="order-status">
-             已签收
+                 <s:if test="%{#mealItem.oStatus==3}"> 已签收</s:if>
+                 <s:if test="%{#mealItem.oStatus==5}"> 退款完成</s:if>
+                 <s:if test="%{#mealItem.oStatus==6}"> 交易关闭</s:if>
              </div> 
             </div> 
             <table class="order-detail-table"> 

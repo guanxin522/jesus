@@ -451,6 +451,7 @@ public class OrdersAction extends ActionSupport implements RequestAware,SessionA
 
 	public String changeOrderStatusAction() throws Exception{
 		Orders od = ordersService.findOrderByOid(oidAjax);
+		System.out.println(od);
 		od.setoStatus(ostatusAjax);
 		if(ostatusAjax.equals("3")){
 			List volumeList = foodService.findFoodVolume(oidAjax);

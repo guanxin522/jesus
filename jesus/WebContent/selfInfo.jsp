@@ -27,10 +27,10 @@
      </div> 
      <div class="subddzx"> 
       <ul> 
-       <li><a href="${pageContext.request.contextPath}/showUnpaidOrdersAction">待付款订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showPaidOrdersAction">已支付订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showNotSignOrdersAction">待确认订单</a></li> 
-       <li><a href="${pageContext.request.contextPath}/showSignOrdersAction">历史订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=0">待付款订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=1">已支付订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=2">待确认订单</a></li> 
+       <li><a href="${pageContext.request.contextPath}/showOrdersAction?oTemp=3">历史订单</a></li> 
       </ul> 
      </div> 
      <div class="ddzx">

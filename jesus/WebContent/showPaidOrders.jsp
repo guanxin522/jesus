@@ -92,6 +92,8 @@
                 
                 </ul> </td> 
  
+                    <td class="order-actions"> <a class="btn btn-small btn-primary"  onClick="refund(this,'${mealItem.oId }','确定要退款吗？','2')" href="javascript:;" >退款</a>  
+                    </td> 
               </tr> 
              </tbody> 
             </table> 
@@ -150,6 +152,35 @@
 		});		
 	});
 }
+	/*退款*/
+	function refund(obj,id,content,status){
+		layer.confirm(content,function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'refundOrdersAction',
+				dataType: 'json',
+				data:{
+					oidAjax:id,
+					ostatusAjax:status,
+				},
+				success: function(data){
+					if(data.resultTemp == 'ok'){
+					layer.msg('完成退款',{icon: 6,time:1000});
+			        setTimeout(function () {
+			        	window.parent.location.reload();
+			            parent.layer.close(index);  // 关闭layer
+			        },1500);
+					}
+					else{
+						layer.msg('退款失败',{icon: 7,time:1000});
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
 </script>
  </body>
 </html> 
