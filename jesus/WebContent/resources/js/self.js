@@ -1,4 +1,14 @@
-﻿	function validateUname(){
+﻿		document.onkeydown = function(e){
+			if($(".bac").length==0)
+			{
+				if(!e) e = window.event;
+				if((e.keyCode || e.which) == 13){
+					var obtnLogin=document.getElementById("registerBtn");
+					obtnLogin.focus();
+				}
+			}
+		}	
+function validateUname(){
 	var form = $('#registerForm');
 $(document).ready(function() {
     // Generate a simple captcha

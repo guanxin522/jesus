@@ -75,9 +75,7 @@
 
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-   								<button type="button" class="btn btn-info" id="validateBtn">核 验</button>
                                 <button type="submit" class="btn btn-primary" id="registerBtn" name="signup" value="Sign up">注 册</button>
-                                <button type="button" class="btn btn-info" id="resetBtn">重 置</button>
                             </div>
                         </div>
                     </form>

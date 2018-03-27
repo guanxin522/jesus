@@ -48,7 +48,7 @@
 					<td class="f-14 td-manage">
 						<s:if test="%{#ordersItem.ostatus==4}">
 					<a style="text-decoration:none" onClick="refund(this,'${ordersItem.oid }','确定要同意退款吗？','5')" href="javascript:;" title="确定退款"><i class="Hui-iconfont">&#xe66b;</i></a>
-					<a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','确定要驳回退款申请吗？','7')" href="javascript:;" title="驳回退款"><i class="Hui-iconfont">&#xe60b;</i></a>
+					<a style="text-decoration:none" onClick="changeStatus(this,'${ordersItem.oid }','确定要驳回退款申请吗？','2')" href="javascript:;" title="驳回退款"><i class="Hui-iconfont">&#xe60b;</i></a>
 					</s:if>
 					</td>				
 				</tr>

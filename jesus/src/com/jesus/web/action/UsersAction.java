@@ -67,6 +67,7 @@ public class UsersAction  extends ActionSupport implements RequestAware,SessionA
 	
 	//用户注册
 	public String registerAction() throws Exception {
+		System.out.println("注册");
 		users.setuId(WebUtils.makeId("u"));
 		Date date = new Date();
 		users.setTime(date);

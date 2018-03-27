@@ -74,6 +74,9 @@ public class FoodAction extends ActionSupport implements RequestAware,SessionAwa
 		String dstPath = ServletActionContext.getServletContext().getRealPath(
 				this.getSavePath())+ "/" + newFileName;
 		File dstFile = new File(dstPath);
+		if (!dstFile.getParentFile().exists()) {
+			dstFile.getParentFile().mkdirs();
+		}
 		WebUtils.copy(this.upload, dstFile);	
 		food.setfImage(this.getSavePath()+ "/" + newFileName);
 		Food foodTemp = foodService.findFood(food.getfId());		

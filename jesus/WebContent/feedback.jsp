@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <h2 style="padding-top: 45px;">意见反馈</h2>
                     </div>
 
-                    <form id="feedbackForm" method="post" class="form-horizontal" action="">
+                    <form id="feedbackForm" method="post" class="form-horizontal" action="${pageContext.request.contextPath}/addFeedbackAction">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">标题：</label>
                             <div class="col-lg-5">
@@ -52,6 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="resources/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+var form = $("#feedbackForm");
     //让当前表单调用validate方法，实现表单验证功能
     $("#feedbackForm").validate({
         rules:{     //配置验证规则，key就是被验证的dom对象，value就是调用验证的方法(也是json格式)

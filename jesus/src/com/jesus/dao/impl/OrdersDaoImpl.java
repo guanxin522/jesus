@@ -35,7 +35,7 @@ public class OrdersDaoImpl implements IOrdersDao{
 	public List findAllOrders(String oStatus) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "SELECT oid,any_value(ORDERS.`otime`) otime,any_value(ORDERS.`oprice`) oprice,any_value(ORDERS.`ostatus`) ostatus,any_value(uname) uname,any_value(address) address,any_value(tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` AND ostatus=? GROUP BY oid ORDER BY otime AND ostatus ASC ";
+		String sql = "SELECT oid, (ORDERS.`otime`) otime, (ORDERS.`oprice`) oprice, (ORDERS.`ostatus`) ostatus, (uname) uname, (address) address, (tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` AND ostatus=? GROUP BY oid ORDER BY otime AND ostatus ASC ";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  		query.setParameter(0,oStatus);
 		List list = query.getResultList();
@@ -84,7 +84,7 @@ public class OrdersDaoImpl implements IOrdersDao{
 	@Override
 	public List findOrdersByDoubleStatus(String oStatus1, String oStatus2) {
 		Session session=sessionFactory.getCurrentSession();
-		String sql = "SELECT oid,any_value(ORDERS.`otime`) otime,any_value(ORDERS.`oprice`) oprice,any_value(ORDERS.`ostatus`) ostatus,any_value(uname) uname,any_value(address) address,any_value(tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` AND ostatus=? OR ostatus=? GROUP BY oid ORDER BY otime AND ostatus ASC ";
+		String sql = "SELECT oid, (ORDERS.`otime`) otime, (ORDERS.`oprice`) oprice, (ORDERS.`ostatus`) ostatus, (uname) uname, (address) address, (tel) tel FROM USERS,ORDERS WHERE USERS.`uid`=ORDERS.`uid` AND ostatus=? OR ostatus=? GROUP BY oid ORDER BY otime AND ostatus ASC ";
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  		query.setParameter(0,oStatus1);
  		query.setParameter(1,oStatus2);

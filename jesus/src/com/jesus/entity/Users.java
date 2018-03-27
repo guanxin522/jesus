@@ -18,7 +18,6 @@ public class Users {
 	private String address;
 	private BigDecimal balance;
 	private Date time;
-	private Set <OrderSon >orderson;
 	
 	public String getuId() {
 		return uId;
@@ -74,12 +73,7 @@ public class Users {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public Set<OrderSon> getOrderson() {
-		return orderson;
-	}
-	public void setOrderson(Set<OrderSon> orderson) {
-		this.orderson = orderson;
-	}
+
 	
 	
 }

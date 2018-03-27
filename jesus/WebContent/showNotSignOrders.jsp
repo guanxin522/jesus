@@ -51,7 +51,7 @@
          <form id="J_orderSearchForm" class="search-form clearfix" action="searchOrdersAction" method="get"> 
           <label for="search" class="hide">站内搜索</label> 
           <input type="hidden" value="2" name="oTemp" id="oTemp" />
-          <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入商品名称、商品编号、订单号" /> 
+          <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords" autocomplete="off" placeholder="输入食品名称" /> 
           <input type="submit" class="search-btn iconfont" value="" /> 
          </form> 
         </div> 
@@ -86,7 +86,7 @@
                 <s:iterator var="mealItem2" value="ordersonList" >
                  <li> 
                   <div class="figure figure-thumb"> 
-                   <a href="#" > <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
+                   <a href="${pageContext.request.contextPath}/foodDetailAction?fId=${mealItem2.fid}"> <img src="${pageContext.request.contextPath}/${mealItem2.fimage}" width="80" height="80" alt="${mealItem2.fname}" /> </a> 
                   </div> <p class="name"> ${mealItem2.fname}</p> <p class="price">${mealItem2.fprice}元 &times; ${mealItem2.quantity}</p> </li> 
                 </s:iterator>
                 

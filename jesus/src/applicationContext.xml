@@ -19,20 +19,24 @@ xsi:schemaLocation="
   destroy-method="close">  
 	    <property name="driverClass" value="com.mysql.jdbc.Driver"/>  
 	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/jesus"/>  
-<!-- 	    <property name="user" value="root"/>  
-	    <property name="password" value="root"/> -->
+	    <property name="user" value="root"/>  
+	    <property name="password" value="root"/>
 	   	<property name="properties">
   			 <props>
-   				 <prop key="c3p0.acquire_increment">5</prop>
+   				 <prop key="c3p0.acquire_increment">10</prop>
     				<prop key="c3p0.idle_test_period">100</prop>
 				    <prop key="c3p0.max_size">100</prop>
 				    <prop key="c3p0.max_statements">0</prop>
-				    <prop key="c3p0.min_size">10</prop>
+				    <prop key="c3p0.min_size">20</prop>
 				    <prop key="acquireRetryAttempts">30</prop>
 				    <prop key="breakAfterAcquireFailure">true</prop>
 				    <prop key="testConnectionOnCheckout">false</prop>
 				     <prop key="user">root</prop>
    					 <prop key="password">root</prop>
+   					 <prop key="maxIdleTime">7200</prop>
+   					 <prop key="autoCommitOnClose">true</prop>
+   					 <prop key="checkoutTimeout">5000</prop>
+   					 <prop key="testConnectionOnCheckout">false</prop>
 		   </props>
 		</property>  
 	</bean>
